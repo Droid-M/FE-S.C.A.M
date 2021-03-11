@@ -73,6 +73,7 @@ def cadastro_de_enfermeiro():
 def listar_pacientes():
     menulist = menus
     active = menulist['Listar Pacientes']
+    export = True
 
     pacientes = [
         {
