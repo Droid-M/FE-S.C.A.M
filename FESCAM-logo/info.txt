@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: IBMPlexMono-Regular
+font link: https://fonts.google.com/specimen/IBM+Plex+Mono
+font author: Mike Abbink
+font author site: https://www.mikeabbink.com/
+
+
+icon designer: Alfredo @ IconsAlfredo.com
+icon designer link: /AlfredoCreates
+        
+{"bg":"#E1F4FC","font":"#08374E","icon-gradient-0":"#0D7CE9","icon-gradient-1":"#15CFF1","slogan":"#1c4b62"}
+      

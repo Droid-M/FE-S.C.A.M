@@ -1,5 +1,9 @@
 # FE-S.C.A.M.
+
 Front-end prototype design
+
+![](FESCAM-logo/cover.png)
+
 
 ## Como executar
 
