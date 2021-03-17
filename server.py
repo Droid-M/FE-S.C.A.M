@@ -55,6 +55,13 @@ def hello_world():
 def cadastro_de_paciente():
     menulist = menus
     active = menulist['Cadastrar Paciente']
+    remedios = []
+    for i in range(1, 21):
+        new_remedio = {
+            'id': i,
+            'nome': f'Remédio {i}'
+        }
+        remedios.append(new_remedio)
 
     title = menulist['Cadastrar Paciente']['title']
     return render_template('cadastro_paciente.html', **locals())

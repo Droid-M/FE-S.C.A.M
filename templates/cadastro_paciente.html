@@ -1,8 +1,6 @@
-{% extends 'base.html' %} 
-
-{% block main %}
+{% extends 'base.html' %} {% block main %}
 <form>
-  <div class="form-row">
+  <div class="form-group row">
     <div class="col">
       <div class="form-group">
         <label for="nome">Nome</label>
@@ -20,6 +18,10 @@
       </div>
 
       <div class="form-group">
+        <label for="nome">CPF</label>
+        <input type="text" class="form-control" id="cpf" placeholder="CPF" />
+      </div>
+      <div class="form-group">
         <label for="tiposangue">Tipo Sanguíneo</label>
         <select class="form-control" id="tiposangue">
           <option>O+</option>
@@ -30,25 +32,30 @@
         </select>
       </div>
 
-      <div class="form-group">
-        <label for="nome">CPF</label>
-        <input type="text" class="form-control" id="cpf" placeholder="CPF" />
-      </div>
+      <br />
+      <button id="btnCadastroPaciente" class="btn btn-primary">
+        Cadastrar
+      </button>
     </div>
     <div class="col">
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Prontuário</label>
-        <textarea
-          class="form-control"
-          id="exampleFormControlTextarea1"
-          rows="3"
-        ></textarea>
-      </div>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in remedios: %}
+          <tr>
+            <td>{{item['id']}}</td>
+            <td>{{item['nome']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <br />
-  <button id="btnCadastroPaciente" class="btn btn-primary">Cadastrar</button>
 </form>
 <script src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
 {% endblock %}
