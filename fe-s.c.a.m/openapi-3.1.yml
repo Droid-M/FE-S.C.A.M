@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: PBL
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /EnfermeiroChefe:
+    get:
+      summary: 'Sample endpoint: Returns details about a particular user'
+      operationId: listUser
+      tags:
+        - user
+      parameters:
+        - name: id
+          in: query
+          description: ID of the user
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: 'Sample response: Details about a user by ID'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+      Paciente:
+          type: object
+          required:
+              - CPF
+              - Nome
+              - Sexo
+              - TipoSangue
+              - DataDeNasc
+              - Endereco
+              - Telefone
+          properties:
+                Nome:
+                    type: string
+                CPF:
+                    type: string
+                Sexo:
+                    type: string
+                TipoSangue:
+                    type: string
+                DataDeNasc:
+                    type: string
+                Endereco:
+                    type: string
+                Telefone:
+                    type: string
+    Estagiario:
+      type: object
+      required:
+        - CPF
+        - Nome
+        - Tipo
+      properties:
+        CPF:
+          type: string
+        Nome:
+          type: string
+        Tipo:
+          type: string
+
+   Administrador:
+      type: object
+      required:
+        - CPF
+        - Nome
+        - Tipo
+      properties:
+        CPF:
+          type: string
+        Nome:
+          type: string
+        Tipo:
+          type: string
+
+    Enfermeiro:
+      type: object
+      required:
+        - CPF
+        - Nome
+        - Tipo
+      properties:
+        CPF:
+          type: string
+        Nome:
+          type: string
+        Tipo:
+            type: string
+
+    EnfermeiroChefe:
+      type: object
+      required:
+        - CPF
+        - Nome
+        - Tipo
+      properties:
+        CPF:
+            type: string
+        Nome:
+            type: string
+        Tipo:
+            type: string
+
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
