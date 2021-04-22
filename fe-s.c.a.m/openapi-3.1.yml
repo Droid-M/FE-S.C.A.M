@@ -2,8 +2,6 @@ openapi: 3.0.0
 info:
   version: '1.0'
   title: PBL
-servers:
-  - url: 'http://localhost:3000'
 paths:
   /EnfermeiroChefe:
     get:
@@ -39,31 +37,31 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-      Paciente:
-          type: object
-          required:
-              - CPF
-              - Nome
-              - Sexo
-              - TipoSangue
-              - DataDeNasc
-              - Endereco
-              - Telefone
-          properties:
-                Nome:
-                    type: string
-                CPF:
-                    type: string
-                Sexo:
-                    type: string
-                TipoSangue:
-                    type: string
-                DataDeNasc:
-                    type: string
-                Endereco:
-                    type: string
-                Telefone:
-                    type: string
+    Paciente:
+      type: object
+      required:
+        - CPF
+        - Nome
+        - Sexo
+        - TipoSangue
+        - DataDeNasc
+        - Endereco
+        - Telefone
+      properties:
+        Nome:
+          type: string
+        CPF:
+          type: string
+        Sexo:
+          type: string
+        TipoSangue:
+          type: string
+        DataDeNasc:
+          type: string
+        Endereco:
+          type: string
+        Telefone:
+          type: string
     Estagiario:
       type: object
       required:
@@ -77,8 +75,7 @@ components:
           type: string
         Tipo:
           type: string
-
-   Administrador:
+    Administrador:
       type: object
       required:
         - CPF
@@ -91,7 +88,6 @@ components:
           type: string
         Tipo:
           type: string
-
     Enfermeiro:
       type: object
       required:
@@ -104,8 +100,7 @@ components:
         Nome:
           type: string
         Tipo:
-            type: string
-
+          type: string
     EnfermeiroChefe:
       type: object
       required:
@@ -114,12 +109,95 @@ components:
         - Tipo
       properties:
         CPF:
-            type: string
+          type: string
         Nome:
-            type: string
+          type: string
         Tipo:
-            type: string
-
+          type: string
+    AgendamentoEnfermeiroChefe:
+      type: object
+      required:
+        - EnfermeiroChefe
+        - Enfermeiro
+        - Estagiario
+        - CPF_Paciente
+        - Codigo_Medicamento
+      properties:
+        EnfermeiroChefe:
+          type: string
+        Enfermeiro:
+          type: string
+        Estagiario:
+          type: string
+        Nome_Paciente:
+          type: string
+        CPF_Paciente:
+          type: string
+        Nome_Medicamento:
+          type: string
+        Codigo_Medicamento:
+          type: string
+    AlarmeAgendamento:
+      type: object
+      properties:
+        CodigoAlarme:
+          type: string
+        Nome_Paciente:
+          type: string
+        Local_Paciente:
+          type: string
+        Timestamp:
+          type: string
+        Nome_Medicamento:
+          type: string
+        Enfermeiro:
+          type: string
+    Medicamento:
+      type: object
+      required:
+        - Nome
+        - Codigo
+      properties:  
+        Nome:
+          type: string
+        Codigo:
+          type: string
+    Prontuario:
+      type: object
+      required:
+        - EnfermeiroChefe
+        - Enfermeiro
+        - Paciente
+        - Dados
+        - InternaçãoTimestamp
+      properties:
+        EnfermeiroChefe:
+          type: string
+        Paciente:
+          type: string
+        Dados:
+          type: string
+        Timestamp:
+          type: string
+        Enfermeiro:
+          type: string
+        InternaçãoTimestamp:
+          type: string
+    CadastroPaciente:
+      type: object
+      properties:
+        EnfermeiroChefe:
+          type: string
+        Enfermeiro:
+          type: string
+        Nome_Paciente:
+          type: string
+        Sexo_Paciente:
+          type: string
+        DataNascimento:
+          type: string
+        TipoSangue:
+          type: string
     Error:
       type: object
       required:
