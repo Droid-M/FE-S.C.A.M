@@ -1,4 +1,6 @@
 .vscode
 .mypy_cache
+.venv
+._pycache_
 docker-stack.yml
 database.ini
