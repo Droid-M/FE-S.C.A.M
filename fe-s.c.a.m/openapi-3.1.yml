@@ -3,38 +3,307 @@ info:
   version: '1.0'
   title: PBL
 paths:
-  /EnfermeiroChefe:
+  /enfermeiro_chefe:
     get:
-      summary: 'Sample endpoint: Returns details about a particular user'
-      operationId: listUser
+      summary: 'Retorna todos os enfermeiros chefes cadastrado no sistema'
+      operationId: getEnfChefe
       tags:
-        - user
-      parameters:
-        - name: id
-          in: query
-          description: ID of the user
-          required: true
-          schema:
-            type: integer
-            format: int32
+        - enfermeiro_chefe
       responses:
         '200':
-          description: 'Sample response: Details about a user by ID'
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
+          description: 'Retorna a lista de Enfermeiros Chefe'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/enfermeiro_chefe'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    post:
+      summary:
+
+  /enfermeiro_chefe/{enfermeiro_chefe_id}:
+    get:
+      summary: 'Retorna o enfermeiro chefe com o ID solicitado'
+      operationId: getEnfChefeById
+      tags:
+        - enfermeiro_chefe
+      parameters:
+        - name: id
+          in: query
+          description: ID referente ao enfermeiro chefe
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: 'Retorna o enfermeiro chefe do respectivo ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/enfermeiro_chefe'
+        default:
+          description: Unexpected error - ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      sumary:
+    delete:
+      sumary:
+
+  /enfermeiro:
+    get:
+      summary: 'Retorna todos os enfermeiros cadastrados no sistema'
+      operationId: 'getEnfermeiro'
+      tags:
+        - enfermeiro
+      responses:
+        '200':
+          description: 'Retorna a lista de enfermeiros cadastrados no sistema'
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/enfermeiro_chefe'
+        defaut:
+          description: Unexpected error
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/error'
+    post:
+      summary: 
+
+  /enfermeiro/ {enfermeiro_id}:
+    get:
+      summary: 'Retorna o enfermeiro referente ao ID solicitado'
+      operationId: 'getEnfermeiroById'
+      tags:
+        - enfermeiro
+      parameters:
+         - name: id
+            in: query
+            description: ID referente ao enfermeiro chefe
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: 'Retorna o usuário enfermeiro referente ao ID'
+          content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/enfermeiro_chefe'
+        defaut:
+          description: Unexpected error - ID not found
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/error'
+    put:
+    delete: 
+
+  /administrador:
+    get:
+      summary: 'Retorna todos os usuários administradores cadastrado no sistema'
+      operationId:  'getAdministrador'
+      tags:
+        - administrador
+      responses:
+        '200':
+          description: 'Retorna uma lista de todos os administradores do sistema'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/administrador'
+        defaut:
+          description: Unexpected error
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /administrador/ {administrador_id}: 
+    get: 
+      summary: 'Retorna o usuário administrador referente ao ID solicitado'
+      operationId: 'getAdministradorById'
+      tags:
+        - administrador
+      parameters:
+        - name: id
+            in: query
+            description: 'ID referente ao usuario administrador'
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses: 
+        '200':
+          description: 'Retorna o administrador do ID solicitado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/administrador'
+        defaut:
+          description: Unexpected error - ID not found
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      summary:
+    delete: 
+      summary: 
+
+  /agendamento_enfermeiro_chefe: 
+    get: 
+      summary: 'Retorna uma lista com todos os agendamentos do enfermeiro chefe'
+      operationId: getAgendamentoEnfChefe
+      tags:
+        - agendamentoEnfChefe
+      responses: 
+        '200':
+          description: 'Retorna todos os agendamentos do enfermeiro chefe'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agendamento_enfermeiro_chefe'
+        defaut: 
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post:
+      summary:
+
+  /agendamento_enfermeiro_chefe/{agendamento_enf_chefe_id}: 
+    get: 
+      summary: 'Retorna o agendamento referente ao ID solicitado'
+      operationId: getAgendamentoEnfChefeById
+      tags:
+        - agendamentoEnfChefe
+      parameters:
+        - name: id
+          in: query
+          description: 'ID referente ao agendamento'
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses: 
+        '200':
+          description: 'Retorna o agendamento do ID solicitado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agendamento_enfermeiro_chefe'
+        defaut: 
+          description: Unexpected error - ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      summary:
+    delete:
+      summary:
+
+  /medicamento:
+    get: 
+      summary: 'Retorna todos os medicamentos cadastrados no sistema'
+      operationId: getMedicamento
+      tags:
+        - medicamento
+      responses:
+        '200':
+          description: 'Retorna todos os medicamentos cadastrados no sistema'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/medicamento'
+        defaut:
+          description: Unixpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post: 
+      summary: 'Cadastra um novo medicamento no sistema'
+      operationId: CadastroMedicamento
+      tags:
+        - medicamento
+      parameters:
+        - name: Nome
+            in: path
+            description: 'Nome do medicamento'
+            required: true
+            schema:
+              type: string
+        - name: Codigo
+            in: path
+            description: 'Codigo do medicamento'
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: 'Medicamento Salvo com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/medicamento'
+        defaut: 
+          description: Unixpected error
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /medicamento/{medicamento_id}:
+    get:
+      summary: 'Retorna um medicamento referente ao ID solicitado'
+      operationId: getMedicamentoById
+      tags:
+        - medicamento
+      parameters:
+        - name: id
+            in: query
+            description: 'ID referente ao medicamento'
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses: 
+        '200':
+          description: 'Retorna o medicamento do ID solicitado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/medicamento'
+        defaut:
+          description: Unixpected error - ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      summary:
+    delete:
+      summary:
+  
+    
+
+                
+    
+
+
 components:
   schemas:
     Paciente:
