@@ -31,7 +31,7 @@ def parametersFilter(params, values):
         p += params[minLength - 1]
     return [p, v]
 
-def create_dictionary(keys, values):
+def create_dictionary(keys:list, values:list):
     if(values is not None and keys is not None):
         dictionary = {}
         valuesLength = len(values)
@@ -42,7 +42,7 @@ def create_dictionary(keys, values):
         return dictionary
     return {}
 
-def create_list_dicitionary(keys, values):
+def create_list_dicitionary(keys:list, values:list):
     if(values is not None and keys is not None):
         listDictionary = []
         for i in range(0, len(values), 1):

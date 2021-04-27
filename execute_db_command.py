@@ -1,7 +1,7 @@
 import psycopg2 as toDB
 from config import config
 
-def execute(command = None, returnAll = False):
+def execute(command = None):
     connection = None
     result = None
     try:
@@ -10,7 +10,7 @@ def execute(command = None, returnAll = False):
             cursor = connection.cursor()
             cursor.execute(command)
             try: #<-- procurar alguma alternativa depois
-                result = cursor.fetchall() if(returnAll == True) else cursor.fetchone()
+                result = cursor.fetchall()
             except(Exception, toDB.DatabaseError) as Error1:
                 print(Error1)
             cursor.close()

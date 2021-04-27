@@ -1,82 +1,26 @@
-import users_table, patiente_table, create_tables, medical_records_table
-from datetime import datetime
-
-#%d/%m/%y %H:%M:%S
+from User import User
+from UserDAO import UserDAO
+from userSchema import UserBase
+import create_tables
 
 if __name__ == '__main__':
-    #EXAMPLES TO TEST:
-
-    #create_tables.create_all()
-    #print(users_table.insert_user_data("1", "Ana", "", "Ana@gmail.com", "123", "nurse"))
-    #print(update_user_data("1", None, None, None, None, None, "nurse", True))
-    #print(users_table.insert_user_data("2", "João", "de Tal", "João@gmail.com", "321", "admin"))
-    #print(users_table.insert_user_data("3", "Marcia", None, "Marcia@gmail.com", "123", "i_nurse"))
-    #print(users_table.delete_user_data('3'))
-    #print(select_user_data())
-    """
-    print(patiente_table.insert_patient_data('1', 'João', 
-        None, 
-        None, 
-        None, 
-        None, 
-        None, 
-        datetime.strptime('21/02/1969', '%d/%m/%Y').date()
-        ))
-    """
-    """
-    print(patiente_table.insert_patient_data(
-        '8', 
-        'Maria das Dores', 
-        'Rua das Flores', 
-        '75988xxxxxx', 
-        'f', 
-        'cis', 
-        'o+', 
-        datetime.strptime('21/02/1969', '%d/%m/%Y').date()
-        ))
-    """
-    """
-    print(patiente_table.update_user_data(
-        "8",
-        '3', 
-        'Maria das Dores', 
-        'Rua das Flores', 
-        '75988xxxxxx', 
-        'f', 
-        'cis', 
-        'o+', 
-        datetime.strptime('20/02/1969', '%d/%m/%Y').date()
-        ))
-    """
-    #print(patiente_table.select_user_data("3"))
-    #print(patiente_table.delete_user_data("8"))
-
-
-    """
-    print(medical_records_table.insert_medical_records_data(
-        "3", '10', 'Maria das Dores', 'f', 'cis','o+', 
-        datetime.strptime('20/02/1969', '%d/%m/%Y').date(), 
-        datetime.strptime('28/01/2021', '%d/%m/%Y').date(), 
-        datetime.strptime('08:21:00', '%H:%M:%S').time(), 'Ana'
-    ))
-    """
-    """
-    print(medical_records_table.insert_medical_records_data(
-        "2", '10', 'João Mourão', 'm', 'cis','b-', 
-        datetime.strptime('20/02/1942', '%d/%m/%Y').date(), 
-        datetime.strptime('28/01/2021', '%d/%m/%Y').date(), 
-        datetime.strptime('08:43:00', '%H:%M:%S').time(), 'Ana'
-    ))
-    """
-    """
-    print(medical_records_table.update_medical_records_data(
-        "3", '10',
-        None, '10', 'Maria das Dores', 'f', 'cis','o+', 
-        datetime.strptime('20/02/1969', '%d/%m/%Y').date(), 
-        datetime.strptime('28/01/2021', '%d/%m/%Y').date(), 
-        datetime.strptime('08:21:02', '%H:%M:%S').time(), 'Ana',
-        True
-    ))
-    """
-    #print(medical_records_table.select_medical_records_data('3', '10'))
-    #print(medical_records_table.delete_medical_records_data("2", None))
+    create_tables.create_all()
+    
+    
+    
+    
+    #U = User(email = "Marcos")
+    #U = UserBase(email = "123@gmail.com",createdOn = 1)
+    #dt = {"firt_name":"MarcOs"}
+    #U.setAll(dt)
+    #print(U.getFirstName())
+    #D = UserDAO()
+    #print(D.findUserByEmail("Ana@gmail.com").getPassword())
+    
+    #print(D.INSERT({"cpf":6, "firt_name":"Zé", "last_name":"", "email":"@zé", "password":"senha", "type":"admin"}))
+    #print(D.UPDATE({"cpf":"10", "firt_name":"Joaquim", "last_name":"", "email":"jq@", "password":"1234", "type":"admin"}, D.WHERE("cpf","=","10")))
+    #print(D.findUsers(D.WHERE("password", "=", "123"))[0].getEmail())
+    #print(D.SELECT(['firt_name', 'password'], D.WHERE("firt_name", "=", "Marcos").OR("cpf", "=", "123")))
+    #print(U.getName())
+    #User.find(['firt_name', 'password'], U.WHERE('password', '=', '123').OR("cpf", "<", '5')._extractCommand())
+    #print(D.DELETE(D.WHERE("cpf", "=", "10")))
