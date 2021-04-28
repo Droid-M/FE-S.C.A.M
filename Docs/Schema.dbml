@@ -82,19 +82,33 @@ Table Posologia {
   id bigserial [pk]
   medicamento bigint [ref: > Medicamento.codigo]
   paciente char(11) [ref: > Paciente.CPF, not null]
+<<<<<<< HEAD
+  dosagem char(15) [note: "Dosagem e Frequencia do medicamento a ser aplicado no paciente"]
+  
+=======
   quantidade float [not null, note: "A quantidade diária a ser administrada"]
+>>>>>>> main
   indexes {
     (paciente, medicamento)
   }
 }
 
 Table Agendamento {
+<<<<<<< HEAD
+  id bigserial [pk]
+  posologia bigint [ref: > Posologia.id, not null, note: "Identificador da posologia do medicamento a ser aplicado"]
+=======
   posologia bigit [ref: > Posologia.id, not null]
+>>>>>>> main
   paciente char(11) [ref: > Paciente.CPF, not null]
   enfermeiro bigint [ref: > Enfermeiro.id, not null]
   estagiario bigint [ref: > Estagiario.id, not null]
   enferchefe bigint [ref: > EnfermeiroChefe.id, not null]
   horario timestamptz [default: null]
+<<<<<<< HEAD
+  alarme timestamptz [default: null, note: "Alarme referente ao horario de aplciação do medicamento, deve notificar quem irá realizar a aplicação"]
+=======
+>>>>>>> main
   
   indexes {
     paciente

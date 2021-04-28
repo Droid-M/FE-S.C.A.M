@@ -166,14 +166,18 @@ paths:
       summary: 'Retorna uma lista com todos os agendamentos do enfermeiro chefe'
       operationId: getAgendamentoEnfChefe
       tags:
-        - agendamentoEnfChefe
+        - agendamento
       responses: 
         '200':
           description: 'Retorna todos os agendamentos do enfermeiro chefe'
           content:
             application/json:
               schema:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+                $ref: '#/components/schemas/agendamento'
+=======
                 $ref: '#/components/schemas/Agendamento'
+>>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error
           content:
@@ -181,14 +185,83 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      summary:
+      summary: 'Cria um novo agendamento do Enfermeiro Chefe'
+      operationId: postAgendamentoEnfChefe
+      tags:
+        - agendamento
+      parameters: 
+        - name: id
+            in: path
+            description: 'Identificador do Agendamento do Enfermeiro Chefe'
+            required: true
+            schema:
+              type: integer
+              format: int32
+        - name: posologia
+            in: path
+            description: 'Codigo identificador da posologia do medicamento'
+            required: true
+            schema:
+              type: bigint
+        - name: paciente
+            in: path
+            description: 'Codigo identificador do paciente a que se refere ao agendamento'
+            required: true
+            schema:
+              type: string
+        - name: enfermeiro
+            in: path
+            description: 'Codigo identificador referente ao enfermeiro responsavel pela aplicação'
+            required: true
+            schema:
+              type: bigint
+        - name: estagiario
+            in: path
+            description: 'Codigo identificador referente ao estagiario responsavel pela aplicação'
+            required: true
+            schema:
+              type: bigint
+        - name: enfermeiroChefe
+            in: path
+            description: 'Codigo identificador referente ao enfermeiro chefe que criou o agendamento'
+            required: true
+            schema:
+              type: bigint
+        - name: horario
+            in: path
+            description: 'Horário que foi criado o agendamento'
+            required: true
+            schema: 
+              type: timestamptz
+        - name: alarme
+            in: path
+            description: 'Alarme referente ao horario da aplicação do medicamento'
+            required: true
+            schema:
+              type: timestamptz
+      responses:
+        '200':
+          description: 'Agendamento criado com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/agendamento'
+        defaut:
+          description: 'Unexpected Error - Impossivel criar agendamento'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    
+            
+
 
   /agendamento_enfermeiro_chefe/{agendamento_enf_chefe_id}: 
     get: 
       summary: 'Retorna o agendamento referente ao ID solicitado'
       operationId: getAgendamentoEnfChefeById
       tags:
-        - agendamentoEnfChefe
+        - agendamento
       parameters:
         - name: id
           in: query
@@ -203,7 +276,11 @@ paths:
           content:
             application/json:
               schema:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+                $ref: '#/components/schemas/agendamento'
+=======
                 $ref: '#/components/schemas/Agendamento'
+>>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error - ID not found
           content:
@@ -211,9 +288,101 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      summary:
+      summary: 'Atualização dos dados do agendamento'
+      operationId: putAgendamentoEnfChefe
+      tags:
+        - agendamento
+      parameters: 
+       - name: id
+            in: path
+            description: 'Identificador do Agendamento a ser atualizado'
+            required: true
+            schema:
+              type: integer
+              format: int32
+        - name: posologia
+            in: path
+            description: 'Codigo identificador da posologia do medicamento'
+            required: true
+            schema:
+              type: bigint
+        - name: paciente
+            in: path
+            description: 'Codigo identificador do paciente a que se refere ao agendamento'
+            required: true
+            schema:
+              type: string
+        - name: enfermeiro
+            in: path
+            description: 'Codigo identificador referente ao enfermeiro responsavel pela aplicação'
+            required: true
+            schema:
+              type: bigint
+        - name: estagiario
+            in: path
+            description: 'Codigo identificador referente ao estagiario responsavel pela aplicação'
+            required: true
+            schema:
+              type: bigint
+        - name: enfermeiroChefe
+            in: path
+            description: 'Codigo identificador referente ao enfermeiro chefe que criou o agendamento'
+            required: true
+            schema:
+              type: bigint
+        - name: horario
+            in: path
+            description: 'Horário que foi criado o agendamento'
+            required: true
+            schema: 
+              type: timestamptz
+        - name: alarme
+            in: path
+            description: 'Alarme referente ao horario da aplicação do medicamento'
+            required: true
+            schema:
+              type: timestamptz
+      responses:
+        '200':
+          description: 'Retorna o agendamento com a atualização realizada com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agendamento'
+      defaut:
+        description:  'Unexpected Error - Impossivel realizar a atualização'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/error'
+    
     delete:
-      summary:
+      summary: 'Deleta o agendamento referente ao ID solicitado'
+      operationId: deleteAgendamento
+      tags:
+        - agendamento
+      paramenters:
+        - name: id
+            in: path
+            description: 'Identificador do Agendamento a ser atualizado'
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: 'Retorna uma mensagem: Agendamento deletado com sucesso'
+          content:
+            text/plain:
+              schema:
+                type: string
+        defaut:
+          description: 'Unexpected Error - Impossivel deletar o agendamento'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/error'
+
 
   /medicamento:
     get: 
@@ -247,11 +416,19 @@ paths:
           schema:
             type: string
         - name: Codigo
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+            in: path
+            description: 'Codigo do medicamento'
+            required: true
+            schema:
+              type: bigserial
+=======
           in: path
           description: 'Codigo do medicamento'
           required: true
           schema:
             type: string
+>>>>>>> main:Docs/openapi-3.1.yml
       responses:
         '200':
           description: 'Medicamento Salvo com sucesso'
@@ -266,13 +443,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /medicamento/{medicamento_id}:
+  /medicamento/{medicamento_codigo}:
     get:
       summary: 'Retorna um medicamento referente ao ID solicitado'
       operationId: getMedicamentoById
       tags:
         - medicamento
       parameters:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        - name: Codigo
+            in: query
+            description: 'ID referente ao medicamento'
+            required: true
+            schema:
+              type: bigserial
+              format: serial8
+=======
         - name: id
           in: query
           description: 'ID referente ao medicamento'
@@ -280,6 +466,7 @@ paths:
           schema:
             type: integer
             format: int32
+>>>>>>> main:Docs/openapi-3.1.yml
       responses: 
         '200':
           description: 'Retorna o medicamento do ID solicitado'
@@ -294,14 +481,481 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      summary:
+      summary: 'Atualiza os dados do medicamento do id solicitado'
+      operationId: putMedicamentoById
+      tags: 
+        - medicamento
+      parameters: 
+        - name: Nome
+            in: path
+            description: 'Nome do medicamento'
+            required: true
+            schema:
+            type: string
+        - name: Codigo
+            in: path
+            description: 'Codigo do medicamento que será atualizado'
+            required: true
+            schema:
+              type: bigserial
+              format: serial8
+      responses: 
+        '200':
+          description: 'Retorna o medicamento com os dados atualizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mecicamento'
+        defaut: 
+          description:  'Unexpected Error - Impossível atualizar os dados'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
     delete:
-      summary:
-  
-    
+      summary: 'Deleta do sistema o medicamento referente ao ID solicitado'
+      operationId: deleteMedicamento
+      tags:
+        - medicamento
+      parameters:
+        - name: Codigo
+            in: path
+            description: 'Codigo do medicamento que será deletado'
+            required: true
+            schema:
+              type: bigserial
+              format: serial8
+      responses:
+        '200':
+          description: 'Retorna uma confirmação que o medicamento foi deletado com sucesso'
+          content:
+            text/plain:
+              schema:
+                type: string
+        defaut:
+          description: 'Unexpected Error - Impossivel deletar o medicamento'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 
-                
+  /posologia:
+    get:
+      summary: 'Retorna todas as posologias que foram cadastradas'
+      operationId: getPosologia
+      tags:
+        - posologia
+      responses:
+        '200':
+          description: 'Retorna todas as posologias cadastradas no sistema'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/posologia'
+        defaut:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post:
+      summary: 'Cadastra uma nova posologia no sistema'
+      operationId: postPosologia
+      tags:
+        - posologia
+      parameters:
+        - name: id
+            in: path
+            description: 'Identificador da posologia'
+            required: true
+            schema:
+              type: bigserial
+        - name: medicamento
+            in: path
+            description: 'Medicamento que a posologia faz referência'
+            required: true
+            schema:
+              type: bigint
+        - name: paciente
+            in: path
+            description: 'Codigo do Paciente em que a posologia será aplicada'
+            required: true
+            schema:
+              type: string
+        - name: dosagem
+            in: path
+            description: 'A dosagem do medicamento que será aplicado ao paciente'
+            required: true
+            schema:
+              type: string
+      responses: 
+        '200':
+          description: 'Posologia salva com sucesso'
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/posologia'
+        defaut:
+          description: 'Unexpected Error - Não foi possivel criar nova posologia'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+  /posologia/{posoloiga_id}:
+    get:
+      summary: 'Busca a posologia referente ao ID solicitado'
+      operationId: getPosologiaById
+      tags:
+        - posologia
+      parameters:
+        - name: id
+            in: query
+            description: 'ID referente a posologia solicitada'
+            required: true
+            schema:
+              type: bigserial
+      responses:
+        '200':
+          description: 'Retorna a Posologia referente ao ID'
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/posologia'
+        defaut:
+          description: 'Unexpected Error - ID not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      summary: 'Atualiza a posologia referente ao ID solicitado'
+      operationId: putPosologiaById
+      tags:
+        - posologia
+      parameters:
+        - name: id
+            in: path
+            description: 'Identificador da posologia'
+            required: true
+            schema:
+              type: bigserial
+        - name: medicamento
+            in: path
+            description: 'Medicamento que a posologia faz referência'
+            required: true
+            schema:
+              type: bigint
+        - name: paciente
+            in: path
+            description: 'Codigo do Paciente em que a posologia será aplicada'
+            required: true
+            schema:
+              type: string
+        - name: dosagem
+            in: path
+            description: 'A dosagem do medicamento que será aplicado ao paciente'
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: 'Retorna a posologia Atualizada com os novos dados'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/posologia'
+        defaut:
+          description: 'Unexpected Error - Não foi possivel atualizar os dados'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    delete: 
+      summary: 'Deleta a posologia referente ao ID solicitado'
+      operationId: deletePosologiaById
+      tags:
+        - posologia
+      parameters:
+        - name: id
+            in: path
+            description: 'Identificador da posologia'
+            required: true
+            schema:
+              type: bigserial
+      responses:
+        '200':
+          description: 'Posologia Deletada com Sucesso'
+          content: 
+            text/plain:
+              schema:
+                type: string
+        defaut:
+          description: 'Unexpected Error - Não foi possivel excluir a posologia'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
     
+  /paciente:
+    get:
+      summary: 'Retorna uma lista com todos os pacientes cadastrados no sistema'
+      operationId: getPaciente
+      tags:
+        - paciente
+      responses:
+        '200':
+          description: 'Retorna todos os pacientes cadastrados no sistema'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paciente'
+        defaut:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    post:
+      summary: 'Cadastra um novo paciente no sistema'
+      operationId: postPaciente
+      tags:
+        - paciente
+      parameters:
+        - name: CPF
+            in: path
+            description: 'CPF do paciente, é uma Chave Primaria'
+            required: true
+            schema:
+              type: string
+        - name: nome
+            in: path
+            description: 'Nome do paciente'
+            required: true
+            schema:
+              type: string
+        - name: sexo
+            in: path
+            description: 'Sexo biológico do paciente'
+            required: true
+            schema:
+              type: boolean
+        - name: genero
+            in: path
+            description: 'Gênero com o qual o paciente se identifica'
+            required: true
+            schema:
+              type: enum
+        - name: dataNascimento
+            in: path
+            description: 'Data de nascimento do paciente'
+            required: true
+            schema:
+              type: date
+        - name: sangue
+            in: path
+            description: 'Tipo sanguíneo do paciente'
+            required: true
+            schema:
+              type: enum
+        - name: endereco
+            in: path
+            description: 'Endereço do paciente'
+            required: true
+            schema:
+              type: string
+        - name: telefone
+            in: path
+            description: 'Telefone para contato com o paciente'
+            required: true
+            schema:
+              type: string
+        - name: createdOn
+            in: path
+            description: 'Data e hora do Cadastro do paciente'
+            required: true
+            schema:
+              type: timestamptz
+        - name: updatedOn
+            in: path
+            description: 'Data de hora em que o cadastro do paciente foi atualizado'
+            required: true
+            schema:
+              type: timestamptz
+        - name: dados
+            in: path
+            description: 'Informação a respeito do diagnóstico do paciente'
+            required: true
+            schema:
+              type: string
+        - name: enfermeiro_id
+            in: path
+            description: 'Codigo do funcionario que cadastrou o paciente'
+            required: true
+            schema:
+              type: bigint
+      responses:
+        '200':
+          description: 'Retorna um novo paciente cadastrado com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paciente'
+        defaut:
+          description: 'Unexpected Error - Não foi possivel realizar o cadastro'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /paciente/{paciente_id}:
+    get:
+      summary: 'Retorna os dados do paciente referente ao ID'
+      operationId: getPacienteById
+      tags:
+        - paciente
+      parameters:
+        - name: CPF
+            in: path
+            description: 'CPF do paciente, é uma Chave Primaria'
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: 'Retorna o Paciente do Id solicitado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paciente'
+        defaut:
+          description: 'Unexpected Error - ID not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    
+    put:
+      summary: 'Atualiza os dados do paciente referente ao ID solicitado'
+      operationId: putPacienteById
+      tags:
+        - paciente
+      parameters:
+        - name: CPF
+            in: path
+            description: 'CPF do paciente, é uma Chave Primaria'
+            required: true
+            schema:
+              type: string
+        - name: nome
+            in: path
+            description: 'Nome do paciente'
+            required: true
+            schema:
+              type: string
+        - name: sexo
+            in: path
+            description: 'Sexo biológico do paciente'
+            required: true
+            schema:
+              type: boolean
+        - name: genero
+            in: path
+            description: 'Gênero com o qual o paciente se identifica'
+            required: true
+            schema:
+              type: enum
+        - name: dataNascimento
+            in: path
+            description: 'Data de nascimento do paciente'
+            required: true
+            schema:
+              type: date
+        - name: sangue
+            in: path
+            description: 'Tipo sanguíneo do paciente'
+            required: true
+            schema:
+              type: enum
+        - name: endereco
+            in: path
+            description: 'Endereço do paciente'
+            required: true
+            schema:
+              type: string
+        - name: telefone
+            in: path
+            description: 'Telefone para contato com o paciente'
+            required: true
+            schema:
+              type: string
+        - name: createdOn
+            in: path
+            description: 'Data e hora do Cadastro do paciente'
+            required: true
+            schema:
+              type: timestamptz
+        - name: updatedOn
+            in: path
+            description: 'Data de hora em que o cadastro do paciente foi atualizado'
+            required: true
+            schema:
+              type: timestamptz
+        - name: dados
+            in: path
+            description: 'Informação a respeito do diagnóstico do paciente'
+            required: true
+            schema:
+              type: string
+        - name: enfermeiro_id
+            in: path
+            description: 'Codigo do funcionario que cadastrou o paciente'
+            required: true
+            schema:
+              type: bigint
+      responses:
+        '200':
+          description: 'Paciente Atualizado com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paciente'
+        defaut:
+          description: 'Unexpected Error - Não foi possivel realizar a atualização dos dados'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    delete:
+      summary: 'Deleta do sistema o Paciente referente ao ID'
+      operationId: deletePacienteById
+      tags:
+        - paciente
+      parameters:
+        - name: CPF
+            in: path
+            description: 'CPF do paciente, é uma Chave Primaria'
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: 'Paciente deletado com sucesso'
+          content:
+            text/plain:
+              schema:
+                type: string
+        defaut:
+          description: 'Unexpected Error - Não foi possivel realizar a operação'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+
 
 
 components:
@@ -312,13 +966,28 @@ components:
         - CPF
         - Nome
         - DataDeNasc
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        - Endereco
+        - Telefone
+        - Genero
+        - createdOn
+        - updatedOn
+        - dados
+        - enfermeiro_id
+=======
         - Enfermeiro
+>>>>>>> main:Docs/openapi-3.1.yml
       properties:
         Nome:
           type: string
         CPF:
           type: string
         Sexo:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+          type: boolean
+        TipoSangue:
+          type: string
+=======
           description: "Sexo biológico"
           type: boolean
           default:
@@ -332,12 +1001,25 @@ components:
           type: string
           enum: ["a+", "a-", "b+", "b-", "ab+", "ab-", "o+", "o-", "null_rh"]
           default: 
+>>>>>>> main:Docs/openapi-3.1.yml
         DataDeNasc:
           type: string
         Endereco:
           type: string
         Telefone:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        Genero:
+          type: string
+        createdOn:
+          type: timestamptz
+        updatedOn:
+          type: timestamptz
+        dados:
+          type: string
+        enfermeiro_id:
+          type: integer
+=======
         CreatedOn:
           type: string
         UpdatedOn:
@@ -348,6 +1030,7 @@ components:
         Dados:
           description: "Informações a respeito do diagnóstico do paciente"
           type: string
+>>>>>>> main:Docs/openapi-3.1.yml
     Estagiario:
       type: object
       required:
@@ -388,6 +1071,11 @@ components:
           type: string
         Nome:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        Tipo:
+          type: string
+=======
+>>>>>>> main:Docs/openapi-3.1.yml
     Agendamento:
       type: object
       required:
@@ -395,8 +1083,13 @@ components:
         - EnfermeiroChefe
         - Enfermeiro
         - Estagiario
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        - CPF_Paciente
+        - Posologia
+=======
         - Paciente
         - Medicamento
+>>>>>>> main:Docs/openapi-3.1.yml
       properties:
         Horario:
           description: "Timestamp com a hora presvista para execução do agendamento."
@@ -407,10 +1100,25 @@ components:
           type: string
         Estagiario:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+        Nome_Paciente:
+          type: string
+        CPF_Paciente:
+          type: string
+        Nome_Medicamento:
+          type: string
+        Posologia:
+          type: string
+        Alarme :
+          type: timestamptz 
+        #Local_Paciente:
+          #type: string       
+=======
         Paciente:
           type: string
         Medicamento:
           type: int
+>>>>>>> main:Docs/openapi-3.1.yml
     Medicamento:
       type: object
       required:
@@ -420,6 +1128,25 @@ components:
         Nome:
           type: string
         Codigo:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
+          type: bigserial
+    Posologia:
+      type: object
+      required:
+        - id
+        - medicamento
+        - paciente
+        - dosagem
+      properties:
+        id:
+          type: bigserial
+        medicamento:
+          type: bigserial
+        paciente: 
+          type: string
+        dosagem:
+          type: string
+=======
           type: int
     Posologia:
       type: object
@@ -438,6 +1165,7 @@ components:
           description: "A quantidade diária a ser administrada" 
           example: "1 (uma vez ao dia), 0.5 (uma vez a cada dois dias)"
           type: float
+>>>>>>> main:Docs/openapi-3.1.yml
     Error:
       type: object
       required:
