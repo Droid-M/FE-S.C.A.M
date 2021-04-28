@@ -82,7 +82,7 @@ Table Posologia {
   id bigserial [pk]
   medicamento bigint [ref: > Medicamento.codigo]
   paciente char(11) [ref: > Paciente.CPF, not null]
-  
+  quantidade float [not null, note: "A quantidade diária a ser administrada"]
   indexes {
     (paciente, medicamento)
   }
