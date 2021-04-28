@@ -59,7 +59,8 @@ CREATE TABLE "Medicamento" (
 CREATE TABLE "Posologia" (
   "id" bigserial PRIMARY KEY,
   "medicamento" bigint,
-  "paciente" char(11) NOT NULL
+  "paciente" char(11) NOT NULL,
+  "quantidade" float NOT NULL
 );
 
 CREATE TABLE "Agendamento" (
@@ -118,3 +119,5 @@ COMMENT ON COLUMN "Paciente"."genero" IS 'Gênero com o qual a pessoa se identif
 COMMENT ON COLUMN "Paciente"."dados" IS 'Informações a respeito do diagnóstico do paciente';
 
 COMMENT ON COLUMN "Paciente"."enfermeiro_id" IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+
+COMMENT ON COLUMN "Posologia"."quantidade" IS 'A quantidade diária a ser administrada';
