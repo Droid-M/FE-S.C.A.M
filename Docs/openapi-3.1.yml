@@ -3,7 +3,7 @@ info:
   version: '1.0'
   title: PBL
 paths:
-  /enfermeiro_chefe:
+  /enfermeirochefe:
     get:
       summary: 'Retorna todos os enfermeiros chefes cadastrado no sistema'
       operationId: getEnfChefe
@@ -15,7 +15,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         default:
           description: Unexpected error
           content:
@@ -45,13 +45,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         default:
           description: Unexpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       sumary:
     delete:
@@ -69,13 +69,13 @@ paths:
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         defaut:
           description: Unexpected error
           content:
             application/json: 
               schema: 
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post:
       summary: 
 
@@ -87,25 +87,25 @@ paths:
         - enfermeiro
       parameters:
          - name: id
-            in: query
-            description: ID referente ao enfermeiro chefe
-            required: true
-            schema:
-              type: integer
-              format: int32
+           in: query
+           description: ID referente ao enfermeiro chefe
+           required: true
+           schema:
+             type: integer
+             format: int32
       responses:
         '200':
           description: 'Retorna o usuário enfermeiro referente ao ID'
           content: 
           application/json:
             schema:
-              $ref: '#/components/schemas/enfermeiro_chefe'
+              $ref: '#/components/schemas/EnfermeiroChefe'
         defaut:
           description: Unexpected error - ID not found
           content:
             application/json: 
               schema: 
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
     delete: 
 
@@ -121,13 +121,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/administrador'
+                $ref: '#/components/schemas/Administrador'
         defaut:
           description: Unexpected error
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
 
   /administrador/ {administrador_id}: 
     get: 
@@ -137,25 +137,25 @@ paths:
         - administrador
       parameters:
         - name: id
-            in: query
-            description: 'ID referente ao usuario administrador'
-            required: true
-            schema:
-              type: integer
-              format: int32
+          in: query
+          description: 'ID referente ao usuario administrador'
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses: 
         '200':
           description: 'Retorna o administrador do ID solicitado'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/administrador'
+                $ref: '#/components/schemas/Administrador'
         defaut:
           description: Unexpected error - ID not found
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary:
     delete: 
@@ -173,13 +173,17 @@ paths:
           content:
             application/json:
               schema:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
                 $ref: '#/components/schemas/agendamento'
+=======
+                $ref: '#/components/schemas/Agendamento'
+>>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post:
       summary: 'Cria um novo agendamento do Enfermeiro Chefe'
       operationId: postAgendamentoEnfChefe
@@ -272,13 +276,17 @@ paths:
           content:
             application/json:
               schema:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
                 $ref: '#/components/schemas/agendamento'
+=======
+                $ref: '#/components/schemas/Agendamento'
+>>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary: 'Atualização dos dados do agendamento'
       operationId: putAgendamentoEnfChefe
@@ -388,13 +396,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut:
           description: Unixpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post: 
       summary: 'Cadastra um novo medicamento no sistema'
       operationId: CadastroMedicamento
@@ -402,30 +410,38 @@ paths:
         - medicamento
       parameters:
         - name: Nome
-            in: path
-            description: 'Nome do medicamento'
-            required: true
-            schema:
-              type: string
+          in: path
+          description: 'Nome do medicamento'
+          required: true
+          schema:
+            type: string
         - name: Codigo
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
             in: path
             description: 'Codigo do medicamento'
             required: true
             schema:
               type: bigserial
+=======
+          in: path
+          description: 'Codigo do medicamento'
+          required: true
+          schema:
+            type: string
+>>>>>>> main:Docs/openapi-3.1.yml
       responses:
         '200':
           description: 'Medicamento Salvo com sucesso'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut: 
           description: Unixpected error
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
 
   /medicamento/{medicamento_codigo}:
     get:
@@ -434,6 +450,7 @@ paths:
       tags:
         - medicamento
       parameters:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         - name: Codigo
             in: query
             description: 'ID referente ao medicamento'
@@ -441,19 +458,28 @@ paths:
             schema:
               type: bigserial
               format: serial8
+=======
+        - name: id
+          in: query
+          description: 'ID referente ao medicamento'
+          required: true
+          schema:
+            type: integer
+            format: int32
+>>>>>>> main:Docs/openapi-3.1.yml
       responses: 
         '200':
           description: 'Retorna o medicamento do ID solicitado'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut:
           description: Unixpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary: 'Atualiza os dados do medicamento do id solicitado'
       operationId: putMedicamentoById
@@ -939,9 +965,8 @@ components:
       required:
         - CPF
         - Nome
-        - Sexo
-        - TipoSangue
         - DataDeNasc
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         - Endereco
         - Telefone
         - Genero
@@ -949,21 +974,41 @@ components:
         - updatedOn
         - dados
         - enfermeiro_id
+=======
+        - Enfermeiro
+>>>>>>> main:Docs/openapi-3.1.yml
       properties:
         Nome:
           type: string
         CPF:
           type: string
         Sexo:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
           type: boolean
         TipoSangue:
           type: string
+=======
+          description: "Sexo biológico"
+          type: boolean
+          default:
+        Genero:
+          description: "Gênero com o qual a pessoa se identifica"
+          type: string
+          enum: ["cis", "trans", "non-b"]
+          default: 
+        Sangue:
+          description: "Tipo sanguíneo"
+          type: string
+          enum: ["a+", "a-", "b+", "b-", "ab+", "ab-", "o+", "o-", "null_rh"]
+          default: 
+>>>>>>> main:Docs/openapi-3.1.yml
         DataDeNasc:
           type: string
         Endereco:
           type: string
         Telefone:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         Genero:
           type: string
         createdOn:
@@ -974,73 +1019,88 @@ components:
           type: string
         enfermeiro_id:
           type: integer
+=======
+        CreatedOn:
+          type: string
+        UpdatedOn:
+          type: string
+        Enfermeiro:
+          description: "O CPF do enfermeiro que cadastrou o paciente"
+          type: string
+        Dados:
+          description: "Informações a respeito do diagnóstico do paciente"
+          type: string
+>>>>>>> main:Docs/openapi-3.1.yml
     Estagiario:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     Administrador:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     Enfermeiro:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     EnfermeiroChefe:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         Tipo:
           type: string
+=======
+>>>>>>> main:Docs/openapi-3.1.yml
     Agendamento:
       type: object
       required:
+        - Horario
         - EnfermeiroChefe
         - Enfermeiro
         - Estagiario
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         - CPF_Paciente
         - Posologia
+=======
+        - Paciente
+        - Medicamento
+>>>>>>> main:Docs/openapi-3.1.yml
       properties:
+        Horario:
+          description: "Timestamp com a hora presvista para execução do agendamento."
+          type: string
         EnfermeiroChefe:
           type: string
         Enfermeiro:
           type: string
         Estagiario:
           type: string
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         Nome_Paciente:
           type: string
         CPF_Paciente:
@@ -1053,6 +1113,12 @@ components:
           type: timestamptz 
         #Local_Paciente:
           #type: string       
+=======
+        Paciente:
+          type: string
+        Medicamento:
+          type: int
+>>>>>>> main:Docs/openapi-3.1.yml
     Medicamento:
       type: object
       required:
@@ -1062,6 +1128,7 @@ components:
         Nome:
           type: string
         Codigo:
+<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
           type: bigserial
     Posologia:
       type: object
@@ -1079,6 +1146,26 @@ components:
           type: string
         dosagem:
           type: string
+=======
+          type: int
+    Posologia:
+      type: object
+      required:
+        - Medicamento
+        - Paciente
+        - Quantidade
+      properties:
+        id:
+          type: int
+        Medicamento:
+          type: int
+        Paciente:
+          type: string
+        Quantidade:
+          description: "A quantidade diária a ser administrada" 
+          example: "1 (uma vez ao dia), 0.5 (uma vez a cada dois dias)"
+          type: float
+>>>>>>> main:Docs/openapi-3.1.yml
     Error:
       type: object
       required:
