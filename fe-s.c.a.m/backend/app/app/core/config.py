@@ -59,11 +59,11 @@ class Settings(BaseSettings):
     EMAILS_FROM_EMAIL: Optional[EmailStr] = None
     EMAILS_FROM_NAME: Optional[str] = None
 
-    @validator("EMAILS_FROM_NAME")
-    def get_project_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
+ @validator("EMAILS_FROM_NAME")
+   def get_project_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if not v:
-            return values["PROJECT_NAME"]
-        return v
+          return values["PROJECT_NAME"]
+      return v
 
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 48
     EMAIL_TEMPLATES_DIR: str = "/app/app/email-templates/build"

@@ -94,20 +94,24 @@ Table Posologia {
   paciente char(11) [ref: > Paciente.CPF, not null]
   quantidade float [not null, note: "A quantidade diária a ser administrada"]
   notas varchar
-  
+
   indexes {
     (paciente, medicamento)
   }
 }
 
 Table Agendamento {
+
   id bigserial [pk]
-  posologia bigit [ref: > Posologia.id, not null]
+  posologia bigint [ref: > Posologia.id, not null, note: "Identificador da posologia do medicamento a ser aplicado"]
+
   paciente char(11) [ref: > Paciente.CPF, not null]
   enfermeiro bigint [ref: > Enfermeiro.id, not null]
   estagiario bigint [ref: > Estagiario.id, not null]
   enferchefe bigint [ref: > EnfermeiroChefe.id, not null]
   horario timestamptz [default: null]
+  alarme timestamptz [default: null, note: "Alarme referente ao horario de aplciação do medicamento, deve notificar quem irá realizar a aplicação"]
+
   
   indexes {
     id
