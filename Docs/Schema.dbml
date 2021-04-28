@@ -38,6 +38,7 @@ Table Paciente {
 Table Funcionario as Func {
   CPF char(11) [pk]
   nome varchar [not null]
+  senha binary(60) [not null]
 
   indexes {
     CPF
@@ -61,6 +62,15 @@ Table EnfermeiroChefe {
   }
 }
 
+Table Administrador {
+  id bigserial [pk]
+  func_id char(11) [unique, ref: > Func.CPF]
+  indexes {
+    func_id
+  }
+}
+
+
 Table Estagiario {
   id bigserial [pk]
   func_id char(11) [unique, ref: > Func.CPF]
@@ -82,35 +92,29 @@ Table Posologia {
   id bigserial [pk]
   medicamento bigint [ref: > Medicamento.codigo]
   paciente char(11) [ref: > Paciente.CPF, not null]
-<<<<<<< HEAD
-  dosagem char(15) [note: "Dosagem e Frequencia do medicamento a ser aplicado no paciente"]
-  
-=======
   quantidade float [not null, note: "A quantidade diária a ser administrada"]
->>>>>>> main
+  notas varchar
+
   indexes {
     (paciente, medicamento)
   }
 }
 
 Table Agendamento {
-<<<<<<< HEAD
+
   id bigserial [pk]
   posologia bigint [ref: > Posologia.id, not null, note: "Identificador da posologia do medicamento a ser aplicado"]
-=======
-  posologia bigit [ref: > Posologia.id, not null]
->>>>>>> main
+
   paciente char(11) [ref: > Paciente.CPF, not null]
   enfermeiro bigint [ref: > Enfermeiro.id, not null]
   estagiario bigint [ref: > Estagiario.id, not null]
   enferchefe bigint [ref: > EnfermeiroChefe.id, not null]
   horario timestamptz [default: null]
-<<<<<<< HEAD
   alarme timestamptz [default: null, note: "Alarme referente ao horario de aplciação do medicamento, deve notificar quem irá realizar a aplicação"]
-=======
->>>>>>> main
+
   
   indexes {
+    id
     paciente
     horario
   }
