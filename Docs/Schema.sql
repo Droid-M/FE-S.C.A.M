@@ -71,6 +71,7 @@ CREATE TABLE "Posologia" (
 );
 
 CREATE TABLE "Agendamento" (
+  "id" bigserial PRIMARY KEY,
   "posologia" bigit NOT NULL,
   "paciente" char(11) NOT NULL,
   "enfermeiro" bigint NOT NULL,
@@ -118,6 +119,8 @@ CREATE INDEX ON "Estagiario" ("func_id");
 CREATE INDEX ON "Medicamento" ("codigo");
 
 CREATE INDEX ON "Posologia" ("paciente", "medicamento");
+
+CREATE INDEX ON "Agendamento" ("id");
 
 CREATE INDEX ON "Agendamento" ("paciente");
 

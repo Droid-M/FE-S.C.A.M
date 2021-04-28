@@ -399,6 +399,8 @@ components:
         - Paciente
         - Medicamento
       properties:
+        Id:
+          type: int
         Horario:
           description: "Timestamp com a hora presvista para execução do agendamento."
           type: string

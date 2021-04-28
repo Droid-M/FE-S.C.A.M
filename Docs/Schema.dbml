@@ -101,6 +101,7 @@ Table Posologia {
 }
 
 Table Agendamento {
+  id bigserial [pk]
   posologia bigit [ref: > Posologia.id, not null]
   paciente char(11) [ref: > Paciente.CPF, not null]
   enfermeiro bigint [ref: > Enfermeiro.id, not null]
@@ -109,6 +110,7 @@ Table Agendamento {
   horario timestamptz [default: null]
   
   indexes {
+    id
     paciente
     horario
   }
