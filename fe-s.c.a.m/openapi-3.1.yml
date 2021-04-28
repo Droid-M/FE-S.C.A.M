@@ -316,6 +316,11 @@ components:
         - DataDeNasc
         - Endereco
         - Telefone
+        - Genero
+        - createdOn
+        - updatedOn
+        - dados
+        - enfermeiro_id
       properties:
         Nome:
           type: string
@@ -331,6 +336,16 @@ components:
           type: string
         Telefone:
           type: string
+        Genero:
+          type: string
+        createdOn:
+          type: timestamptz
+        updatedOn:
+          type: timestamptz
+        dados:
+          type: string
+        enfermeiro_id:
+          type: integer
     Estagiario:
       type: object
       required:
@@ -383,14 +398,14 @@ components:
           type: string
         Tipo:
           type: string
-    AgendamentoEnfermeiroChefe:
+    Agendamento:
       type: object
       required:
         - EnfermeiroChefe
         - Enfermeiro
         - Estagiario
         - CPF_Paciente
-        - Codigo_Medicamento
+        - Posologia
       properties:
         EnfermeiroChefe:
           type: string
@@ -404,23 +419,12 @@ components:
           type: string
         Nome_Medicamento:
           type: string
-        Codigo_Medicamento:
+        Posologia:
           type: string
-    AlarmeAgendamento:
-      type: object
-      properties:
-        CodigoAlarme:
-          type: string
-        Nome_Paciente:
-          type: string
-        Local_Paciente:
-          type: string
-        Timestamp:
-          type: string
-        Nome_Medicamento:
-          type: string
-        Enfermeiro:
-          type: string
+        Alarme :
+          type: timestamptz 
+        #Local_Paciente:
+          #type: string       
     Medicamento:
       type: object
       required:
@@ -431,41 +435,21 @@ components:
           type: string
         Codigo:
           type: string
-    Prontuario:
+    Posologia:
       type: object
       required:
-        - EnfermeiroChefe
-        - Enfermeiro
-        - Paciente
-        - Dados
-        - InternaçãoTimestamp
+        - id
+        - medicamento
+        - paciente
+        - dosagem
       properties:
-        EnfermeiroChefe:
+        id:
+          type: integer
+        medicamento:
+          type: integer
+        paciente: 
           type: string
-        Paciente:
-          type: string
-        Dados:
-          type: string
-        Timestamp:
-          type: string
-        Enfermeiro:
-          type: string
-        InternaçãoTimestamp:
-          type: string
-    CadastroPaciente:
-      type: object
-      properties:
-        EnfermeiroChefe:
-          type: string
-        Enfermeiro:
-          type: string
-        Nome_Paciente:
-          type: string
-        Sexo_Paciente:
-          type: string
-        DataNascimento:
-          type: string
-        TipoSangue:
+        dosagem:
           type: string
     Error:
       type: object
