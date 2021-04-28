@@ -3,7 +3,7 @@ info:
   version: '1.0'
   title: PBL
 paths:
-  /enfermeiro_chefe:
+  /enfermeirochefe:
     get:
       summary: 'Retorna todos os enfermeiros chefes cadastrado no sistema'
       operationId: getEnfChefe
@@ -15,7 +15,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         default:
           description: Unexpected error
           content:
@@ -45,13 +45,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         default:
           description: Unexpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       sumary:
     delete:
@@ -69,13 +69,13 @@ paths:
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/enfermeiro_chefe'
+                $ref: '#/components/schemas/EnfermeiroChefe'
         defaut:
           description: Unexpected error
           content:
             application/json: 
               schema: 
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post:
       summary: 
 
@@ -87,25 +87,25 @@ paths:
         - enfermeiro
       parameters:
          - name: id
-            in: query
-            description: ID referente ao enfermeiro chefe
-            required: true
-            schema:
-              type: integer
-              format: int32
+           in: query
+           description: ID referente ao enfermeiro chefe
+           required: true
+           schema:
+             type: integer
+             format: int32
       responses:
         '200':
           description: 'Retorna o usuário enfermeiro referente ao ID'
           content: 
           application/json:
             schema:
-              $ref: '#/components/schemas/enfermeiro_chefe'
+              $ref: '#/components/schemas/EnfermeiroChefe'
         defaut:
           description: Unexpected error - ID not found
           content:
             application/json: 
               schema: 
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
     delete: 
 
@@ -121,13 +121,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/administrador'
+                $ref: '#/components/schemas/Administrador'
         defaut:
           description: Unexpected error
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
 
   /administrador/ {administrador_id}: 
     get: 
@@ -137,25 +137,25 @@ paths:
         - administrador
       parameters:
         - name: id
-            in: query
-            description: 'ID referente ao usuario administrador'
-            required: true
-            schema:
-              type: integer
-              format: int32
+          in: query
+          description: 'ID referente ao usuario administrador'
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses: 
         '200':
           description: 'Retorna o administrador do ID solicitado'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/administrador'
+                $ref: '#/components/schemas/Administrador'
         defaut:
           description: Unexpected error - ID not found
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary:
     delete: 
@@ -173,13 +173,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/agendamento_enfermeiro_chefe'
+                $ref: '#/components/schemas/Agendamento'
         defaut: 
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post:
       summary:
 
@@ -203,13 +203,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/agendamento_enfermeiro_chefe'
+                $ref: '#/components/schemas/Agendamento'
         defaut: 
           description: Unexpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary:
     delete:
@@ -227,13 +227,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut:
           description: Unixpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post: 
       summary: 'Cadastra um novo medicamento no sistema'
       operationId: CadastroMedicamento
@@ -241,30 +241,30 @@ paths:
         - medicamento
       parameters:
         - name: Nome
-            in: path
-            description: 'Nome do medicamento'
-            required: true
-            schema:
-              type: string
+          in: path
+          description: 'Nome do medicamento'
+          required: true
+          schema:
+            type: string
         - name: Codigo
-            in: path
-            description: 'Codigo do medicamento'
-            required: true
-            schema:
-              type: string
+          in: path
+          description: 'Codigo do medicamento'
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: 'Medicamento Salvo com sucesso'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut: 
           description: Unixpected error
           content: 
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
 
   /medicamento/{medicamento_id}:
     get:
@@ -274,25 +274,25 @@ paths:
         - medicamento
       parameters:
         - name: id
-            in: query
-            description: 'ID referente ao medicamento'
-            required: true
-            schema:
-              type: integer
-              format: int32
+          in: query
+          description: 'ID referente ao medicamento'
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses: 
         '200':
           description: 'Retorna o medicamento do ID solicitado'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicamento'
+                $ref: '#/components/schemas/Medicamento'
         defaut:
           description: Unixpected error - ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     put:
       summary:
     delete:
@@ -311,116 +311,106 @@ components:
       required:
         - CPF
         - Nome
-        - Sexo
-        - TipoSangue
         - DataDeNasc
-        - Endereco
-        - Telefone
+        - Enfermeiro
       properties:
         Nome:
           type: string
         CPF:
           type: string
         Sexo:
+          description: "Sexo biológico"
+          type: boolean
+          default:
+        Genero:
+          description: "Gênero com o qual a pessoa se identifica"
           type: string
-        TipoSangue:
+          enum: ["cis", "trans", "non-b"]
+          default: 
+        Sangue:
+          description: "Tipo sanguíneo"
           type: string
+          enum: ["a+", "a-", "b+", "b-", "ab+", "ab-", "o+", "o-", "null_rh"]
+          default: 
         DataDeNasc:
           type: string
         Endereco:
           type: string
         Telefone:
           type: string
+        CreatedOn:
+          type: string
+        UpdatedOn:
+          type: string
+        Enfermeiro:
+          description: "O CPF do enfermeiro que cadastrou o paciente"
+          type: string
+        Dados:
+          description: "Informações a respeito do diagnóstico do paciente"
+          type: string
     Estagiario:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     Administrador:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     Enfermeiro:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
-          type: string
-        Tipo:
           type: string
     EnfermeiroChefe:
       type: object
       required:
         - CPF
         - Nome
-        - Tipo
       properties:
         CPF:
           type: string
         Nome:
           type: string
-        Tipo:
-          type: string
-    AgendamentoEnfermeiroChefe:
+    Agendamento:
       type: object
       required:
+        - Horario
         - EnfermeiroChefe
         - Enfermeiro
         - Estagiario
-        - CPF_Paciente
-        - Codigo_Medicamento
+        - Paciente
+        - Medicamento
       properties:
+        Horario:
+          description: "Timestamp com a hora presvista para execução do agendamento."
+          type: string
         EnfermeiroChefe:
           type: string
         Enfermeiro:
           type: string
         Estagiario:
           type: string
-        Nome_Paciente:
+        Paciente:
           type: string
-        CPF_Paciente:
-          type: string
-        Nome_Medicamento:
-          type: string
-        Codigo_Medicamento:
-          type: string
-    AlarmeAgendamento:
-      type: object
-      properties:
-        CodigoAlarme:
-          type: string
-        Nome_Paciente:
-          type: string
-        Local_Paciente:
-          type: string
-        Timestamp:
-          type: string
-        Nome_Medicamento:
-          type: string
-        Enfermeiro:
-          type: string
+        Medicamento:
+          type: int
     Medicamento:
       type: object
       required:
@@ -430,43 +420,24 @@ components:
         Nome:
           type: string
         Codigo:
-          type: string
-    Prontuario:
+          type: int
+    Posologia:
       type: object
       required:
-        - EnfermeiroChefe
-        - Enfermeiro
+        - Medicamento
         - Paciente
-        - Dados
-        - InternaçãoTimestamp
+        - Quantidade
       properties:
-        EnfermeiroChefe:
-          type: string
+        id:
+          type: int
+        Medicamento:
+          type: int
         Paciente:
           type: string
-        Dados:
-          type: string
-        Timestamp:
-          type: string
-        Enfermeiro:
-          type: string
-        InternaçãoTimestamp:
-          type: string
-    CadastroPaciente:
-      type: object
-      properties:
-        EnfermeiroChefe:
-          type: string
-        Enfermeiro:
-          type: string
-        Nome_Paciente:
-          type: string
-        Sexo_Paciente:
-          type: string
-        DataNascimento:
-          type: string
-        TipoSangue:
-          type: string
+        Quantidade:
+          description: "A quantidade diária a ser administrada" 
+          example: "1 (uma vez ao dia), 0.5 (uma vez a cada dois dias)"
+          type: float
     Error:
       type: object
       required:
