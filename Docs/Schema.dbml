@@ -90,7 +90,8 @@ Table Posologia {
 }
 
 Table Agendamento {
-  posologia bigit [ref: > Posologia.id, not null]
+  id bigserial [pk]
+  posologia bigint [ref: > Posologia.id, not null, note: "Identificador da posologia do medicamento a ser aplicado"]
   paciente char(11) [ref: > Paciente.CPF, not null]
   enfermeiro bigint [ref: > Enfermeiro.id, not null]
   estagiario bigint [ref: > Estagiario.id, not null]
