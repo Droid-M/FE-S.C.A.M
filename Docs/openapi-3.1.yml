@@ -308,6 +308,7 @@ components:
   schemas:
     Paciente:
       type: object
+      description: "Pessoa que dá entrada na UTI cadastrada por um enfermeiro"
       required:
         - CPF
         - Nome
@@ -438,6 +439,9 @@ components:
           description: "A quantidade diária a ser administrada" 
           example: "1 (uma vez ao dia), 0.5 (uma vez a cada dois dias)"
           type: float
+        Notas:
+          type: string
+          description: "Anotações sobre peculiaridades de administração da dose do medicamento"
     Error:
       type: object
       required:
