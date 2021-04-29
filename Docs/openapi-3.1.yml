@@ -173,11 +173,7 @@ paths:
           content:
             application/json:
               schema:
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
                 $ref: '#/components/schemas/agendamento'
-=======
-                $ref: '#/components/schemas/Agendamento'
->>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error
           content:
@@ -276,11 +272,7 @@ paths:
           content:
             application/json:
               schema:
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
                 $ref: '#/components/schemas/agendamento'
-=======
-                $ref: '#/components/schemas/Agendamento'
->>>>>>> main:Docs/openapi-3.1.yml
         defaut: 
           description: Unexpected error - ID not found
           content:
@@ -416,19 +408,11 @@ paths:
           schema:
             type: string
         - name: Codigo
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
             in: path
             description: 'Codigo do medicamento'
             required: true
             schema:
               type: bigserial
-=======
-          in: path
-          description: 'Codigo do medicamento'
-          required: true
-          schema:
-            type: string
->>>>>>> main:Docs/openapi-3.1.yml
       responses:
         '200':
           description: 'Medicamento Salvo com sucesso'
@@ -450,7 +434,6 @@ paths:
       tags:
         - medicamento
       parameters:
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         - name: Codigo
             in: query
             description: 'ID referente ao medicamento'
@@ -458,15 +441,6 @@ paths:
             schema:
               type: bigserial
               format: serial8
-=======
-        - name: id
-          in: query
-          description: 'ID referente ao medicamento'
-          required: true
-          schema:
-            type: integer
-            format: int32
->>>>>>> main:Docs/openapi-3.1.yml
       responses: 
         '200':
           description: 'Retorna o medicamento do ID solicitado'
@@ -962,32 +936,24 @@ components:
   schemas:
     Paciente:
       type: object
+      description: "Pessoa que dá entrada na UTI cadastrada por um enfermeiro"
       required:
         - CPF
         - Nome
         - DataDeNasc
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
         - Endereco
         - Telefone
         - Genero
         - createdOn
         - updatedOn
         - dados
-        - enfermeiro_id
-=======
-        - Enfermeiro
->>>>>>> main:Docs/openapi-3.1.yml
+        - enfermeiro_id  
       properties:
         Nome:
           type: string
         CPF:
           type: string
         Sexo:
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-          type: boolean
-        TipoSangue:
-          type: string
-=======
           description: "Sexo biológico"
           type: boolean
           default:
@@ -1001,25 +967,12 @@ components:
           type: string
           enum: ["a+", "a-", "b+", "b-", "ab+", "ab-", "o+", "o-", "null_rh"]
           default: 
->>>>>>> main:Docs/openapi-3.1.yml
         DataDeNasc:
           type: string
         Endereco:
           type: string
         Telefone:
           type: string
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-        Genero:
-          type: string
-        createdOn:
-          type: timestamptz
-        updatedOn:
-          type: timestamptz
-        dados:
-          type: string
-        enfermeiro_id:
-          type: integer
-=======
         CreatedOn:
           type: string
         UpdatedOn:
@@ -1030,7 +983,7 @@ components:
         Dados:
           description: "Informações a respeito do diagnóstico do paciente"
           type: string
->>>>>>> main:Docs/openapi-3.1.yml
+
     Estagiario:
       type: object
       required:
@@ -1071,26 +1024,19 @@ components:
           type: string
         Nome:
           type: string
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-        Tipo:
-          type: string
-=======
->>>>>>> main:Docs/openapi-3.1.yml
+
     Agendamento:
       type: object
       required:
         - Horario
         - EnfermeiroChefe
         - Enfermeiro
-        - Estagiario
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-        - CPF_Paciente
+        - Estagiario  
         - Posologia
-=======
         - Paciente
-        - Medicamento
->>>>>>> main:Docs/openapi-3.1.yml
       properties:
+        Id:
+          type: int
         Horario:
           description: "Timestamp com a hora presvista para execução do agendamento."
           type: string
@@ -1100,25 +1046,15 @@ components:
           type: string
         Estagiario:
           type: string
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-        Nome_Paciente:
-          type: string
-        CPF_Paciente:
-          type: string
-        Nome_Medicamento:
+        Paciente:
           type: string
         Posologia:
           type: string
         Alarme :
           type: timestamptz 
         #Local_Paciente:
-          #type: string       
-=======
-        Paciente:
-          type: string
-        Medicamento:
-          type: int
->>>>>>> main:Docs/openapi-3.1.yml
+          #type: string           
+
     Medicamento:
       type: object
       required:
@@ -1128,26 +1064,8 @@ components:
         Nome:
           type: string
         Codigo:
-<<<<<<< HEAD:fe-s.c.a.m/openapi-3.1.yml
-          type: bigserial
-    Posologia:
-      type: object
-      required:
-        - id
-        - medicamento
-        - paciente
-        - dosagem
-      properties:
-        id:
-          type: bigserial
-        medicamento:
-          type: bigserial
-        paciente: 
-          type: string
-        dosagem:
-          type: string
-=======
           type: int
+   
     Posologia:
       type: object
       required:
@@ -1165,7 +1083,10 @@ components:
           description: "A quantidade diária a ser administrada" 
           example: "1 (uma vez ao dia), 0.5 (uma vez a cada dois dias)"
           type: float
->>>>>>> main:Docs/openapi-3.1.yml
+        Notas:
+          type: string
+          description: "Anotações sobre peculiaridades de administração da dose do medicamento"
+
     Error:
       type: object
       required:
