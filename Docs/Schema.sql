@@ -33,7 +33,8 @@ CREATE TABLE "Paciente" (
 
 CREATE TABLE "Funcionario" (
   "CPF" char(11) PRIMARY KEY,
-  "nome" varchar NOT NULL
+  "nome" varchar NOT NULL,
+  "senha" binary(60) NOT NULL
 );
 
 CREATE TABLE "Enfermeiro" (
@@ -42,6 +43,11 @@ CREATE TABLE "Enfermeiro" (
 );
 
 CREATE TABLE "EnfermeiroChefe" (
+  "id" bigserial PRIMARY KEY,
+  "func_id" char(11) UNIQUE
+);
+
+CREATE TABLE "Administrador" (
   "id" bigserial PRIMARY KEY,
   "func_id" char(11) UNIQUE
 );
@@ -60,10 +66,12 @@ CREATE TABLE "Posologia" (
   "id" bigserial PRIMARY KEY,
   "medicamento" bigint,
   "paciente" char(11) NOT NULL,
-  "quantidade" float NOT NULL
+  "quantidade" float NOT NULL,
+  "notas" varchar
 );
 
 CREATE TABLE "Agendamento" (
+  "id" bigserial PRIMARY KEY,
   "posologia" bigit NOT NULL,
   "paciente" char(11) NOT NULL,
   "enfermeiro" bigint NOT NULL,
@@ -77,6 +85,8 @@ ALTER TABLE "Paciente" ADD FOREIGN KEY ("enfermeiro_id") REFERENCES "Enfermeiro"
 ALTER TABLE "Enfermeiro" ADD FOREIGN KEY ("func_id") REFERENCES "Funcionario" ("CPF");
 
 ALTER TABLE "EnfermeiroChefe" ADD FOREIGN KEY ("func_id") REFERENCES "Funcionario" ("CPF");
+
+ALTER TABLE "Administrador" ADD FOREIGN KEY ("func_id") REFERENCES "Funcionario" ("CPF");
 
 ALTER TABLE "Estagiario" ADD FOREIGN KEY ("func_id") REFERENCES "Funcionario" ("CPF");
 
@@ -102,11 +112,15 @@ CREATE INDEX ON "Enfermeiro" ("func_id");
 
 CREATE INDEX ON "EnfermeiroChefe" ("func_id");
 
+CREATE INDEX ON "Administrador" ("func_id");
+
 CREATE INDEX ON "Estagiario" ("func_id");
 
 CREATE INDEX ON "Medicamento" ("codigo");
 
 CREATE INDEX ON "Posologia" ("paciente", "medicamento");
+
+CREATE INDEX ON "Agendamento" ("id");
 
 CREATE INDEX ON "Agendamento" ("paciente");
 
