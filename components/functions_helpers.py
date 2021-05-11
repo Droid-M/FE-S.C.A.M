@@ -49,3 +49,21 @@ def create_list_dicitionary(keys:list, values:list):
             listDictionary.append(create_dictionary(keys, values[i]))
         return listDictionary
     return []
+
+def dictToSQLConditions(attAndValues:dict, conector_AND = True, simbol_compare = "="):
+        storeV = []
+        conector = "AND" if(conector_AND == True) else "OR"
+        for key, value in attAndValues.items():
+            storeV.append(key)
+            storeV.append(simbol_compare)
+            storeV.append(value)
+            storeV.append(conector)
+        storeV.pop(-1)
+        return tuple(storeV)
+    
+def cpfNumber_int_to_str(CPF:int):
+    CPF_str = "00000000000"
+    CPF = str(CPF)
+    min_len = len(CPF)
+    max_len = len(CPF_str)
+    return CPF_str[: max_len - min_len] + CPF
