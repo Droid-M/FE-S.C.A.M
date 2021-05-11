@@ -109,44 +109,175 @@ paths:
     put:
     delete: 
 
-  /administrador:
+#ADMINISTRADOR
+  /administrador/lista_users:
     get:
-      summary: 'Retorna todos os usuários administradores cadastrado no sistema'
-      operationId:  'getAdministrador'
+      summary: 'Retorna todos os usuários cadastrado no sistema'
+      operationId:  'getAllUsers'
       tags:
         - administrador
       responses:
         '200':
-          description: 'Retorna uma lista de todos os administradores do sistema'
+          description: 'Retorna uma lista de todos os usuários do sistema'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Administrador'
+                $ref: '#/components/schemas/User'
         defaut:
           description: Unexpected error
           content: 
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  /administrador/cadastro_user:
     post:
-      summary:
-      operationId:
+      summary: 'Cadastra um novo usuário no sistema'
+      operationId: 'create_user'
       tags:
+        - administrador
+      parameters: 
+        - name: CPF
+            in: path
+            description: 'CPF do usuario'
+            required: true
+            schema:
+              type: string
+        - name: nome
+            in: path
+            description: 'Nome do usuario'
+            required: true
+            schema:
+              type: string
+        - name: senha
+            in: path
+            description: 'senha do usuario'
+            required: true
+            schema:
+              type: integer
+              format: int32
       responses:
         '200':
-          description:
+          description: 'Um novo usuario foi cadastrado com sucesso'
           content:
             application/json:
               schema:
-
+                $ref: '#/components/schemas/Usuarios'
         defaut:
-          description:
+          description: Unexpected Error
             content:
               application/json:
                 schema:
-                  
+                  $ref: '#/components/schemas/Error'
 
-  /administrador/ {administrador_id}: 
+  /administrador/cadastro_user/{id_user}:
+    put:
+      summary: 'Atualiza os dados de um usuário do sistema'
+      operationId: update_user'
+      tags:
+        - administrador
+      parameters: 
+        - name: CPF
+            in: path
+            description: 'CPF do usuario'
+            required: true
+            schema:
+              type: string
+        - name: nome
+            in: path
+            description: 'Nome do usuario'
+            required: true
+            schema:
+              type: string
+        - name: senha
+            in: path
+            description: 'senha do usuario'
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: 'Atualização realizada com sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuarios'
+        defaut:
+          description: Unexpected Error - id not found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+   delete:
+      summary: 'Deleta o usuário do sistema'
+      operationId: delete_user
+      tags:
+        - administrador
+      paramenters:
+        - name: id
+            in: path
+            description: 'Identificador do Usuario para ser deletado'
+            required: true
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: 'Retorna uma mensagem: Usuario deletado com sucesso'
+          content:
+            text/plain:
+              schema:
+                type: string
+        defaut:
+          description: 'Unexpected Error - Impossivel deletar o usuario'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/error'
+
+  /administrador/relatorios:
+    get:
+      summary: 'Retorna a tela de Relatorios Gerenciais do sistema'
+      operationId:  'getRelatorio'
+      tags:
+        - administrador
+      responses:
+        '200':
+          description: 'Retorna os relatorios do sistema'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/relatorio'
+        defaut:
+          description: Unexpected error
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /administrador/home_dashboard:
+    get:
+      sumarry: 'Retorna a pagina inicial/dashboard do administrador do sistema, carregando a quantidade de usuarios logados
+                no sistema, o tempo total de funcionamento do sistema e etc.'
+      operationsId: 'getDashboard'
+      tags:
+        - administrador
+      responses:
+        '200':
+          description: 'Todos os dados foram carregados com sucesso'
+          content:
+            text/plain:
+              schema:
+                type:string
+        defaut:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/error'
+
+  #/administrador/ {administrador_id}: 
     get: 
       summary: 'Retorna o usuário administrador referente ao ID solicitado'
       operationId: 'getAdministradorById'
@@ -177,6 +308,7 @@ paths:
       summary:
     delete: 
       summary: 
+
 
   /agendamento_enfermeiro_chefe: 
     get: 
