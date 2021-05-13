@@ -1,0 +1,121 @@
+enum tipoSangue {
+  "a+"
+  "a-"
+  "b+"
+  "b-"
+  "ab+"
+  "ab-"
+  "o+"
+  "o-"
+  "null_rh"
+}
+
+enum tipoGenero {
+  "cis"
+  "trans"
+  "non-b"
+}
+
+Table Paciente {
+  CPF char(11) [pk]
+  nome varchar [not null]
+  sexo boolean [default: null, note: "Sexo biológico"]
+  genero tipoGenero [default: null, note: "Gênero com o qual a pessoa se identifica"]
+  dataDeNascimento date [default: null]
+  sangue tipoSangue [default: null]
+  endereco varchar [default: null]
+  telefone char(11) [default: null]
+  createdOn timestamptz [default: `now()`]
+  updatedOn timestamptz [default: `now()`]
+  dados varchar [note: "Informações a respeito do diagnóstico do paciente"]
+  enfermeiro_id bigint [ref: > Enfermeiro.id, note: "Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes"]
+
+  indexes {
+    CPF
+  }
+}
+
+Table Funcionario as Func {
+  CPF char(11) [pk]
+  nome varchar [not null]
+  senha binary(60) [not null]
+
+  indexes {
+    CPF
+  }
+}
+
+Table Enfermeiro {
+  id bigserial [pk]
+  func_id char(11) [unique, ref: > Func.CPF]
+
+  indexes {
+    func_id
+  }
+}
+
+Table EnfermeiroChefe {
+  id bigserial [pk]
+  func_id char(11) [unique, ref: > Func.CPF]
+  indexes {
+    func_id
+  }
+}
+
+Table Administrador {
+  id bigserial [pk]
+  func_id char(11) [unique, ref: > Func.CPF]
+  indexes {
+    func_id
+  }
+}
+
+
+Table Estagiario {
+  id bigserial [pk]
+  func_id char(11) [unique, ref: > Func.CPF]
+  indexes {
+    func_id
+  }
+}
+
+Table Medicamento {
+  codigo bigserial [pk]
+  nome varchar [not null]
+
+  indexes {
+    codigo
+  }
+}
+
+Table Posologia {
+  id bigserial [pk]
+  medicamento bigint [ref: > Medicamento.codigo]
+  paciente char(11) [ref: > Paciente.CPF, not null]
+  quantidade float [not null, note: "A quantidade diária a ser administrada"]
+  notas varchar
+
+  indexes {
+    (paciente, medicamento)
+  }
+}
+
+Table Agendamento {
+
+  id bigserial [pk]
+  posologia bigint [ref: > Posologia.id, not null, note: "Identificador da posologia do medicamento a ser aplicado"]
+
+  paciente char(11) [ref: > Paciente.CPF, not null]
+  enfermeiro bigint [ref: > Enfermeiro.id, not null]
+  estagiario bigint [ref: > Estagiario.id, not null]
+  enferchefe bigint [ref: > EnfermeiroChefe.id, not null]
+  horario timestamptz [default: null]
+  alarme timestamptz [default: null, note: "Alarme referente ao horario de aplciação do medicamento, deve notificar quem irá realizar a aplicação"]
+
+  
+  indexes {
+    id
+    paciente
+    horario
+  }
+}

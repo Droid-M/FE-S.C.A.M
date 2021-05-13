@@ -1,0 +1,1 @@
+from .funcionario import FuncionarioBase, FuncionarioCreated
