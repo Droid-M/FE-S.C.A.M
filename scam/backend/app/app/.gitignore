@@ -1,9 +1,0 @@
-/.vscode
-/.pytest_cache
-/venv
-__pycache__/
-/__pycache__
-.database.ini
-docker-stack.yml
-database.ini
-.openapi-3.1.yml
