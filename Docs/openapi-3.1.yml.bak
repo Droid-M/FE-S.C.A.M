@@ -65,7 +65,7 @@ paths:
             required: true
             schema:
               type: timestamptz
-        - name: updated_on
+        - name: updatedOn
             in: path
             description: 'Data de hora em que o cadastro do paciente foi atualizado'
             required: true
@@ -184,7 +184,7 @@ paths:
             required: true
             schema:
               type: timestamptz
-        - name: updated_on
+        - name: updatedOn
             in: path
             description: 'Data de hora em que o cadastro do paciente foi atualizado'
             required: true
@@ -1399,7 +1399,7 @@ components:
         - Telefone
         - Genero
         - created_on
-        - updated_on
+        - updatedOn
         - dados
         - enfermeiro_id  
       properties:
@@ -1429,7 +1429,7 @@ components:
           type: string
         created_on:
           type: string
-        updated_on:
+        UpdatedOn:
           type: string
         Enfermeiro:
           description: "O CPF do enfermeiro que cadastrou o paciente"
