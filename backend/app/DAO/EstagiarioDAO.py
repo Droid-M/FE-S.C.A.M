@@ -1,8 +1,8 @@
-from app.schemas.estagiaro import EstagiarioCreated
-from app.model.Estagiario import Estagiario
-from app.model.Funcionario import Funcionario
-from app.DAO.FuncionarioDAO import FuncionarioDAO
-from app.DAO.child.childBase import childBase
+from backend.app.schemas.estagiaro import EstagiarioCreated
+from backend.app.model.Estagiario import Estagiario
+from backend.app.model.Funcionario import Funcionario
+from backend.app.DAO.FuncionarioDAO import FuncionarioDAO
+from backend.app.DAO.child.childBase import childBase
 
 class EstagiarioDAO(childBase):
     def __init__(self):

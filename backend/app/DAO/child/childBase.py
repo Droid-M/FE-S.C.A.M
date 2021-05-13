@@ -1,5 +1,5 @@
-from app.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
-from app.model.IBaseModel import IBase
+from backend.app.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
+from backend.app.model.IBaseModel import IBase
 
 class childBase:
     

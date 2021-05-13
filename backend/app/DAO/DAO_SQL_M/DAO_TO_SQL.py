@@ -1,5 +1,5 @@
-from app.components.functions_helpers import create_list_dicitionary, create_dictionary
-from app.db.execute_db_command import execute
+from backend.app.components.functions_helpers import create_list_dicitionary, create_dictionary
+from backend.app.db.execute_db_command import execute
 
 #EXTRAIR A CLASSE CONVERT_COMAND E A CLASSE WHERE NO FUTURO *************************
 

@@ -1,8 +1,8 @@
-from app.schemas.enfermeiro import EnfermeiroCreated
-from app.model.Enfermeiro import Enfermeiro
-from app.model.Funcionario import Funcionario
-from app.DAO.FuncionarioDAO import FuncionarioDAO
-from app.DAO.child.childBase import childBase
+from backend.app.schemas.enfermeiro import EnfermeiroCreated
+from backend.app.model.Enfermeiro import Enfermeiro
+from backend.app.model.Funcionario import Funcionario
+from backend.app.DAO.FuncionarioDAO import FuncionarioDAO
+from backend.app.DAO.child.childBase import childBase
 
 class EnfermeiroDAO(childBase):
     def __init__(self):

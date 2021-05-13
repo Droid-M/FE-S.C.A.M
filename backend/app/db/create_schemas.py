@@ -1,4 +1,4 @@
-from app.db.execute_db_command import execute
+from backend.app.db.execute_db_command import execute
 #(falta definir a TIMEZONE)
 import os
 

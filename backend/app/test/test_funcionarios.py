@@ -1,8 +1,8 @@
 import pytest
-from app.schemas.administrador import AdministradorCreated
-from app.schemas.estagiaro import EstagiarioCreated
-from app.model.Funcionario import Funcionario
-from app.DAO.EstagiarioDAO import EstagiarioDAO
+from backend.app.schemas.administrador import AdministradorCreated
+from backend.app.schemas.estagiaro import EstagiarioCreated
+from backend.app.model.Funcionario import Funcionario
+from backend.app.DAO.EstagiarioDAO import EstagiarioDAO
 
 def test_estagiario():
     estDAO = EstagiarioDAO()

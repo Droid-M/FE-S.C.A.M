@@ -1,9 +1,9 @@
 import pytest
-from app.model.Posologia import Posologia
-from app.schemas.posologia import PosologiaCreated
-from app.DAO.PosologiaDAO import PosologiaDAO
-from app.DAO.MedicamentoDAO import MedicamentoDAO
-from app.DAO.PacienteDAO import PacienteDAO
+from backend.app.model.Posologia import Posologia
+from backend.app.schemas.posologia import PosologiaCreated
+from backend.app.DAO.PosologiaDAO import PosologiaDAO
+from backend.app.DAO.MedicamentoDAO import MedicamentoDAO
+from backend.app.DAO.PacienteDAO import PacienteDAO
 
 def test_posologia():
     posDAO = PosologiaDAO()

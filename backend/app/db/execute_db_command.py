@@ -1,5 +1,5 @@
 import psycopg2 as toDB
-from app.db.config import config
+from backend.app.db.config import config
 
 def execute(command = None, getAll = False):
     connection = None

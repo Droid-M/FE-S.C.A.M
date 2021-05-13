@@ -1,5 +1,5 @@
-from app.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
-from app.components.functions_helpers import dictToSQLConditions
+from backend.app.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
+from backend.app.components.functions_helpers import dictToSQLConditions
 #from model.childModel import childModel
 
 class BaseDAO:

@@ -1,25 +1,29 @@
-from os import stat
+from os import path
+import sys
+
+sys.path.append(path.abspath('.'))
+
 from typing import Any, List, NoReturn
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from app import DAO, model, schemas
-from app.api import deps
+from backend.app import DAO, model, schemas
+from backend.app.api import deps
 
 router = APIRouter()
 
+admDAO = DAO.AdministradorDAO()
 funcDAO = DAO.FuncionarioDAO()
 estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
-admDAO = DAO.AdministradorDAO() 
 
 @router.get("/lista_users", response_model=List[schemas.FuncionarioBase])
 def getAllUsers(
         page: int = 0, per_page: int = -1,
-        current_user: model.Administrador = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
+        current_user: schemas.FuncionarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
         ): #-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
