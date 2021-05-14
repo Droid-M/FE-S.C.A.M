@@ -42,32 +42,40 @@ def getAllUsers(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 
-@router.post("/cadastro_user", response_model=schemas.funcionario)
+@router.post("/cadastro_user", response_model=schemas.FuncionarioBase)
 def create_user(
     user: schemas.FuncionarioCreated,
     user_type: str,
-    current_user: model.Administrador = None
     ): # -> Any
     is_admin = True
     if(is_admin):
         result = None
         if(user_type == "ADMINISTRADOR"):
-            result = Depends(funcDAO.createBySchema(user))
+            result = Depends(admDAO.createBySchema(user))
         elif(user_type == "ESTAGIARIO"):
             result = Depends(estDAO.createBySchema(user))
         elif(user_type == "ENFERMEIRO"):
             result = Depends(enfDAO.createBySchema(user))
         elif(user_type == "ENFERMEIRO_CHEFE"):
             result = Depends(enfCFDAO.createBySchema(user))
+        
         if(result is not None):
             user = schemas.FuncionarioBase(**result.typesAceptables)
             return Response(
-                    status_code= status.HTTP_200_OK, 
-                    description = 'Um novo usuario foi cadastrado com sucesso', 
-                    content = users
-                    )
+                status_code= status.HTTP_200_OK, 
+                description = 'Um novo usuario foi cadastrado com sucesso', 
+                content = user
+                )
+        else:
+            return Response(
+                status_code= status.HTTP_406_NOT_ACCEPTABLE,
+                description = f"Tipo de usuário {user_type} não é permitido!",
+            )
+    else:
+        #lance algum tipo de exceção ou redirecione, por exemplo
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-
+"""
 @router.put("/{id}", response_model=schemas.Item)
 def update_item(
     *,
@@ -76,9 +84,6 @@ def update_item(
     item_in: schemas.ItemUpdate,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    """
-    Update an item.
-    """
     item = crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -95,9 +100,6 @@ def read_item(
     id: int,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    """
-    Get item by ID.
-    """
     item = crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -113,9 +115,6 @@ def delete_item(
     id: int,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    """
-    Delete an item.
-    """
     item = crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -123,3 +122,4 @@ def delete_item(
         raise HTTPException(status_code=400, detail="Not enough permissions")
     item = crud.item.remove(db=db, id=id)
     return item
+"""

@@ -818,7 +818,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /administrador/cadastro_user:
+  /cadastro_user:
     post:
       summary: 'Cadastra um novo usuário no sistema'
       operationId: 'create_user'

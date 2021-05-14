@@ -1,13 +1,11 @@
+from os import path
+import sys
+
+sys.path.append(path.abspath('.'))
+
 from typing import Optional
-
 from fastapi import FastAPI, Response, status
-from pydantic import BaseModel
-
-
-class Error(BaseModel):
-    code: int = 500
-    message: str
-
+from backend.app.schemas.error import Error
 
 app = FastAPI()
 
