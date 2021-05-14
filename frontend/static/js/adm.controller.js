@@ -1,5 +1,3 @@
-const axios = require('axios').default;
-
 const baseURL = "http://localhost:3000"
 
 function getAllUsuarios(){
