@@ -1,7 +1,4 @@
-from fastapi import FastAPI, Header, Request, status
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, Header
 from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
 from typing import Optional
@@ -9,18 +6,10 @@ import bcrypt
 import jwt
 import re
 
-router = FastAPI(prefix='/api')
+router = APIRouter(prefix='/api')
 func_dao = FuncionarioDAO()
 
 SECRET = '123124'
-
-
-@router.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
-    )
 
 
 @router.post('/auth')
