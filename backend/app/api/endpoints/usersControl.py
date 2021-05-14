@@ -11,7 +11,6 @@ from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from backend.app.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
 from backend.app import DAO, model, schemas
-from backend.app.api import deps
 
 router = APIRouter()
 
@@ -42,6 +41,35 @@ def getAllUsers(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
+@router.get("/lista_usuario/{user_id}", response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
+def getAllUsers(user_id: int):#-> Any
+    is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
+    if(is_admin):
+        user = Depends(funcDAO.findByPK(user_id))
+        if(user is not None):
+            nome = user.nome
+            CPF = user.CPF
+            created_on = user.created_on
+            updated_on = user.updated_on
+            user = schemas.FuncionarioBase(
+                nome = nome,
+                CPF = CPF,
+                created_on = created_on,
+                updated_on = updated_on
+                )
+            return Response(
+                status_code= status.HTTP_200_OK, 
+                description = 'Retorna uma lista de todos os usuários do sistema', 
+                content = user
+                )
+        return Response(
+            status_code = status.HTTP_406_NOT_ACCEPTABLE,
+            description = f"ID/CPF de usuário {user_id} não consta no sistema!",
+            content= schemas.Error(message = f"ID/CPF de usuário {user_id} não consta no sistema!")
+        )
+    else:
+        #lance algum tipo de exceção ou redirecione, por exemplo
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.post("/cadastro_usuario", response_model=schemas.FuncionarioBase)
 def create_user(
@@ -131,52 +159,3 @@ def delete_user(id):
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
-
-"""
-@router.put("/{id}", response_model=schemas.Item)
-def update_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    item_in: schemas.ItemUpdate,
-    current_user: models.User = Depends(deps.get_current_active_user),
-) -> Any:
-    item = crud.item.get(db=db, id=id)
-    if not item:
-        raise HTTPException(status_code=404, detail="Item not found")
-    if not crud.user.is_superuser(current_user) and (item.owner_id != current_user.id):
-        raise HTTPException(status_code=400, detail="Not enough permissions")
-    item = crud.item.update(db=db, db_obj=item, obj_in=item_in)
-    return item
-
-
-@router.get("/{id}", response_model=schemas.Item)
-def read_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    current_user: models.User = Depends(deps.get_current_active_user),
-) -> Any:
-    item = crud.item.get(db=db, id=id)
-    if not item:
-        raise HTTPException(status_code=404, detail="Item not found")
-    if not crud.user.is_superuser(current_user) and (item.owner_id != current_user.id):
-        raise HTTPException(status_code=400, detail="Not enough permissions")
-    return item
-
-
-@router.delete("/{id}", response_model=schemas.Item)
-def delete_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    current_user: models.User = Depends(deps.get_current_active_user),
-) -> Any:
-    item = crud.item.get(db=db, id=id)
-    if not item:
-        raise HTTPException(status_code=404, detail="Item not found")
-    if not crud.user.is_superuser(current_user) and (item.owner_id != current_user.id):
-        raise HTTPException(status_code=400, detail="Not enough permissions")
-    item = crud.item.remove(db=db, id=id)
-    return item
-"""
