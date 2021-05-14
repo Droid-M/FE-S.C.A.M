@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/enfchefe.js"></script>
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/adm.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
 
 </head>
@@ -26,16 +26,18 @@
         <div id="page-content-wrapper">
             <nav id="navbar"></nav>
             <div class="container-fluid">
-
-
+                
 
                 <table class="table table-dark">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Data de Internação</th>
-                        <th scope="col">Prontuário</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Tempo Ativo</th>
+                        <th scope="col">Hora Login</th>
+                        <th scope="col">Hora Logout</th>
+                        <th scope="col">Tipo Alteração</th>
+                        <th scope="col">Descrição</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -43,18 +45,22 @@
                       <tr>
                         <th scope="row">1</th>
                         <td>Fulano</td>
-                        <td>10/10/2021</td>
-                        <td>pop up de visualização</td>
+                        <td>10 Horas</td>
+                        <td>13:00</td>
+                        <td>03:00</td>
+                        <td>Exclusão de Paciente</td>
+                        <td>Exclui paciente de X</td>
                       </tr>-->
                      
                     </tbody>
                     
                   </table>
 
-                  <button type="button" onclick="relistarPaciente()" class="btn btn-primary">
+                  <button type="button" onclick="regerarLog()" class="btn btn-primary">
                     <span class="glyphicon glyphicon-send"></span>
                     Atualizar
                 </button>
+
 
 
             </div>
@@ -62,8 +68,8 @@
 
     </div>
 
-
-
+    
+    
 </body>
 
 </html>

@@ -1,25 +1,25 @@
 {
-  "name": "FE-SCAM-FrontEnd",
+  "name": "frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Project setup ``` npm install ```",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leoMachadoMS/FE-SCAM-FrontEnd.git"
+    "dev": "parcel src/login.html",
+    "build": "parcel build src/login.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/leoMachadoMS/FE-SCAM-FrontEnd/issues"
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "parcel-bundler": "^1.12.5"
   },
-  "homepage": "https://github.com/leoMachadoMS/FE-SCAM-FrontEnd#readme",
   "dependencies": {
-    "axios": "^0.21.1",
-    "uuidv4": "^6.2.7"
+    "axios": "^0.21.1"
   }
 }
