@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+    app:
+        build: .
+        command: uvicorn --host 0.0.0.0 --port 80 --reload fescam.api.api:api_router
+        working_dir: /app/backend
+        ports: 
+            - 80:80

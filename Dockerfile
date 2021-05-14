@@ -7,3 +7,5 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY . .
+
+RUN pip install -r /app/requirements.txt
