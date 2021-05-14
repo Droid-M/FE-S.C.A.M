@@ -1,0 +1,7 @@
+FastAPI
+aiofiles
+SQLAlchemy
+uvicorn
+psycopg2
+bcrypt
+jwt
