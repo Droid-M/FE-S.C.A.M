@@ -86,7 +86,22 @@ class childBase:
         self.__parentDAO.refresh(instanceData)
         
     def update(self, instanceData): #Preciso fazer update com Join?**************
-        instancePKValue = instanceData.typesAcceptables[instanceData.primaryKey]
+        instancePKValue = None
+        dictValuesToUpd = None
+        if(type(instanceData) == type(self.__parent)):
+            dictValuesToUpd = instanceData.typesAcceptables
+            dictValuesToUpd.pop('updated_on') #<-- tirando esse dado pois o DAO_TO_SQL se encarrega de preencher a informação
+        else:
+            try:
+                dictValuesToUpd = instanceData.dict() #Supondo que a instância é filiada de pydantic.baseModel
+                dictValuesToUpd.pop('updated_on') #<-- tirando esse dado pois o DAO_TO_SQL se encarrega de preencher a informação
+            except(Exception):
+                print(Exception)
+        
+        if(dictValuesToUpd is None or type(dictValuesToUpd) != dict):
+            return None
+        
+        instancePKValue = dictValuesToUpd[self.__parent.primaryKey]
         result = self.findByPK(instancePKValue)
         if(result is not None):
             #primaryKeyValue = ForeignKey aqui **
@@ -100,11 +115,10 @@ class childBase:
             parentTableName = self.__parent.tableName
             parentPK = self.__parent.primaryKey
             PTN_period_PPK = parentTableName+ "." + parentPK #ptn= parentTableName; PPK = parentPK
-            result = self.__base._save(instanceData.typesAcceptables, toInsert= False, toJoinOnUpdate = instanceData.tableName).FROM(
+            result = self.__base._save(dictValuesToUpd, toInsert= False, toJoinOnUpdate = self.__parent.tableName, convertMethod= True).FROM(
                 self.__child.tableName).WHERE(
                     TN_period_FK, "=", PTN_period_PPK).AND(TN_period_FK, "=", f"'{result_valuePK}'").getFirst()
-            return (result is not None)
-        return False
+        return result
         #return self.__parentDAO.update(instanceData)
     
     

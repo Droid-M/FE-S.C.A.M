@@ -1,3 +1,10 @@
+from typing import Final
+
+ENFERMEIRO_FOO:Final = "ENFERMEIRO"
+ESTAGIARIO_FOO: Final = "ESTAGIARIO"
+ADMINISTRADOR_FOO: Final = "ADMINISTRADOR"
+ENFERMEIRO_CHEFE_FOO: Final = "ENFERMEIRO_CHEFE"
+
 def valuesVerifier(params, values, avertNullData):
     valuesLength = len(values)
     paramsLength = len(params)
