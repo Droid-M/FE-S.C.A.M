@@ -5,3 +5,4 @@ uvicorn
 psycopg2
 bcrypt
 jwt
+jinja2
