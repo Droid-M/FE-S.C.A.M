@@ -28,4 +28,4 @@ api_router.include_router(enfermeiro, tags=["enfermeiro"])
 api_router.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
 api_router.include_router(estagiario, tags=["estagiario"])
 
-api_router.mount("/", StaticFiles(directory="../frontend"), name="static")
+api_router.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
