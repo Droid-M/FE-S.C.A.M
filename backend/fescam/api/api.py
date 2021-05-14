@@ -11,6 +11,7 @@ from fescam.api.endpoints.administrador import router as administrador
 from fescam.api.endpoints.enfermeiro import router as enfermeiro
 from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
 from fescam.api.endpoints.estagiario import router as estagiario
+from fescam.api.endpoints.usersControl import router as users
 
 from fastapi.staticfiles import StaticFiles
 
@@ -25,7 +26,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-#api_router.include_router(usersControl, tags=["user_control"])
+api_router.include_router(users, tags=["user_control"])
 api_router.include_router(auth, tags=["api_auth"])
 api_router.include_router(administrador, tags=["administrador"])
 api_router.include_router(enfermeiro, tags=["enfermeiro"])
