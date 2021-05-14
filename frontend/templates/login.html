@@ -1,8 +1,8 @@
 <html lang="pt-br">
     <head>
-        <link href="/frontend/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" href="/frontend/static/css/style2.css">
-        <script src="/frontend/static/js/login.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}" id="bootstrap-css">
+        <link rel="stylesheet" href="{{ url_for('static', path='css/style2.css') }}">
+        <script src="{{ url_for('static', path='js/login.js') }}"></script>
     </head>
     <body>        
         <div class="wrapper fadeInDown">

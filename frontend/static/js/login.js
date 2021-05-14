@@ -6,7 +6,7 @@ function logar(){
     
     if(email.value == "admin@admin.com" && senha.value=="123"){
         localStorage.setItem("acesso",true);
-        window.location.href = "./pages/admin/adm.html";
+        window.location.href = "static/templates/adm.html";
         console.log(localStorage.getItem("acesso"))
 
     } else if(email.value ="enfChefe@enf" && senha.value=="enfe"){
