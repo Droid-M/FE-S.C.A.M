@@ -5,7 +5,7 @@ sys.path.append(path.abspath('.'))
 
 from typing import Optional
 from fastapi import FastAPI, Response, status
-from backend.app.schemas.error import Error
+from fescam.schemas.error import Error
 
 app = FastAPI()
 

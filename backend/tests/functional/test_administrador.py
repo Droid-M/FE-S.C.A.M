@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from backend.app.app.main import app
+from fescam.app.main import app
 
 client = TestClient(app)
 
