@@ -13,7 +13,7 @@ services:
             - database.env # configure postgres
         volumes:
             - database-data:/var/lib/postgresql/data/
-    dminer:
+    adminer:
         image: adminer
         restart: always
         ports:
