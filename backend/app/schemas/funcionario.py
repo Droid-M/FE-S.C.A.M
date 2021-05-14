@@ -13,3 +13,7 @@ class FuncionarioCreated(BaseModel):
     CPF: constr(min_length=11, max_length=11)
     nome: str
     senha: str
+
+class Funcionario(BaseModel):
+    CPF: constr(min_length=11, max_length=11)
+    senha: str
