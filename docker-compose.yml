@@ -7,3 +7,14 @@ services:
         working_dir: /app/backend
         ports: 
             - 80:80
+    database:
+        image: "postgres" # use latest official postgres version
+        env_file:
+            - database.env # configure postgres
+        volumes:
+            - database-data:/var/lib/postgresql/data/
+    dminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
