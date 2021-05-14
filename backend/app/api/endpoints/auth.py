@@ -7,14 +7,14 @@ import jwt
 import re
 
 router = APIRouter(prefix='/api')
-
+funcDAO = FuncionarioDAO()
 SECRET = '123124'
 
 
 @router.post('/auth')
 async def post_auth(func: Funcionario):
     cpf = re.sub(r'\D', '', func.CPF)
-    funcionario = FuncionarioDAO.findByPK(cpf)
+    funcionario = funcDAO.findByPK(cpf)
     cpf_existe = bool(funcionario)
     encoded_senha = func.senha.encode('utf-8')
 
@@ -35,6 +35,6 @@ async def ping(authentication: Optional[str] = Header(None)):
     encoded = re.sub('Bearer ', '', authentication)
     decoded = jwt.decode(encoded, SECRET, algorithms="HS256")
     cpf = decoded.get('cpf')
-    if cpf and FuncionarioDAO.findByPK(cpf):
+    if cpf and funcDAO.findByPK(cpf):
         return True
     return False

@@ -5,7 +5,7 @@ sys.path.append(path.abspath('.'))
 
 from typing import Any, List, NoReturn
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, responses, status
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
@@ -60,9 +60,13 @@ def create_user(
             result = Depends(enfCFDAO.createBySchema(user))
         
         if(result is not None):
-            user = schemas.FuncionarioBase(**result.typesAceptables)
+            nome = result.nome
+            CPF = result.CPF
+            created_on = result.created_on
+            updated_on = result.updated_on
+            user = schemas.FuncionarioBase(nome = nome, CPF = CPF, created_on = created_on, updated_on = updated_on)
             return Response(
-                status_code= status.HTTP_200_OK, 
+                status_code= status.HTTP_200_OK,
                 description = 'Um novo usuario foi cadastrado com sucesso', 
                 content = user
                 )
