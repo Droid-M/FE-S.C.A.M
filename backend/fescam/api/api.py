@@ -9,6 +9,8 @@ from fescam.api.endpoints.enfermeiro import router as enfermeiro
 from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
 from fescam.api.endpoints.estagiario import router as estagiario
 
+from fastapi.staticfiles import StaticFiles
+
 api_router = FastAPI()
 
 @api_router.exception_handler(RequestValidationError)
@@ -25,3 +27,5 @@ api_router.include_router(administrador, tags=["administrador"])
 api_router.include_router(enfermeiro, tags=["enfermeiro"])
 api_router.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
 api_router.include_router(estagiario, tags=["estagiario"])
+
+api_router.mount("/", StaticFiles(directory="../frontend"), name="static")

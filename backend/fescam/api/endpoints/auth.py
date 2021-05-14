@@ -35,6 +35,8 @@ async def post_auth(func: Funcionario = None):
 
 @router.get('/auth')
 async def ping(authentication: Optional[str] = Header(None)):
+    if not authentication:
+        return {'msg': 'Você não enviou o cabeçalho de autenticação'}
     encoded = authentication.replace('Bearer ', '')
     decoded = jwt.decode(encoded, SECRET, algorithms="HS256")
     cpf = decoded.get('cpf')
