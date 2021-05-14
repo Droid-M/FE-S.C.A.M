@@ -1,15 +1,15 @@
 <html lang="pt-br">
     <head>
-        <link href="./bootstrap/css/bootstrap.min.css"" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" href="css/style2.css">
-        <script src="./js/login.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}" id="bootstrap-css">
+        <link rel="stylesheet" href="{{ url_for('static', path='css/style2.css') }}">
+        <script src="{{ url_for('static', path='js/login.js') }}"></script>
     </head>
     <body>        
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 
                 <div class="fadeIn first">
-                    <img src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png" id="icon" alt="User Icon" />
+                    <img src="/frontend/src/assets/man-300x300.png" id="icon" alt="User Icon" />
                 </div>
 
                 <form>
