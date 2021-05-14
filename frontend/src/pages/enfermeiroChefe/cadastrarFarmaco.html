@@ -29,7 +29,33 @@
 
 
 
-                <!-- Conteúdo aqui-->
+                <form action="/novo-farmaco" method="POST">
+                    
+                    <div class= "form-group">
+                        <label for="nome-medicamento">Nome do medicamento:</label>
+                        <input type="text" id="nome-medicamento" />
+                    </div>
+                    <div class= "form-group">
+                        <label for="quantidade">Quantidade de uso:</label>
+                        <input type="text" id="quantidade" />
+                    </div>
+                    <div class= "form-group">
+                        <label for="aplicacao">Orientação de aplicação:</label>
+                        <input type="text" id="aplicacao" />
+                    </div>
+                    <div class= "form-group">
+                        <label for="reacao">Possíveis reações:</label>
+                        <input type="text" id="reacao" />
+                    </div>
+                    <button type="button" onclick="salvarFarmaco()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-send"></span>
+                        Salvar
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-send"></span>
+                        Limpar tudo
+                    </button>
+                </form>
 
 
             </div>
