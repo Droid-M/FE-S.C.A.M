@@ -1,7 +1,7 @@
 // const axios = require('axios').default;
 import axios from 'axios';
 
-const baseURL = "http://localhost:3000"
+const baseURL = " "
 
 
 
@@ -29,15 +29,23 @@ class AdmService{
     }
 
     /**
+     * Busca um usuário especifico pelo seu id
+     */
+    static async getUsuarioId(cpf){
+        const user = (await axios.get(baseURL+`/lista_usuario/${cpf}`)).data;
+        return user;
+    }
+
+    /**
      * Cria um novo usuário do sistema
      */
-    static async createUsers(){
+    static async createUsers(cpf,nome,email,senha){
 
-        axios.post('/user', {
-            CPF: 'Fred',
-            nome: 'Flintstone',
-            email: '',
-            senha: ''
+        axios.post(baseURL+'/cadastro_usuario', {
+            CPF: `${cpf}`,
+            nome: `${nome}`,
+            email: `${email}`,
+            senha: `${senha}`
           })
           .then(function (response) {
             console.log(response);
@@ -61,20 +69,31 @@ class AdmService{
     /**
      * Atualiza um usuário especifico
      */
-    static async updateUser(){
-
+    static async updateUser(cpf,nome,email,senha){
+        axios.put(baseURL+`/edicao_usuario/${id}`, {
+            CPF: `${cpf}`,
+            nome: `${nome}`,
+            email: `${email}`,
+            senha: `${senha}`
+        }).then((response)=> {
+            return true;    // Por enquanto retorna um booleano, mas deve retornar alguma resposta
+            console.log(response);
+        }).cath((err)=>{
+            console.log(err);
+        })
     }
 
     /** 
      * Deleta um usuário do sistema
      */
-    static async deleteUser(){
+    static async deleteUser(id){
 
+        axios.delete(baseURL+`/edicao_usuario/${id}`)
     }
 
 }
 
-AdmService.createUsers();
+// AdmService.createUsers();
 
 export {AdmService};
 
