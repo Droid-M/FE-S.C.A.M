@@ -1,6 +1,3 @@
-import {AdmService} from './adm.service.js';
-
-
 /**
  * Busca todos os usuários
  */

@@ -6,18 +6,18 @@ function logar(){
     
     if(email.value == "admin@admin.com" && senha.value=="123"){
         localStorage.setItem("acesso",true);
-        window.location.href = "static/templates/adm.html";
+        window.location.href = "./templates/adm.html";
         console.log(localStorage.getItem("acesso"))
 
     } else if(email.value ="enfChefe@enf" && senha.value=="enfe"){
         localStorage.setItem("acesso",true);
-        window.location.href = "./pages/enfermeiroChefe/enfchefe.html";
+        window.location.href = "./templates/enfchefe.html";
         console.log("Logado como Enfermeiro Chefe")
         
     }
      else if(email.value ="enf@enf" && senha.value=="enf" ){
             localStorage.setItem("acesso", true);
-            window.location.href="./pages/enfermeiro/enf.html";
+            window.location.href="./templates/enf.html";
             console.log("Logado como enfermeiro");
      }   
     else{
