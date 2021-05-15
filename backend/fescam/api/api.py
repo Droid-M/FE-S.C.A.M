@@ -6,12 +6,12 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
 
-from fescam.api.endpoints.auth import router as auth
-from fescam.api.endpoints.administrador import router as administrador
-from fescam.api.endpoints.enfermeiro import router as enfermeiro
-from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
-from fescam.api.endpoints.estagiario import router as estagiario
-from fescam.api.endpoints.usersControl import router as users
+from backend.fescam.api.endpoints.auth import router as auth
+from backend.fescam.api.endpoints.administrador import router as administrador
+from backend.fescam.api.endpoints.enfermeiro import router as enfermeiro
+from backend.fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
+from backend.fescam.api.endpoints.estagiario import router as estagiario
+from backend.fescam.api.endpoints.usersControl import router as users
 
 from fastapi.staticfiles import StaticFiles
 
@@ -23,7 +23,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
-    )
+)
 
 
 api_router.include_router(users, tags=["user_control"])
@@ -35,7 +35,9 @@ api_router.include_router(estagiario, tags=["estagiario"])
 
 api_router.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 
-@api_router.get("/", response_class=HTMLResponse)
+
+
+@api_router.get("/das", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("login.html",  {"request": request})
 
