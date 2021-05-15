@@ -1,5 +1,5 @@
 import psycopg2 as toDB
-from fescam.db.config import config
+from backend.fescam.db.config import config
 
 def execute(command = None, getAll = False):
     connection = None

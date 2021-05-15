@@ -1,5 +1,9 @@
-from fescam.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
-from fescam.components.functions_helpers import dictToSQLConditions
+from os import path
+import sys
+
+sys.path.append(path.abspath('.'))
+from backend.fescam.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
+from backend.fescam.components.functions_helpers import dictToSQLConditions
 #from model.childModel import childModel
 
 class BaseDAO:

@@ -1,8 +1,8 @@
-from fescam.schemas.estagiaro import EstagiarioCreated
-from fescam.model.Estagiario import Estagiario
-from fescam.model.Funcionario import Funcionario
-from fescam.DAO.FuncionarioDAO import FuncionarioDAO
-from fescam.DAO.child.childBase import childBase
+from backend.fescam.schemas.estagiaro import EstagiarioCreated
+from backend.fescam.model.Estagiario import Estagiario
+from backend.fescam.model.Funcionario import Funcionario
+from backend.fescam.DAO.FuncionarioDAO import FuncionarioDAO
+from backend.fescam.DAO.child.childBase import childBase
 
 class EstagiarioDAO(childBase):
     def __init__(self):

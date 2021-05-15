@@ -1,5 +1,5 @@
-from fescam.components.functions_helpers import create_list_dicitionary, create_dictionary
-from fescam.db.execute_db_command import execute
+from backend.fescam.components.functions_helpers import create_list_dicitionary, create_dictionary
+from backend.fescam.db.execute_db_command import execute
 
 #EXTRAIR A CLASSE CONVERT_COMAND E A CLASSE WHERE NO FUTURO *************************
 
@@ -12,6 +12,8 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
         self._aspas = "'"
     
     def _lstrListToStr(self, list, separator:str):
+        if(type(list) == str):
+            return list
         result = ''
         for item in list:
             assert(type(separator) == str)
@@ -158,7 +160,8 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
             elif (len(tablesNames) == 1) and type(tablesNames[0] == tuple):
                 tablesNames = tablesNames[0]
             separator = ","
-            self.__commandToDB += f" FROM {self.__lstrListToStr(tablesNames, separator)}"
+            tbNames = self.__lstrListToStr(tablesNames, separator) if type(tablesNames) != str else tablesNames
+            self.__commandToDB += f" FROM {tbNames}"
             return self.__WHERE(
                 commandToDB = self.__commandToDB,
                 convertCommand = self.__convertCommand,

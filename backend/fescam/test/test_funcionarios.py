@@ -1,8 +1,12 @@
+from os import path
+import sys
+
+sys.path.append(path.abspath('.'))
 import pytest
-from fescam.schemas.administrador import AdministradorCreated
-from fescam.schemas.estagiaro import EstagiarioCreated
-from fescam.model.Funcionario import Funcionario
-from fescam.DAO.EstagiarioDAO import EstagiarioDAO
+from backend.fescam.schemas.administrador import AdministradorCreated
+from backend.fescam.schemas.estagiaro import EstagiarioCreated
+from backend.fescam.model.Funcionario import Funcionario
+from backend.fescam.DAO.EstagiarioDAO import EstagiarioDAO
 
 def test_estagiario():
     estDAO = EstagiarioDAO()
@@ -46,11 +50,11 @@ def test_estagiario():
     retorno2.nome = "Dr Ciclano"
     assert(retorno2.nome == "Dr Ciclano")
     areUpdated = estDAO.update(retorno2)
-    assert(areUpdated == True)
+    assert(areUpdated is not None)
     assert(retorno2.nome == "Dr Ciclano")
     novo = Funcionario(nome = "Ninguém", CPF="12345678900", senha = "nao_tenho")
     areUpdated = estDAO.update(novo)
-    assert(areUpdated == False)
+    assert(areUpdated is None)
     
     #Removendo (outra vez kkkkk)
     retorno3 = estDAO.DeleteByPK("00000000000")

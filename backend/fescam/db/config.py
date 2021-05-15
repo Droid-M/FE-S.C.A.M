@@ -1,13 +1,19 @@
-from configparser import ConfigParser
-
-def config(filename = 'database.ini', section = 'postgresql'):
-    parser = ConfigParser()
-    parser.read(filename)
-
+def config(filename = 'database.env'):
+    f = open(filename, 'r')
     dbParams = {}
-    if (parser.has_section(section)):
-        for param in parser.items(section):
-            dbParams[param[0]] = param[1]
-    else:
-        raise Exception(f'Verifique os dados e a existência do arquivo de configuração do banco de dados [diretório: {filename}] [sessão: {section}]')
+    translator = {
+        "POSTGRES_DB":"database",
+        "POSTGRES_USER":"user",
+        "POSTGRES_PASSWORD":"password"
+    }
+    for param in f:
+        param = param.split('=')
+        #atributo:
+        attr = translator.get(param[0])
+        if(attr is None):
+            attr = param[0]
+        #valor:
+        value = param[1]
+        value = value if value[-1] != '\n' else value[:-1]
+        dbParams[attr] = value
     return dbParams

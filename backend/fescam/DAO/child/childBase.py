@@ -1,5 +1,5 @@
-from fescam.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
-from fescam.model.IBaseModel import IBase
+from backend.fescam.DAO.DAO_SQL_M.DAO_TO_SQL import DAO_TO_SQL
+from backend.fescam.model.IBaseModel import IBase
 
 class childBase:
     
