@@ -1,5 +1,5 @@
-from backend.fescam.components.functions_helpers import create_list_dicitionary, create_dictionary
-from backend.fescam.db.execute_db_command import execute
+from fescam.components.functions_helpers import create_list_dicitionary, create_dictionary
+from fescam.db.execute_db_command import execute
 
 #EXTRAIR A CLASSE CONVERT_COMAND E A CLASSE WHERE NO FUTURO *************************
 

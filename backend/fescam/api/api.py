@@ -6,12 +6,12 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
 
-from backend.fescam.api.endpoints.auth import router as auth
-from backend.fescam.api.endpoints.administrador import router as administrador
-from backend.fescam.api.endpoints.enfermeiro import router as enfermeiro
-from backend.fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
-from backend.fescam.api.endpoints.estagiario import router as estagiario
-from backend.fescam.api.endpoints.usersControl import router as users
+from fescam.api.endpoints.auth import router as auth
+from fescam.api.endpoints.administrador import router as administrador
+from fescam.api.endpoints.enfermeiro import router as enfermeiro
+from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
+from fescam.api.endpoints.estagiario import router as estagiario
+from fescam.api.endpoints.usersControl import router as users
 
 from fastapi.staticfiles import StaticFiles
 

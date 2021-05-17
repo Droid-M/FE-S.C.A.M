@@ -4,11 +4,11 @@ import sys
 
 sys.path.append(path.abspath('.'))
 from faker import Faker
-from backend.fescam.components.functions_helpers import cpfNumber_int_to_str
-from backend.fescam.schemas.administrador import AdministradorCreated
-from backend.fescam.schemas.estagiaro import EstagiarioCreated
-from backend.fescam.model.Funcionario import Funcionario
-from backend.fescam.DAO.EstagiarioDAO import EstagiarioDAO
+from fescam.components.functions_helpers import cpfNumber_int_to_str
+from fescam.schemas.administrador import AdministradorCreated
+from fescam.schemas.estagiaro import EstagiarioCreated
+from fescam.model.Funcionario import Funcionario
+from fescam.DAO.EstagiarioDAO import EstagiarioDAO
 
 fake = Faker(['pt_BR'])
 
