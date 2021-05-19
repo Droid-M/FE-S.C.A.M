@@ -1,7 +1,7 @@
 $(function () {
     $("#sidebar-wrapper").addClass("bg-light border-right");
-    $("#sidebar-wrapper").load("/static/components/sidebarEnf.html");
+    $("#sidebar-wrapper").load("/sidebarenf");
 
     $("#navbar").addClass("navbar navbar-expand-lg navbar-light bg-light border-bottom");
-    $("#navbar").load("/static/components/navbar.html");
+    $("#navbar").load("/navbar");
 });

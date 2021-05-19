@@ -97,5 +97,18 @@ async def listaEnfermeiro(request: Request):
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("listarPaciente.html",  {"request": request})
 
-
+@api_router.get("/navbar", response_class=HTMLResponse)
+async def listaPaciente(request: Request):
+    return templates.TemplateResponse("navbar.html",  {"request": request})
     
+@api_router.get("/sidebaradm", response_class=HTMLResponse)
+async def listaPaciente(request: Request):
+    return templates.TemplateResponse("sidebarAdm.html",  {"request": request})
+
+@api_router.get("/sidebarenfchefe", response_class=HTMLResponse)
+async def listaPaciente(request: Request):
+    return templates.TemplateResponse("sidebarEnfChefe.html",  {"request": request})
+
+@api_router.get("/sidebarenf", response_class=HTMLResponse)
+async def listaPaciente(request: Request):
+    return templates.TemplateResponse("sidebarEnf.html",  {"request": request})
