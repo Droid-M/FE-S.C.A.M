@@ -9,5 +9,5 @@ if(localStorage.getItem("acesso")== "true"){
 
 if(logado != true){
     alert("Voce nao esta logado");
-    window.location.href="/src/login.html";
+    location.href="/src/login.html";
 }
