@@ -17,6 +17,7 @@ services:
         env_file:
             - database.env # configure postgres
         volumes:
+            - ./config/init-database.sql:/docker-entrypoint-initdb.d/dump.sql
             - database-data:/var/lib/postgresql/data/
     adminer:
         image: adminer
