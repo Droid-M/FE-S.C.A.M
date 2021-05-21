@@ -1,0 +1,20 @@
+#form_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 80px;
+    border: 1px solid rgb(214, 212, 212);
+    width: 400px;
+    box-shadow: 5px 10px #e6e5e5;
+    border-radius: 10px;
+    height: 450x;
+}
+
+.form-group{
+    margin-top: 20px;
+}
+.form-group input{
+   margin-right: 15px;
+}
+   
