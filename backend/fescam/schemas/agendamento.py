@@ -7,9 +7,8 @@ class AgendamentoBase(BaseModel):
     posologia: int
     paciente: constr(min_length=11, max_length=11)
     enferchefe: constr(min_length=11, max_length=11)
-    enfermeiro: Optional[constr(min_length=11, max_length=11)]
+    enfermeiro: Optional[constr(min_length=11, max_length=11)] #<-- tratar para que apenas 1 ou outro seja escolhido **** -->
     estagiario: Optional[constr(min_length=11, max_length=11)]
-    posologia: int
     created_on: Optional[datetime]
     updated_on: Optional[datetime]
     horario: datetime
@@ -19,9 +18,6 @@ class AgendamentoCreated(BaseModel): #Enfermeiro e estagiário podem ser alocado
     posologia: int
     paciente: constr(min_length=11, max_length=11)
     enferchefe: constr(min_length=11, max_length=11)
-    enfermeiro: Optional[constr(min_length=11, max_length=11)]
-    estagiario: Optional[constr(min_length=11, max_length=11)]
-    posologia: int
     horario: datetime
 
 # Adicionar um enfermeiro no agendamento

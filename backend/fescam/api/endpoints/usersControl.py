@@ -4,8 +4,9 @@ import sys
 sys.path.append(path.abspath('.'))
 
 from typing import Any, List, NoReturn
-
-from fastapi import APIRouter, Depends, HTTPException, Response, responses, status
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
@@ -31,11 +32,11 @@ def getAllUsers(
             #users = funcDAO.getpagete(page, per_page) #Fazer método de paginação ***********
             pass
         else: #Senão, pega todos
-            users = Depends(funcDAO.getAll())
-            return Response(
+            users = funcDAO.getAll()
+            return JSONResponse(
                 status_code= status.HTTP_200_OK, 
-                description = 'Retorna uma lista de todos os usuários do sistema', 
-                content = users
+                #description = 'Retorna uma lista de todos os usuários do sistema', 
+                content = jsonable_encoder(users)
                 )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
@@ -45,7 +46,7 @@ def getAllUsers(
 def getAllUsers(user_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
-        user = Depends(funcDAO.findByPK(user_id))
+        user = funcDAO.findByPK(user_id)
         if(user is not None):
             nome = user.nome
             CPF = user.CPF
@@ -57,15 +58,15 @@ def getAllUsers(user_id: int):#-> Any
                 created_on = created_on,
                 updated_on = updated_on
                 )
-            return Response(
+            return JSONResponse(
                 status_code= status.HTTP_200_OK, 
-                description = 'Retorna uma lista de todos os usuários do sistema', 
-                content = user
+                #description = 'Retorna uma lista de todos os usuários do sistema', 
+                content = jsonable_encoder(user)
                 )
-        return Response(
+        return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
-            description = f"ID/CPF de usuário {user_id} não consta no sistema!",
-            content= schemas.Error(message = f"ID/CPF de usuário {user_id} não consta no sistema!")
+            #description = f"ID/CPF de usuário {user_id} não consta no sistema!",
+            content= jsonable_encoder(schemas.Error(message = f"ID/CPF de usuário {user_id} não consta no sistema!"))
         )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
@@ -80,13 +81,13 @@ def create_user(
     if(is_admin):
         result = None
         if(user_type == ADMINISTRADOR_FOO):
-            result = Depends(admDAO.createBySchema(user))
+            result = admDAO.createBySchema(user)
         elif(user_type == ESTAGIARIO_FOO):
-            result = Depends(estDAO.createBySchema(user))
+            result = estDAO.createBySchema(user)
         elif(user_type == ENFERMEIRO_FOO):
-            result = Depends(enfDAO.createBySchema(user))
+            result = enfDAO.createBySchema(user)
         elif(user_type == ENFERMEIRO_CHEFE_FOO):
-            result = Depends(enfCFDAO.createBySchema(user))
+            result = enfCFDAO.createBySchema(user)
         
         if(result is not None):
             nome = result.nome
@@ -94,68 +95,68 @@ def create_user(
             created_on = result.created_on
             updated_on = result.updated_on
             user = schemas.FuncionarioBase(nome = nome, CPF = CPF, created_on = created_on, updated_on = updated_on)
-            return Response(
+            return JSONResponse(
                 status_code = status.HTTP_200_OK,
-                description = 'Um novo usuario foi cadastrado com sucesso', 
-                content = user
+                #description = 'Um novo usuario foi cadastrado com sucesso', 
+                content = jsonable_encoder(user)
                 )
         else:
-            return Response(
+            return JSONResponse(
                 status_code = status.HTTP_406_NOT_ACCEPTABLE,
-                description = f"Tipo de usuário {user_type} não é permitido!",
-                content= schemas.Error(message = f"Tipo de usuário {user_type} não é permitido!")
+                #description = f"Tipo de usuário {user_type} não é permitido!",
+                content= jsonable_encoder(schemas.Error(message = f"Tipo de usuário {user_type} não é permitido!"))
             )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.put("/edicao_usuario/{user_id}") #<-- Ainda não suporta atualização de chave primária *******
+@router.put("/edicao_usuario") #<-- Ainda não suporta atualização de chave primária *******
 def update_user(
     user: schemas.FuncionarioCreated,
 ): #-> Any
     #Buscando usuario:
     is_admin = True
     if(is_admin):
-        user_updated = Depends(funcDAO.update(user))
+        user_updated = funcDAO.update(user)
         if(user_updated is not None):
-            return Response(
+            return JSONResponse(
                 status_code = status.HTTP_200_OK,
-                description = 'Atualização realizada com sucesso', 
-                content = schemas.FuncionarioBase(
+                #description = 'Atualização realizada com sucesso', 
+                content = jsonable_encoder(schemas.FuncionarioBase(
                     CPF = user_updated.CPF, 
                     nome = user_updated.nome, 
                     updated_on = user_updated.updated_on, 
                     created_on = user_updated.created_on
-                ))
-        return Response(
+                )))
+        return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
-            description = f"Impossível atualizar um usuário não cadastrado! CPF:{user.CPF}",
-            content= schemas.Error(message = f"Impossível atualizar um usuário não cadastrado! CPF:{user.CPF}")
-            )
+            #description = f"Impossível atualizar um usuário não cadastrado! CPF:{user.CPF}",
+            content= jsonable_encoder(schemas.Error(message = f"Impossível atualizar um usuário não cadastrado! CPF:{user.CPF}")
+            ))
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.delete("/edicao_usuario/{user_id}")
-def delete_user(id):
+def delete_user(user_id: int):
     is_admin = True
     if(is_admin):
-        deleted_user = Depends(funcDAO.DeleteByPK(id))
+        deleted_user = funcDAO.DeleteByPK(user_id)
         if(deleted_user is not None):
-            return Response(
+            return JSONResponse(
                 status_code = status.HTTP_200_OK,
-                description = 'Usuario deletado com sucesso', 
-                content = schemas.FuncionarioBase(
+                #description = 'Usuario deletado com sucesso', 
+                content = jsonable_encoder(schemas.FuncionarioBase(
                     CPF = deleted_user.CPF, 
                     nome = deleted_user.nome, 
                     updated_on = deleted_user.updated_on, 
                     created_on = deleted_user.created_on
-                ))
-        return Response(
+                )))
+        return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
-            description = f"Impossível remover um usuário não cadastrado! CPF:{id}",
-            content= schemas.Error(message = f"Impossível remover um usuário não cadastrado! CPF:{id}")
-            )
+            #description = f"Impossível remover um usuário não cadastrado! CPF:{id}",
+            content= jsonable_encoder(schemas.Error(message = f"Impossível remover um usuário não cadastrado! CPF:{user_id}")
+            ))
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")

@@ -10,9 +10,15 @@ class PosologiaBase(BaseModel):
     notas: str
     created_on: Optional[datetime]
     updated_on: Optional[datetime]
+    
+    class Config:
+        use_enum_values = True
 
 class PosologiaCreated(BaseModel):
     medicamento: int
     paciente: constr(min_length=11, max_length=11)
     quantidade: float
     notas: str
+    
+    class Config:
+        use_enum_values = True

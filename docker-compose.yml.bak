@@ -15,7 +15,7 @@ services:
     database:
         image: "postgres" # use latest official postgres version
         env_file:
-            - /backend/database.env # configure postgres
+            - database.env # configure postgres
         volumes:
             - ./config/init-database.sql:/docker-entrypoint-initdb.d/dump.sql
             - database-data:/var/lib/postgresql/data/

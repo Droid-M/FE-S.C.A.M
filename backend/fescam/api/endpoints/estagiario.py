@@ -4,8 +4,9 @@ import sys
 sys.path.append(path.abspath('.'))
 
 from typing import Any, List, NoReturn
-
-from fastapi import APIRouter, Depends, HTTPException, Response, responses, status
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
@@ -31,11 +32,11 @@ def read_all_enfermeiro(
             #users = funcDAO.getpagete(page, per_page) #Fazer método de paginação ***********
             pass
         else: #Senão, pega todos
-            users = Depends(estDAO.getAll())
-            return Response(
+            users = estDAO.getAll()
+            return JSONResponse(
                 status_code= status.HTTP_200_OK, 
-                description = 'Retorna uma lista de todos os usuários do sistema', 
-                content = users
+                #description = 'Retorna uma lista de todos os usuários do sistema', 
+                content = jsonable_encoder(users)
                 )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
@@ -45,7 +46,7 @@ def read_all_enfermeiro(
 def read_enfermeiro(estagiario_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
-        user = Depends(estDAO.findByPK(estagiario_id))
+        user = estDAO.findByPK(estagiario_id)
         if(user is not None):
             nome = user.nome
             CPF = user.CPF
@@ -57,15 +58,15 @@ def read_enfermeiro(estagiario_id: int):#-> Any
                 created_on = created_on,
                 updated_on = updated_on
                 )
-            return Response(
+            return JSONResponse(
                 status_code= status.HTTP_200_OK, 
-                description = 'Retorna uma lista de todos os usuários do sistema', 
-                content = user
+                #description = 'Retorna uma lista de todos os usuários do sistema', 
+                content = jsonable_encoder(user)
                 )
-        return Response(
+        return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
-            description = f"ID/CPF de usuário {estagiario_id} não consta no sistema!",
-            content= schemas.Error(message = f"ID/CPF de usuário {estagiario_id} não consta no sistema!")
+            #description = f"ID/CPF de usuário {estagiario_id} não consta no sistema!",
+            content= jsonable_encoder(schemas.Error(message = f"ID/CPF de usuário {estagiario_id} não consta no sistema!"))
         )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo

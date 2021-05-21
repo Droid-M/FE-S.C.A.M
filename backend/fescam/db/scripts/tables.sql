@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Paciente (
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
   dados varchar,
-  enfermeiro_id bigint
+  enfermeiro_id char(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Funcionario (
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Agendamento (
   horario timestamptz DEFAULT null
 );
 
-ALTER TABLE Paciente ADD FOREIGN KEY (enfermeiro_id) REFERENCES Enfermeiro (id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Paciente ADD FOREIGN KEY (enfermeiro_id) REFERENCES Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Enfermeiro ADD FOREIGN KEY (func_id) REFERENCES Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
