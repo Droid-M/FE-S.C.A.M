@@ -38,10 +38,12 @@
 
   <body>
     
-    <div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper"> 
       <div id="sidebar-wrapper"></div>
       <div id="page-content-wrapper">
-        <nav id="navbar"></nav>
+        <nav id="navbar">
+          <h1>Test</h1>
+        </nav>
         <div class="divroot">
           {% block main %}
           <div id="table-users">
@@ -63,21 +65,11 @@
           {% endblock %}
         </div>
 
-        <button
-          type="button"
-          onclick="getAllUsuarios()"
-          class="btn btn-primary"
-        >
-          <span class="glyphicon glyphicon-send"></span>
-          Atualizar
-        </button>
       </div>
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script src="{{ url_for('static', path='js/adm.controller.js') }}"></script>
-    <!--<script src="{{ url_for('static', path='js/main.js') }}"></script>s-->
   </body>
   
 </html>
