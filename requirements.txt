@@ -6,3 +6,4 @@ psycopg2
 bcrypt
 jwt
 jinja2
+faker

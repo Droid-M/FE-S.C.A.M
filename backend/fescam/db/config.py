@@ -4,7 +4,8 @@ def config(filename = 'database.env'):
     translator = {
         "POSTGRES_DB":"database",
         "POSTGRES_USER":"user",
-        "POSTGRES_PASSWORD":"password"
+        "POSTGRES_PASSWORD":"password",
+        "POSTGRES_HOST":"host"
     }
     for param in f:
         param = param.split('=')

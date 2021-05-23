@@ -32,7 +32,7 @@ def getAllUsers(
             #users = funcDAO.getpagete(page, per_page) #Fazer método de paginação ***********
             pass
         else: #Senão, pega todos
-            users = funcDAO.getAll()
+            users = funcDAO.getAll(convert = False)
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
