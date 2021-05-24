@@ -15,10 +15,10 @@ from fescam.api.endpoints.usersControl import router as users
 
 from fastapi.staticfiles import StaticFiles
 
-api_router = FastAPI()
+app = FastAPI()
 templates = Jinja2Templates(directory="../frontend/templates")
 
-@api_router.exception_handler(RequestValidationError)
+@app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -26,88 +26,88 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 )
 
 
-api_router.include_router(users, tags=["user_control"])
-api_router.include_router(auth, tags=["api_auth"])
-api_router.include_router(administrador, tags=["administrador"])
-api_router.include_router(enfermeiro, tags=["enfermeiro"])
-api_router.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
-api_router.include_router(estagiario, tags=["estagiario"])
+app.include_router(users, tags=["user_control"])
+app.include_router(auth, tags=["api_auth"])
+app.include_router(administrador, tags=["administrador"])
+app.include_router(enfermeiro, tags=["enfermeiro"])
+app.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
+app.include_router(estagiario, tags=["estagiario"])
 
-api_router.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
+app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 
 
-@api_router.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("login.html",  {"request": request})
 
-@api_router.get("/admin", response_class=HTMLResponse)
+@app.get("/admin", response_class=HTMLResponse)
 async def adm(request: Request):
     return templates.TemplateResponse("adm.html", {"request": request})
 
-@api_router.get("/alarme", response_class=HTMLResponse)
+@app.get("/alarme", response_class=HTMLResponse)
 async def alarme(request: Request):
     return templates.TemplateResponse("alarme.html",  {"request": request})
 
-@api_router.get("/cadastrar-farmaco", response_class=HTMLResponse)
+@app.get("/cadastrar-farmaco", response_class=HTMLResponse)
 async def cadastrarFarmaco(request: Request):
     return templates.TemplateResponse("cadastrarFarmaco.html",  {"request": request})
 
-@api_router.get("/cadastrar-paciente", response_class=HTMLResponse)
+@app.get("/cadastrar-paciente", response_class=HTMLResponse)
 async def cadastrarPaciente(request: Request):
     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
 
-@api_router.get("/cadastro-paciente", response_class=HTMLResponse)
+@app.get("/cadastro-paciente", response_class=HTMLResponse)
 async def cadastroPaciente(request: Request):
     return templates.TemplateResponse("cadastroPaciente.html",  {"request": request})
 
-@api_router.get("/cadastro-usuario", response_class=HTMLResponse)
+@app.get("/cadastro-usuario", response_class=HTMLResponse)
 async def cadastroUsuario(request: Request):
     return templates.TemplateResponse("cadastroUsuario.html",  {"request": request})
 
-@api_router.get("/designar-enfermeiro", response_class=HTMLResponse)
+@app.get("/designar-enfermeiro", response_class=HTMLResponse)
 async def designarEnfermeiro(request: Request):
     return templates.TemplateResponse("designarEnfermeiro.html",  {"request": request})
 
-@api_router.get("/enf", response_class=HTMLResponse)
+@app.get("/enf", response_class=HTMLResponse)
 async def enfermeiro(request: Request):
     return templates.TemplateResponse("enf.html",  {"request": request})
 
-@api_router.get("/enf-chefe", response_class=HTMLResponse)
+@app.get("/enf-chefe", response_class=HTMLResponse)
 async def enfermeiroChefe(request: Request):
     return templates.TemplateResponse("enfchefe.html",  {"request": request})
 
-@api_router.get("/fazer-backup", response_class=HTMLResponse)
+@app.get("/fazer-backup", response_class=HTMLResponse)
 async def fazerBackup(request: Request):
     return templates.TemplateResponse("fazerBackup.html",  {"request": request})
 
-@api_router.get("/gerar-log", response_class=HTMLResponse)
+@app.get("/gerar-log", response_class=HTMLResponse)
 async def gerarLog(request: Request):
     return templates.TemplateResponse("gerarLog.html",  {"request": request})
 
-@api_router.get("/gerar-relatorio", response_class=HTMLResponse)
+@app.get("/gerar-relatorio", response_class=HTMLResponse)
 async def gerarRelatorio(request: Request):
     return templates.TemplateResponse("gerarRelatorio.html",  {"request": request})
 
-@api_router.get("/listar-enfermeiro", response_class=HTMLResponse)
+@app.get("/listar-enfermeiro", response_class=HTMLResponse)
 async def listaEnfermeiro(request: Request):
     return templates.TemplateResponse("listarEnfermeiros.html",  {"request": request})
 
-@api_router.get("/listar-paciente", response_class=HTMLResponse)
+@app.get("/listar-paciente", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("listarPaciente.html",  {"request": request})
 
-@api_router.get("/navbar", response_class=HTMLResponse)
+@app.get("/navbar", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("navbar.html",  {"request": request})
     
-@api_router.get("/sidebaradm", response_class=HTMLResponse)
+@app.get("/sidebaradm", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("sidebarAdm.html",  {"request": request})
 
-@api_router.get("/sidebarenfchefe", response_class=HTMLResponse)
+@app.get("/sidebarenfchefe", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("sidebarEnfChefe.html",  {"request": request})
 
-@api_router.get("/sidebarenf", response_class=HTMLResponse)
+@app.get("/sidebarenf", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
     return templates.TemplateResponse("sidebarEnf.html",  {"request": request})
