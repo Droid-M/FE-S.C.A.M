@@ -36,8 +36,7 @@ api_router.include_router(estagiario, tags=["estagiario"])
 api_router.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 
 
-
-@api_router.get("/das", response_class=HTMLResponse)
+@api_router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("login.html",  {"request": request})
 
