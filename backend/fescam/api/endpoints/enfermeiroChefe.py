@@ -6,12 +6,13 @@ sys.path.append(path.abspath('.'))
 from typing import Any, List, NoReturn
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from fescam.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
 from fescam import DAO, model, schemas
+from fescam.api.bearer import JWTBearer
 
 router = APIRouter()
 
@@ -21,7 +22,7 @@ estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
-@router.get('/enfermeirochefe', response_model=List[schemas.EnfermeiroChefeBase])
+@router.get('/enfermeirochefe', dependencies=[Depends(JWTBearer())], response_model=List[schemas.EnfermeiroChefeBase])
 def read_all_enfermeiro(
         page: int = 0, per_page: int = -1,
         current_user: schemas.EnfermeiroChefeBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
@@ -42,7 +43,7 @@ def read_all_enfermeiro(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.get('/enfermeirochefe/{enfermeiro_chefe_id}', response_model=schemas.EnfermeiroChefeBase) #Response_model é realmente necessário?
+@router.get('/enfermeirochefe/{enfermeiro_chefe_id}', dependencies=[Depends(JWTBearer())], response_model=schemas.EnfermeiroChefeBase) #Response_model é realmente necessário?
 def read_enfermeiro(enfermeiro_chefe_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):

@@ -21,7 +21,7 @@ estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
-@router.get('/enfermeiro', response_model=List[schemas.EnfermeiroBase])
+@router.get('/enfermeiro', dependencies=[Depends(JWTBearer())], response_model=List[schemas.EnfermeiroBase])
 def read_all_enfermeiro(
         page: int = 0, per_page: int = -1,
         current_user: schemas.EnfermeiroBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
@@ -40,7 +40,7 @@ def read_all_enfermeiro(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.get('/enfermeiro/{enfermeiro_id}', response_model=schemas.EnfermeiroBase) #Response_model é realmente necessário?
+@router.get('/enfermeiro/{enfermeiro_id}',dependencies=[Depends(JWTBearer())], response_model=schemas.EnfermeiroBase) #Response_model é realmente necessário?
 def read_enfermeiro(enfermeiro_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
