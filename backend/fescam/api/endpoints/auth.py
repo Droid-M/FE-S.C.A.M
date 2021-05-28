@@ -21,7 +21,7 @@ async def post_auth(func: Funcionario = None):
     cpf_existe = bool(funcionario)
     encoded_senha = func.senha.encode('utf-8')
 
-    if cpf_existe and bcrypt.checkpw(encoded_senha, funcionario.senha.encode('utf-8')):
+    if cpf_existe and bcrypt.checkpw(funcionario.senha, encoded_senha):
         return {'access_token': encode_jwt(cpf)}
 
     return {'msg': f'Esse funcionário não existe ou a senha está incorreta, CPF: "{cpf}".'}
