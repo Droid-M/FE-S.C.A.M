@@ -1,5 +1,7 @@
+import io
+
 def config(filename = 'database.env'):
-    f = open(filename, 'r')
+    f = io.open(filename, 'r', encoding="utf8")
     dbParams = {}
     translator = {
         "POSTGRES_DB":"database",

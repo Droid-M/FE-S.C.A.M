@@ -1,4 +1,8 @@
-CREATE TYPE "tipoSangue" AS ENUM (
+DROP SCHEMA IF EXISTS public CASCADE;
+
+CREATE SCHEMA public;
+
+CREATE TYPE public.tipoSangue AS ENUM (
   'a+',
   'a-',
   'b+',
@@ -10,7 +14,7 @@ CREATE TYPE "tipoSangue" AS ENUM (
   'null_rh'
 );
 
-CREATE TYPE "tipoGenero" AS ENUM (
+CREATE TYPE public.tipoGenero AS ENUM (
   'cis',
   'trans',
   'non-b'

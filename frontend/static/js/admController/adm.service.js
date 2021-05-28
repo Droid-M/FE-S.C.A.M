@@ -1,9 +1,5 @@
 // const axios = require('axios').default;
-import axios from 'axios';
-
-const baseURL = " "
-
-
+const baseURL = " ";
 
 
 class AdmService{
@@ -77,8 +73,8 @@ class AdmService{
             email: `${email}`,
             senha: `${senha}`
         }).then((response)=> {
-            return true;    // Por enquanto retorna um booleano, mas deve retornar alguma resposta
             console.log(response);
+            return true;    // Por enquanto retorna um booleano, mas deve retornar alguma resposta
         }).cath((err)=>{
             console.log(err);
         })

@@ -17,7 +17,7 @@ services:
         env_file:
             - ./backend/database.env # configure postgres
         volumes:
-            - ./config/init-database.sql:/docker-entrypoint-initdb.d/dump.sql
+            - ./backend/fescam/db/scripts/init-database.sql:/docker-entrypoint-initdb.d/dump.sql
             - database-data:/var/lib/postgresql/data/
     adminer:
         image: adminer

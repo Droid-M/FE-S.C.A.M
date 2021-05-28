@@ -3,3 +3,7 @@ from .AdministradorDAO import AdministradorDAO
 from .EnfermeiroChefeDAO import EnfermeiroChefeDAO
 from .EnfermeiroDAO import EnfermeiroDAO
 from .EstagiarioDAO import EstagiarioDAO
+from .MedicamentoDAO import MedicamentoDAO
+from .PacienteDAO import PacienteDAO
+from .PosologiaDAO import PosologiaDAO
+from .AgendamentoDAO import AgendamentoDAO

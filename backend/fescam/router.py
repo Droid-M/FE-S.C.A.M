@@ -35,6 +35,19 @@ app.include_router(estagiario, tags=["estagiario"])
 
 app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 
+#testando dump sql (na segunda vez vai dar erro pq não permite sobrescrita de arquivo --proposital--): ***************
+from fescam.db.generate_backup import backup
+import os
+
+@app.get("/teste_backup")
+async def test():
+    path = os.path.dirname(os.path.abspath(__file__)) + "/db/scripts/teste.sql"
+    #path = os.path.dirname(os.path.abspath(__file__)) + "\\db\\scripts\\teste.sql" <-- Windows
+    if(backup(path)):
+        return f"Arquivo criado com sucesso! Localização: {path}"
+    else:
+        return f"Erro ao criar arquivo! Verifique as credenciais do banco ou se já existe algum arquivo no diretório {path}"
+#testando dump sql ***************
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
