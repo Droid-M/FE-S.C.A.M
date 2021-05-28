@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/login.style.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,700&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/login.js') }}"></script>  
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+      <div class="content-form">
+        <div class="title">
+          <h3>FESCAM</h3>
+        </div>
+        <form class="form" id='login-form'>
+            <input type="text" id="login" placeholder="Email/CPF">
+            <input type="password" id="password" placeholder="Senha">
+            <button type='button' onclick = "logar()" class="btn btn-primary btn-login">Login</button>
+        </form>
+        <div class="esqueceu-senha">
+            <a href="">Esqueceu a senha?</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

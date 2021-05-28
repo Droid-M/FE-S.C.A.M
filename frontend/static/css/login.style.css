@@ -1,0 +1,74 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap'); */
+*{
+    margin:0;
+    padding:0;
+    
+ }
+body{
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 1em rgb(151, 150, 150);
+    width: 400px;
+    height: 450px;
+    background-color: #f9f7f7ea;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+    
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.form input{
+    background-color: rgba(242, 242, 243, 0.973);
+    height: 45px;
+    margin:8px;
+    border: 1px solid rgb(219, 212, 212);
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.btn{
+    width: 150px;
+    align-self: center;
+    border-radius: 10px;
+}
+
+.btn-login{
+    margin-top: 10px;
+    background-color: #3E62C5;
+    width: 200px;
+}
+
+.btn-login:hover{
+    background-color: rgb(129, 141, 245);
+    color: black;
+}
+
+.title{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.esqueceu-senha{
+    margin-top: 20px;
+}
