@@ -3,13 +3,17 @@ from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
 from fescam.api.bearer import JWTBearer
 from fescam.util.jwt import decode_jwt, encode_jwt
-from typing import Optional
+from typing import Any, Optional
 import bcrypt
 import re
+import json
 
-router = APIRouter(prefix='/api')
+router = APIRouter()
 func_dao = FuncionarioDAO()
 
+@router.get('/test')
+async def teste():
+    return {'msg': 'Olá Mundo'}
 
 @router.post('/auth')
 async def post_auth(func: Funcionario = None):
