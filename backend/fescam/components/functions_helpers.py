@@ -1,4 +1,5 @@
 from typing import Final
+import io
 
 ENFERMEIRO_FOO:Final = "ENFERMEIRO"
 ESTAGIARIO_FOO: Final = "ESTAGIARIO"
@@ -74,3 +75,55 @@ def cpfNumber_int_to_str(CPF:int):
     min_len = len(CPF)
     max_len = len(CPF_str)
     return CPF_str[: max_len - min_len] + CPF
+
+def read_file(filePath:str, toIgnore:str = None): #<-- Adicionar tratamento de exceção depois *****
+    def contain_end_command(line:str, end_simbol = ";"):
+        if(len(line) == 1):
+            line[0] == end_simbol
+        elif(line[-1] == "\n"): #Se tiver quebra de linha (não for a última):
+            return line[-2] == end_simbol
+        #Se for a última:
+        return line[-1] == end_simbol
+    
+    fileData = ''
+    arq = io.open(filePath, "r", encoding="utf8")
+    if(toIgnore):
+        verifyNextLn = False
+        endLineSeq = 0 #qtd de '\n'
+        for line in arq:
+            if(line[0] == "\n"):
+                endLineSeq += 1
+            else:
+                endLineSeq = 0
+            if(endLineSeq < 2): #Tratamento para evitar muitas linhas sequenciais em branco
+                if(verifyNextLn):
+                    if(contain_end_command(line)):
+                        verifyNextLn = False
+                elif(not toIgnore.lower() in line.lower()):
+                    fileData += line
+                else:
+                    verifyNextLn = True
+    else:
+        for line in arq:
+            fileData += line
+    arq.close()
+    return fileData;
+
+def create_file(filePath:str, content:str): #usar x ou w?
+    try:
+        arq = io.open(filePath, "x", encoding="utf8")
+        arq.write(content)
+        arq.close()
+        return True
+    except(Exception):
+        print(Exception)
+        return False
+        
+def lstrListToStr(list, separator:str):
+        if(type(list) == str):
+            return list
+        result = ''
+        for item in list:
+            assert(type(separator) == str)
+            result += item + separator
+        return result[:-1] #<-- Removendo ultimo separador

@@ -1,4 +1,4 @@
-from fescam.components.functions_helpers import create_list_dicitionary, create_dictionary
+from fescam.components.functions_helpers import create_list_dicitionary, create_dictionary, lstrListToStr
 from fescam.db.execute_db_command import execute
 
 #EXTRAIR A CLASSE CONVERT_COMAND E A CLASSE WHERE NO FUTURO *************************
@@ -11,15 +11,6 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
         self.__schemaBase = schemaBase
         self._aspas = "'"
     
-    def _lstrListToStr(self, list, separator:str):
-        if(type(list) == str):
-            return list
-        result = ''
-        for item in list:
-            assert(type(separator) == str)
-            result += item + separator
-        return result[:-1]
-
     def _convertToSchema(self, schemaData):
         if(type(schemaData) == list): #Provavelmente uma lista de dicionários
             schemaList = []    
@@ -263,7 +254,7 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
                 atributesToSave += atribute + ','
                 tablesNamesToSave += f"{value},"
                 AtributesEtablesNamesToUpdate += f"{atribute} = {value},"
-        toReturn = self._lstrListToStr(list(self.__typesAcceptables.keys()), ",")
+        toReturn = lstrListToStr(list(self.__typesAcceptables.keys()), ",")
         #Se for pra inserir
         if(toInsert == True): #Se o objeto ainda não está no banco
             commandToDB = f"INSERT INTO {self.__tableName}({atributesToSave}) VALUES ({tablesNamesToSave}) RETURNING {toReturn}"
@@ -286,7 +277,7 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
                 returning = f" RETURNING {toReturn}", #O espaço antes é importante
                 convertMethod = self._convertToSchema if(convertMethod == True) else None,
                 executeCommand = self._executeCommand,
-                lstrListToStr = self._lstrListToStr
+                lstrListToStr = lstrListToStr
                 )
         
         return self._WHERE(
@@ -317,7 +308,7 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
         else:
             atributes = list(self.__typesAcceptables.keys())
             commandToDB = f'DELETE FROM {self.__tableName}'
-        toReturn = self._lstrListToStr(atributes, ",")
+        toReturn = lstrListToStr(atributes, ",")
         return self._WHERE(
                 commandToDB = commandToDB,
                 convertCommand = self._convertCommand,

@@ -67,7 +67,9 @@ class childBase:
             "atributesToReturn": list(self.__parent.typesAcceptables.keys())
         }).WHERE(TN_period_FK, "=", PTN_period_PPK).AND(TN_period_FK, "=", f"'{primaryKeyValue}'").getFirst()
     
-    def getAll(self, convert = True):
+    def getAll(self, convert = True, disassociate = False):
+        if(disassociate):
+            return self.__base._find(atributes = list(self.__child.typesAcceptables.keys()), convertMethod = convert, getAllTuples = True).getAll()
         #primaryKeyValue = ForeignKey aqui **
         #Essa classe:
         foreignKey = self.__child.foreignKey[self.__parent.tableName]
@@ -124,7 +126,9 @@ class childBase:
     
     #Retornam dicionário(s) por padrão:
     
-    def SELECT(self, atributes:list, convertReturn = False):
+    def SELECT(self, atributes:list, disassociate = False, convertReturn = False):
+        if(disassociate):
+            return self.__base._find(atributes = atributes, convertMethod= convertReturn)
         return self.__parentDAO.SELECT(atributes = atributes, convertReturn = convertReturn)
     
     def INSERT(self, atributeEValue:dict, convertReturn = False):

@@ -1,10 +1,12 @@
 from fescam.db.execute_db_command import execute
+from fescam.components.functions_helpers import read_file
+import io
 #(falta definir a TIMEZONE)
 import os
 
 def create_types(): #<- Adicionar tratamento de exceção depois ****
     commands = ''
-    databaseFile = open(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\types.sql", "r")
+    databaseFile = io.open(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\types.sql", "r", encoding="utf8")
     for line in databaseFile:
         commands += line
     databaseFile.close()  
@@ -18,7 +20,7 @@ def create_types(): #<- Adicionar tratamento de exceção depois ****
 
 def create_tables(): #<- Adicionar tratamento de exceção depois ****
     commands = ''
-    databaseFile = open(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\tables.sql", "r")
+    databaseFile = io.open(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\tables.sql", "r", encoding="utf8")
     for line in databaseFile:
         commands += line
     databaseFile.close()  
@@ -31,11 +33,7 @@ def create_tables(): #<- Adicionar tratamento de exceção depois ****
     execute(commands)
     
 def create_all(): #<- Adicionar tratamento de exceção depois ****
-    commands = ''
-    databaseFile = open(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\init-database.sql", "r")
-    for line in databaseFile:
-        commands += line
-    databaseFile.close()  
+    commands = read_file(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\init-database.sql")
     commands = (
         f"""
         {commands}

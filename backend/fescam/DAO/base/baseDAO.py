@@ -38,7 +38,7 @@ class BaseDAO:
     def deleteByTuple(self, **attAndValues):
         return self.__base._remove(convertMethod= True).WHERE(dictToSQLConditions(attAndValues)).getAll()
     
-    def getAll(self, convert = True):
+    def getAll(self, convert = True, disassociate = False):
         return self.__base._find(atributes = list(self.__typesAcceptables.keys()), convertMethod = convert, getAllTuples = True).getAll()
     
     def refresh(self, instanceData): #<-- A chave primária não pode ser nula (None)
