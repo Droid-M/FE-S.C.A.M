@@ -51,7 +51,7 @@ async def test():
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("login.html",  {"request": request})
+    return templates.TemplateResponse("login2.html",  {"request": request})
 
 @app.get("/admin", response_class=HTMLResponse)
 async def adm(request: Request):

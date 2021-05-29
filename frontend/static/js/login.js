@@ -1,11 +1,11 @@
-async function logar(){  
+function logar(){  
         //stop submit the form, we will post it manually.
         // event.preventDefault();
     
         var username = document.getElementById("login").value;
         var password = document.getElementById("password").value;
         
-        console.log(username+' '+password);
+        console.log('Usuário e Senha:',username+' '+password);
         
        
         
@@ -14,12 +14,11 @@ async function logar(){
             senha: password,
         };
 
-    //    axios.get('/test').then((response)=>{
-    //        console.log(response.data);
-    //    })
-
+        // Faz uma requisição post para a api, esperando como resultado o token 
          axios.post('/auth',jsonData).then((response)=>{
-             console.log(response.data);
+             console.log(response.data); // json com os dados
+         }).catch((error)=>{
+             console.log(error);
          });
 
         
