@@ -14,6 +14,38 @@ function getAllUsuarios(){
 }
 
 
+/**
+ * Edita e Atualiza usuario 
+ */
+function update_user(){
+
+}
+
+
+/**
+ * Deleta Usuarios
+ */
+function delete_user(){
+
+}
+
+/**
+ * Busca todos os usuários cadastrados
+ */
+function get_all_users(){
+
+}
+
+/**
+ * Pesquisa um usuário específico 
+ */
+function get_user(){
+
+}
+
+/**
+ * 
+ */
 
 
 // const axios = require('../services/index')
