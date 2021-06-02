@@ -4,6 +4,6 @@ SQLAlchemy
 uvicorn
 psycopg2
 bcrypt
-jwt
+PyJWT
 jinja2
 faker

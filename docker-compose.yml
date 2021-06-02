@@ -16,8 +16,10 @@ services:
         image: "postgres" # use latest official postgres version
         env_file:
             - ./backend/database.env # configure postgres
+        ports: 
+            - 5432:5432
         volumes:
-            - ./backend/fescam/db/scripts/init-database.sql:/docker-entrypoint-initdb.d/dump.sql
+            - ./backend/fescam/db/scripts/dump.sql:/docker-entrypoint-initdb.d/dump.sql
             - database-data:/var/lib/postgresql/data/
     adminer:
         image: adminer
