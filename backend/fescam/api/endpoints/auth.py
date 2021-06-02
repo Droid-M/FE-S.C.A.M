@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header, Depends
+from fastapi import APIRouter, Depends
 from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
 from fescam.api.bearer import JWTBearer
