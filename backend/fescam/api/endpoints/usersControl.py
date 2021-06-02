@@ -22,7 +22,7 @@ estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
-@router.get("/lista_usuario", dependencies=[Depends(JWTBearer())], response_model=List[schemas.FuncionarioBase]) #Response_model é realmente necessário?
+@router.get("/lista_usuario", dependencies=[Depends(JWTBearer())],  response_model=List[schemas.FuncionarioBase]) #Response_model é realmente necessário?
 def getAllUsers(
         page: int = 0, per_page: int = -1,
         current_user: schemas.FuncionarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
@@ -73,11 +73,12 @@ def getAllUsers(user_id: int):#-> Any
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.post("/cadastro_usuario", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase)
+@router.post("/cadastro_usuario", dependencies=[Depends(JWTBearer())],  response_model=schemas.FuncionarioBase)
 def create_user(
-    user: schemas.FuncionarioCreated,
-    user_type: str,
+    data: list,
     ): # -> Any
+    user_type = data[1]['user_type'] #<-- ['user_type'] é importante ***
+    user = schemas.EnfermeiroCreated(**data[0])
     is_admin = True
     if(is_admin):
         result = None
@@ -89,6 +90,12 @@ def create_user(
             result = enfDAO.createBySchema(user)
         elif(user_type == ENFERMEIRO_CHEFE_FOO):
             result = enfCFDAO.createBySchema(user)
+        else:
+            return JSONResponse(
+            status_code = status.HTTP_406_NOT_ACCEPTABLE,
+            #description = f"Tipo de usuário {user_type} não é permitido!",
+            content= jsonable_encoder(schemas.Error(message = f"Tipo de usuário {user_type} não é permitido!"))
+        )
         
         if(result is not None):
             nome = result.nome
@@ -103,10 +110,10 @@ def create_user(
                 )
         else:
             return JSONResponse(
-                status_code = status.HTTP_406_NOT_ACCEPTABLE,
-                #description = f"Tipo de usuário {user_type} não é permitido!",
-                content= jsonable_encoder(schemas.Error(message = f"Tipo de usuário {user_type} não é permitido!"))
-            )
+            status_code = status.HTTP_406_NOT_ACCEPTABLE,
+            #description = f"Tipo de usuário {user_type} não é permitido!",
+            content= jsonable_encoder(schemas.Error(message = f"Falha ao salvar informações ({user})."))
+        )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
