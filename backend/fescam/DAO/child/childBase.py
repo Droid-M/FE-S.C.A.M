@@ -18,7 +18,9 @@ class childBase:
         if(result is not None):
             foreignKey = self.__child.foreignKey[self.__parent.tableName]
             valueFK = attAndValues.get(self.__parent.primaryKey)
-            self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = False)
+            if(self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = False) is None):
+                self.__parentDAO.deleteByTuple(**attAndValues)
+                return None
         return result
     
     def createBySchema(self, instanceData):
@@ -26,7 +28,9 @@ class childBase:
         if(result is not None):
             foreignKey = self.__child.foreignKey[self.__parent.tableName]
             valueFK = instanceData.dict()[self.__parent.primaryKey]
-            self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = False)
+            if(self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = False) is None):
+                self.__parentDAO.deleteByTuple(**instanceData.dict())
+                return None
         return result
     
     def store(self, instanceData) -> bool:
