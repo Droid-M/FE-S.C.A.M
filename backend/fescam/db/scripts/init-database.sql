@@ -20,6 +20,13 @@ CREATE TYPE public.tipoGenero AS ENUM (
   'non-b'
 );
 
+CREATE TYPE public.tipoFuncionario AS ENUM (
+  'ENFERMEIRO',
+  'ESTAGIARIO',
+  'ADMINISTRADOR',
+  'ENFERMEIRO_CHEFE'
+);
+
 CREATE TABLE IF NOT EXISTS public.Paciente (
   CPF char(11) PRIMARY KEY,
   nome varchar NOT NULL,
@@ -40,7 +47,8 @@ CREATE TABLE IF NOT EXISTS public.Funcionario (
   nome varchar NOT NULL,
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
-  senha varchar(80) NOT NULL
+  senha varchar(80) NOT NULL,
+  tipo tipoFuncionario DEFAULT null
 );
 
 CREATE TABLE IF NOT EXISTS public.Enfermeiro (

@@ -22,7 +22,11 @@ estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
-@router.get("/lista_usuario", dependencies=[Depends(JWTBearer())],  response_model=List[schemas.FuncionarioBase]) #Response_model é realmente necessário?
+@router.get(
+    "/lista_usuario", 
+    dependencies=[Depends(JWTBearer())],
+    response_model=List[schemas.FuncionarioBase]
+    ) 
 def getAllUsers(
         page: int = 0, per_page: int = -1,
         current_user: schemas.FuncionarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
@@ -33,7 +37,7 @@ def getAllUsers(
             #users = funcDAO.getpagete(page, per_page) #Fazer método de paginação ***********
             pass
         else: #Senão, pega todos
-            users = funcDAO.getAll(convert = False)
+            users = funcDAO.SELECT(['CPF', 'nome', 'created_on', 'updated_on', 'tipo'], convertReturn = False).getAll()
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
@@ -53,11 +57,13 @@ def getAllUsers(user_id: int):#-> Any
             CPF = user.CPF
             created_on = user.created_on
             updated_on = user.updated_on
+            tipo = user.tipo
             user = schemas.FuncionarioBase(
                 nome = nome,
                 CPF = CPF,
                 created_on = created_on,
-                updated_on = updated_on
+                updated_on = updated_on,
+                tipo = tipo
                 )
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
@@ -73,12 +79,15 @@ def getAllUsers(user_id: int):#-> Any
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.post("/cadastro_usuario", dependencies=[Depends(JWTBearer())],  response_model=schemas.FuncionarioBase)
+@router.post(
+    "/cadastro_usuario", 
+    dependencies=[Depends(JWTBearer())],
+    response_model=schemas.FuncionarioBase
+    )
 def create_user(
-    data: list,
+    user: schemas.FuncionarioCreated,
     ): # -> Any
-    user_type = data[1]['user_type'] #<-- ['user_type'] é importante ***
-    user = schemas.EnfermeiroCreated(**data[0])
+    user_type = user.tipo
     is_admin = True
     if(is_admin):
         result = None
@@ -102,7 +111,8 @@ def create_user(
             CPF = result.CPF
             created_on = result.created_on
             updated_on = result.updated_on
-            user = schemas.FuncionarioBase(nome = nome, CPF = CPF, created_on = created_on, updated_on = updated_on)
+            tipo = result.tipo
+            user = schemas.FuncionarioBase(nome = nome, CPF = CPF, created_on = created_on, updated_on = updated_on, tipo = tipo)
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Um novo usuario foi cadastrado com sucesso', 
@@ -112,7 +122,7 @@ def create_user(
             return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
             #description = f"Tipo de usuário {user_type} não é permitido!",
-            content= jsonable_encoder(schemas.Error(message = f"Falha ao salvar informações ({user})."))
+            content= jsonable_encoder(schemas.Error(message = f"Falha ao salvar informações"))
         )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo

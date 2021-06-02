@@ -23,7 +23,11 @@ estDAO = DAO.EstagiarioDAO()
 enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
-@router.get('/enfermeiro', dependencies=[Depends(JWTBearer())], response_model=List[schemas.EnfermeiroBase])
+@router.get(
+    '/enfermeiro', 
+    dependencies=[Depends(JWTBearer())], 
+    response_model=List[schemas.EnfermeiroBase]
+    )
 def read_all_enfermeiro(
         page: int = 0, per_page: int = -1,
         current_user: schemas.EnfermeiroBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
@@ -34,6 +38,17 @@ def read_all_enfermeiro(
             #users = funcDAO.getpagete(page, per_page) #Fazer método de paginação ***********
             pass
         else: #Senão, pega todos
+            """ Sugestão: 
+            table1N = model.Funcionario.tableName
+            pk1N = model.Funcionario.primaryKey
+            table1N = model.Funcionario.tableName
+            pk1N = model.Funcionario.primaryKey
+            
+            users = funcDAO.select(['CPF', 'nome', 'created_on', 'updated_on', 'tipo']).ON(
+                model.Funcionario, "=", PTN_period_PPK
+                ).getAll()
+            """
+            
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 content = jsonable_encoder(enfDAO.getAll(convert = False))

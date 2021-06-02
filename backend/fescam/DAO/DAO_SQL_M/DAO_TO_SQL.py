@@ -107,6 +107,38 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
         
         def getAll(self):
             return self.__executeCommand(command= self.__commandToDB, atributes= self.__atributes, convertMethod= self.__convertMethod, returning = self.__returning).getAll()
+    
+    class _WHERE_OR_GET:
+        def __init__(self, executeCommand, commandToDB:str, atributes, storageCommand, convertCommand, convertMethod = None, returning = ''):
+            self.__storageCommand = storageCommand
+            self.__commandToDB = commandToDB
+            self.__convertCommand = convertCommand
+            self.__atributes = atributes
+            self.__convertMethod = convertMethod
+            self.__returning = returning
+            self.__executeCommand = executeCommand
+        
+        def WHERE(self, *tablesNames):
+            if len(tablesNames) == 0:
+                raise ValueError("Impossível impor uma condição sem atributos, comparadores e valores definidos.")
+            elif (len(tablesNames) == 1) and type(tablesNames[0] == tuple):
+                tablesNames = tablesNames[0]
+            self.__commandToDB += f" WHERE ({self.__convertCommand(tablesNames)})"
+            return self.__storageCommand(
+                command = self.__commandToDB,
+                convertCommand = self.__convertCommand,
+                atributes = self.__atributes,
+                convertMethod = self.__convertMethod,
+                returning = self.__returning,
+                executeCommand = self.__executeCommand,
+                )
+            
+        def getFirst(self):
+            return self.__executeCommand(command= self.__commandToDB, atributes= self.__atributes, convertMethod= self.__convertMethod, returning = self.__returning).getFirst()
+        
+        def getAll(self):
+            return self.__executeCommand(command= self.__commandToDB, atributes= self.__atributes, convertMethod= self.__convertMethod, returning = self.__returning).getAll()
+        
        
     class _WHERE:
         def __init__(self, executeCommand, commandToDB:str, atributes, storageCommand, convertCommand, convertMethod = None, returning = ''):
@@ -130,7 +162,7 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
                 atributes = self.__atributes,
                 convertMethod = self.__convertMethod,
                 returning = self.__returning,
-                executeCommand = self.__executeCommand
+                executeCommand = self.__executeCommand,
                 )
             
     class _FROM:
@@ -225,7 +257,7 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
                 executeCommand = self._executeCommand
             )
             
-        return self._WHERE(
+        return self._WHERE_OR_GET(
                 commandToDB = commandToDB,
                 convertCommand = self._convertCommand,
                 storageCommand = self.__storageCommand,

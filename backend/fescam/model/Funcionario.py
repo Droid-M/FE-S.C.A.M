@@ -7,6 +7,7 @@ class Funcionario:
         self.senha = values.get("senha")
         self.created_on = values.get("created_on")
         self.updated_on = values.get("updated_on")
+        self.tipo = values.get("tipo")
     
     def setAll(self, **values): #<-- Sobrescreve todos os valores, até os que não forem passados por parâmetro (recebem None)
         self.CPF = values.get("CPF")
@@ -14,6 +15,7 @@ class Funcionario:
         self.senha = values.get("senha")
         self.created_on = values.get("created_on")
         self.updated_on = values.get("updated_on")
+        self.tipo = values.get("tipo")
     
     def updateAll(self, **values): #<-- Apenas sobrescreve os valores que forem passados por parâmetro
         if(values.get("CPF") is not None):
@@ -26,6 +28,8 @@ class Funcionario:
             self.created_on = values.get("created_on")
         if(values.get("updated_on") is not None):
             self.updated_on = values.get("updated_on")
+        if(values.get("tipo") is not None):
+            self.tipo = values.get("tipo")
     
     #"Atributos" somente leitura:
     
@@ -41,6 +45,7 @@ class Funcionario:
         "senha" : self.senha,
         "created_on" : self.created_on,
         "updated_on" : self.updated_on,
+        "tipo" : self.tipo
         }
      
     @property
