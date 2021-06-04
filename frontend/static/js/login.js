@@ -16,7 +16,32 @@ function logar(){
 
         // Faz uma requisição post para a api, esperando como resultado o token 
          axios.post('/auth',jsonData).then((response)=>{
-             console.log(response.data); // json com os dados
+            console.log(response.data); // json com os dados
+            let status = response.data.status;
+
+            if(status == '201'){
+
+                let access_token = response.data.access_token;
+                let classe = response.data.classe;
+   
+                sessionStorage.setItem('access_token',access_token);
+
+                if(classe == "ADMINISTRADOR"){
+                    location.href('/admin');
+                }else if(classe == "ENFERMEIRO_CHEFE"){
+                    location.href("/enf-chefe");
+                }else if(classe == "ENFERMEIRO"){
+                    location.href("/enf");
+                }else if(classe == "ESTAGIARIO"){
+                    location.href("/estagiario");
+                }
+            }else if(status == '406'){
+                let msg = response.data.msg;
+                alert(msg);
+                location.href("/");
+            }
+
+             
          }).catch((error)=>{
              console.log(error);
          });

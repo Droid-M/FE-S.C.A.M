@@ -10,19 +10,22 @@
     let senha = document.getElementById('senha').value;
     let user_type = document.querySelector('input[name="funcao"]:checked').value;
 
-    
+    let token = sessionStorage.getItem("access_token")
+
     //Cadastra novo Usuário
     axios({
         method: 'post',
         url: '/cadastro_usuario',
-        data: [
+        xsrfHeaderName: token,
+        data: 
             {
                 CPF:cpf,
                 nome:nome,
-                senha:senha
-            },
-            {user_type:user_type.toUpperCase()}
-        ]
+                senha:senha,
+                tipo: user_type
+            }
+           
+        
     }). then((response)=>{
         console.log(response.data);
     }).catch((error)=>{
