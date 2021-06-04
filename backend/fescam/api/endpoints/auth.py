@@ -18,12 +18,18 @@ async def post_auth(func: Funcionario = None):
     if not func:
         return {'msg': 'Requisição vazia.'}
 
-    cpf = re.sub(r'\D', '', func.CPF)
-    funcionario = func_dao.findByPK(cpf)
+    cpf = re.sub(r'\D', '', func.CPF) # Meu funcionario
+    funcionario = func_dao.findByPK(cpf)  # Funcionario do bd 
     cpf_existe = bool(funcionario)
     encoded_senha = func.senha.encode('utf-8')
+    senha_bd = funcionario.senha
+    hashed = bcrypt.hashpw(senha_bd.encode('utf8'),bcrypt.gensalt())
 
-    if cpf_existe and bcrypt.checkpw(encoded_senha, funcionario.senha.tobytes()):
+    # if bcrypt.checkpw(encoded_senha,hashed):
+    #     return {'msg': "Problema de hash"}
+    # return {'Error': "Error brabo"}
+    if cpf_existe and bcrypt.checkpw(encoded_senha, hashed):
+        # return {'classe': str(funcionario.tipo)}
         return {'access_token': encode_jwt(cpf), 'classe': str(funcionario.tipo)}
 
     return {'msg': f'Esse funcionário não existe ou a senha está incorreta, CPF: "{cpf}".'}
