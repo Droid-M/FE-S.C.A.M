@@ -133,7 +133,10 @@ class childBase:
     def SELECT(self, atributes:list, disassociate = False, convertReturn = False):
         if(disassociate):
             return self.__base._find(atributes = atributes, convertMethod= convertReturn)
-        return self.__parentDAO.SELECT(atributes = atributes, convertReturn = convertReturn)
+        return self.__base._find(atributes = atributes, convertMethod= convertReturn, toJoin = {
+            "tableName":self.__parent.tableName,
+            "foreignKey":self.__parent.primaryKey
+        })
     
     def INSERT(self, atributeEValue:dict, convertReturn = False):
         return self.__parentDAO.INSERT(atributeEValue= atributeEValue, convertReturn= convertReturn)
