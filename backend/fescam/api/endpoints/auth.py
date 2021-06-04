@@ -9,10 +9,6 @@ import re
 router = APIRouter()
 func_dao = FuncionarioDAO()
 
-@router.get('/test')
-async def teste():
-    return {'msg': 'Olá Mundo'}
-
 @router.post('/auth')
 async def post_auth(func: Funcionario = None):
     if not func:
