@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
 from fescam.api.bearer import JWTBearer
-from fescam.util.jwt import decode_jwt, encode_jwt
+from fescam.util.jwt_use import decode_jwt, encode_jwt
 import bcrypt
 import re
 

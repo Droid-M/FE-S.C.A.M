@@ -2,7 +2,7 @@
 from fastapi import Request, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-from fescam.util.jwt import decode_jwt
+from fescam.util.jwt_use import decode_jwt
 
 
 class JWTBearer(HTTPBearer):
