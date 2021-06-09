@@ -21,10 +21,10 @@ services:
         volumes:
             - ./backend/fescam/db/scripts/dump.sql:/docker-entrypoint-initdb.d/dump.sql
             - database-data:/var/lib/postgresql/data/
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 8080:8080
+    # adminer:
+    #     image: adminer
+    #     restart: always
+    #     ports:
+    #         - 8080:8080
 volumes:
     database-data:
