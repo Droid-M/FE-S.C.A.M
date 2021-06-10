@@ -7,3 +7,4 @@ bcrypt
 PyJWT
 jinja2
 faker
+faker_enum

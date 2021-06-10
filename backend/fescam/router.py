@@ -42,7 +42,7 @@ import os
 @app.get("/teste_seed")
 async def test_seed():
     prepare_DB()
-    return {"message":"Dados completos. Cheque a pasta 'backend\fescam\db\scripts\seed_result' para obter as credenciais"}
+    return {"message":"Dados completos. Cheque a pasta 'backend/fescam/db/scripts/seed_result' para obter as credenciais"}
 #testando semeação de banco (e geração de arquivos) **********************
 
 

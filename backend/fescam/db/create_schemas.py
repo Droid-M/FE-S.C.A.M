@@ -4,7 +4,7 @@ from fescam.components.functions_helpers import read_file
 import os
 
 def create_all(): #<- Adicionar tratamento de exceção depois ****
-    commands = read_file(os.path.dirname(os.path.abspath(__file__)) + "\\scripts\\init-database.sql")
+    commands = read_file(os.path.dirname(os.path.abspath(__file__)) + "/scripts/init-database.sql")
     commands = (
         f"""
         {commands}
