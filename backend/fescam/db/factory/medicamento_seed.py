@@ -17,4 +17,7 @@ def factory():
     nome = "medicamento_" + str(comp)
     codigo = fake.pyint(min_value=0, max_value=9999999999, step=1)
     medicamento = MedicamentoCreated(nome = nome, codigo = codigo)
-    return medDAO.createBySchema(medicamento)
+    result = medDAO.createBySchema(medicamento)
+    if(bool(result)):
+        return result.typesAcceptables
+    return None

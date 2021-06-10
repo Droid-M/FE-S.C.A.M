@@ -1,6 +1,6 @@
 from os import path
 import sys
-
+import bcrypt
 sys.path.append(path.abspath('.'))
 
 from typing import Any, List, NoReturn
@@ -90,6 +90,7 @@ def create_user(
     user_type = user.tipo
     is_admin = True
     if(is_admin):
+        user.senha = bcrypt.hashpw(user.senha.encode('utf-8'), bcrypt.gensalt()).decode()
         result = None
         if(user_type == ADMINISTRADOR_FOO):
             result = admDAO.createBySchema(user)

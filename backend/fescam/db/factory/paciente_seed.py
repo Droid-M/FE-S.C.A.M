@@ -56,5 +56,8 @@ def factory():
         enfermeiro_id = enfermeiro_id,
         dados = dados
         )
-    return pacDAO.createBySchema(paciente)
+    result = pacDAO.createBySchema(paciente)
+    if(bool(result)):
+        return result.typesAcceptables
+    return None
     
