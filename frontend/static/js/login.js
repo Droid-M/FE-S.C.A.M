@@ -19,30 +19,26 @@ function logar() {
       console.log(response.data); // json com os dados
       let status = response.data.status;
 
-      if (status == "201") {
-        let access_token = response.data.access_token;
-        let classe = response.data.classe;
+      let access_token = response.data.access_token;
+      let classe = response.data.classe;
 
-        sessionStorage.setItem("access_token", access_token);
+      sessionStorage.setItem("access_token", access_token);
 
-        if (classe == "ADMINISTRADOR") {
-          location.href("/admin");
-        } else if (classe == "ENFERMEIRO_CHEFE") {
-          location.href("/enf-chefe");
-        } else if (classe == "ENFERMEIRO") {
-          location.href("/enf");
-        } else if (classe == "ESTAGIARIO") {
-          location.href("/estagiario");
-        }
+      if (classe == "ADMINISTRADOR") {
+        location.href("/admin");
+      } else if (classe == "ENFERMEIRO_CHEFE") {
+        location.href("/enf-chefe");
+      } else if (classe == "ENFERMEIRO") {
+        location.href("/enf");
+      } else if (classe == "ESTAGIARIO") {
+        location.href("/estagiario");
       }
     })
     .catch((error) => {
       let msg = error.response.data.msg;
       console.error(msg);
       $("#alert_placeholder").html(
-        '<div class="alert alert-danger alert-dismissible">' +
-          msg +
-          "</div>"
+        '<div class="alert alert-danger alert-dismissible">' + msg + "</div>"
       );
     });
 
