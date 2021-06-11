@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
 from fescam.api.bearer import JWTBearer
@@ -10,7 +10,7 @@ router = APIRouter()
 func_dao = FuncionarioDAO()
 
 @router.post('/auth')
-async def post_auth(func: Funcionario = None):
+async def post_auth(response: Response, func: Funcionario = None):
     if not func:
         return {'msg': 'Requisição vazia.'}
 
@@ -24,6 +24,7 @@ async def post_auth(func: Funcionario = None):
         if bcrypt.checkpw(encoded_senha, hashed):
             # return {'classe': str(funcionario.tipo)}
             return {'access_token': encode_jwt(cpf), 'classe': str(funcionario.tipo)}
+    response.status_code = 422
     return {'msg': f'Esse funcionário não existe ou a senha está incorreta, CPF: "{cpf}".'}
     
     # if bcrypt.checkpw(encoded_senha,hashed):
