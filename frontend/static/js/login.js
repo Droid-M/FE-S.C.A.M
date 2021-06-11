@@ -1,7 +1,4 @@
 function logar() {
-  //stop submit the form, we will post it manually.
-  // event.preventDefault();
-
   var username = document.getElementById("login").value;
   var password = document.getElementById("password").value;
 
@@ -41,45 +38,4 @@ function logar() {
         '<div class="alert alert-danger alert-dismissible">' + msg + "</div>"
       );
     });
-
-  // disabled the submit button
-  // $("#btnSubmit").prop("disabled", true);
-
-  //  axios
-  //     .post('/auth', jsonData)
-  //     .then(function(response) {
-
-  // let access_token = response.data.access_token;
-  // let user_class = response.data.user_class;
-  // let first_login = response.data.first_login;
-  // let username = response.data.cpf;
-  // console.log(response.data);
-  // localStorage.setItem("access_token", access_token);
-  // localStorage.setItem("user_class", user_class);
-  // localStorage.setItem("first_login", first_login);
-  // localStorage.setItem("username", username);
-  // $("#btnSubmit").prop("disabled", false);
-  // if(access_token){
-  //     console.log('Sucesso');
-  // }
-  // if (first_login === true) {
-  //     document.location = "/redefine";
-  // } else if (user_class === "administrador") {
-  //     document.location = "/admin";
-  // } else if (user_class === "agente") {
-  //     document.location = "/";
-  // } else {
-  //     Swal.fire({
-  //         icon: "error",
-  //         title: "Erro desconhecido",
-  //         text: "Aconteceu algo inesperado, tente novamente. Caso o erro persista, entre em contato com o suporte.",
-  //         confirmButtonColor: "#2f3883"
-  //     });
-  // }
-  // })
-  // .catch(function(error) {
-
-  //     console.log(error.data);
-  // });
-  // $("#btnSubmit").prop("disabled", false);
 }
