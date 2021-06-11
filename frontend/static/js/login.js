@@ -19,6 +19,7 @@ function logar(){
             console.log(response.data); // json com os dados
             let status = response.data.status;
 
+        
             if(status == '201'){
 
                 let access_token = response.data.access_token;
@@ -26,14 +27,16 @@ function logar(){
    
                 sessionStorage.setItem('access_token',access_token);
 
+                
+
                 if(classe == "ADMINISTRADOR"){
-                    location.href('/admin');
+                    location.href='/admin';
                 }else if(classe == "ENFERMEIRO_CHEFE"){
-                    location.href("/enf-chefe");
+                    location.href='/enf-chefe';
                 }else if(classe == "ENFERMEIRO"){
-                    location.href("/enf");
+                    location.href='/enf';
                 }else if(classe == "ESTAGIARIO"){
-                    location.href("/estagiario");
+                    location.href='/estagiario';
                 }
             }else if(status == '406'){
                 let msg = response.data.msg;
