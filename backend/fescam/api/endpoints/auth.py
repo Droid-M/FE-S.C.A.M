@@ -24,7 +24,7 @@ async def post_auth(response: Response, func: Funcionario = None):
         if bcrypt.checkpw(encoded_senha, hashed):
             # return {'classe': str(funcionario.tipo)}
             return {'access_token': encode_jwt(cpf), 'classe': str(funcionario.tipo)}
-    response.status_code = 422
+    response.status_code = 406
     return {'msg': f'Esse funcionário não existe ou a senha está incorreta, CPF: "{cpf}".'}
     
     # if bcrypt.checkpw(encoded_senha,hashed):
