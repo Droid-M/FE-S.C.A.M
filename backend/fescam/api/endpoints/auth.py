@@ -16,11 +16,9 @@ async def post_auth(response: Response, func: Funcionario = None):
 
     cpf = re.sub(r'\D', '', func.CPF) # Meu funcionario
     funcionario = func_dao.findByPK(cpf)  # Funcionario do bd 
-    if(bool(funcionario)): #<-- Evita o erro de ponteiro nulo que acontecia
+    if(bool(funcionario)): 
         encoded_senha = func.senha.encode('utf-8')
         hashed = funcionario.senha.encode('utf-8')
-        #senha_bd = funcionario.senha <-- V. anterior
-        #hashed = bcrypt.hashpw(senha_bd.encode('utf8'),bcrypt.gensalt()) <-- V. anterior
         if bcrypt.checkpw(encoded_senha, hashed):
             # return {'classe': str(funcionario.tipo)}
             return {'access_token': encode_jwt(cpf), 'classe': str(funcionario.tipo)}

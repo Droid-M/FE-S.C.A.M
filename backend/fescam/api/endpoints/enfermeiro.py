@@ -1,8 +1,3 @@
-from os import path
-import sys
-
-sys.path.append(path.abspath('.'))
-
 from typing import Any, List, NoReturn
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -28,7 +23,7 @@ enfCFDAO = DAO.EnfermeiroChefeDAO()
     dependencies=[Depends(JWTBearer())], 
     response_model=List[schemas.EnfermeiroBase]
     )
-def read_all_enfermeiro(
+async def read_all_enfermeiro(
         page: int = 0, per_page: int = -1,
         current_user: schemas.EnfermeiroBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
         ): #-> Any
@@ -58,7 +53,7 @@ def read_all_enfermeiro(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.get('/enfermeiro/{enfermeiro_id}',dependencies=[Depends(JWTBearer())], response_model=schemas.EnfermeiroBase) #Response_model é realmente necessário?
-def read_enfermeiro(enfermeiro_id: int):#-> Any
+async def read_enfermeiro(enfermeiro_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = enfDAO.findByPK(enfermeiro_id)
