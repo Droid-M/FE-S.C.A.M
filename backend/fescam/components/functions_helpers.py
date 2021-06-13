@@ -109,14 +109,14 @@ def read_file(filePath:str, toIgnore:str = None): #<-- Adicionar tratamento de e
     arq.close()
     return fileData;
 
-def create_file(filePath:str, content:str): #usar x ou w?
+def create_file(filePath:str, content:str, writeMode = 'x'): #usar x ou w?
     try:
-        arq = io.open(filePath, "x", encoding="utf8")
+        arq = io.open(filePath, writeMode, encoding="utf8")
         arq.write(content)
         arq.close()
         return True
-    except(Exception):
-        print(Exception)
+    except(Exception) as e:
+        print(e)
         return False
         
 def lstrListToStr(list, separator:str):
@@ -127,3 +127,4 @@ def lstrListToStr(list, separator:str):
             assert(type(separator) == str)
             result += item + separator
         return result[:-1] #<-- Removendo ultimo separador
+    

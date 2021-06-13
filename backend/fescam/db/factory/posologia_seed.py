@@ -48,5 +48,8 @@ def factory():
         notas = notas,
         paciente = paciente
         )
-    return posDAO.createBySchema(posologia)
+    result = posDAO.createBySchema(posologia)
+    if(bool(result)):
+        return result.typesAcceptables
+    return None
     

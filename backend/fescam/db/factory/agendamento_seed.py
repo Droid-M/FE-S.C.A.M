@@ -70,5 +70,8 @@ def factory():
             estagiario = estagiario,
             horario = horario
         )
-    agdDAO.createBySchema(agendamento)
+    result = agdDAO.createBySchema(agendamento)
+    if(bool(result)):
+        return result.typesAcceptables
+    return None
     

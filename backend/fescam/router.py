@@ -12,7 +12,7 @@ from fescam.api.endpoints.enfermeiro import router as enfermeiro
 from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
 from fescam.api.endpoints.estagiario import router as estagiario
 from fescam.api.endpoints.usersControl import router as users
-
+from fescam.db.seed.seed_db import prepare_DB
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
@@ -34,6 +34,17 @@ app.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
 app.include_router(estagiario, tags=["estagiario"])
 
 app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
+
+#testando semeação de banco (e geração de arquivos) (tô ligado que testes de rota não feitos aqui kk)**********************
+from fescam.db.generate_backup import backup
+import os
+
+@app.get("/teste_seed")
+async def test_seed():
+    prepare_DB()
+    return {"message":"Dados completos. Cheque a pasta 'backend/fescam/db/scripts/seed_result' para obter as credenciais"}
+#testando semeação de banco (e geração de arquivos) **********************
+
 
 #testando dump sql (na segunda vez vai dar erro pq não permite sobrescrita de arquivo --proposital--): ***************
 from fescam.db.generate_backup import backup
