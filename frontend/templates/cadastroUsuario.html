@@ -9,6 +9,7 @@
     <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', path='js/adm.js') }}"></script>
+    
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
@@ -54,25 +55,25 @@
                         <legend class="col-form-label col-sm-2 pt-0">Função</legend>
                         <div class="col-sm-10">
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="admin" value="administrador" >
+                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="admin" value="ADMINISTRADOR" >
                             <label class="form-check-label" for="gridRadios1">
                               Administrador
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="funcao" id="enfChefe" class='tipo_user' value="enfermeiro chefe">
+                            <input class="form-check-input" type="radio" name="funcao" id="enfChefe" class='tipo_user' value="ENFERMEIRO_CHEFE">
                             <label class="form-check-label" for="gridRadios2">
                               Enfermeiro Chefe
                             </label>
                           </div>
                           <div class="form-check ">
-                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="enf" value="enfermeiro">
+                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="enf" value="ENFERMEIRO">
                             <label class="form-check-label" for="gridRadios3">
                               Enfermeiro
                             </label>
                           </div>
                           <div class="form-check ">
-                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="esta" value="estagiario">
+                            <input class="form-check-input" type="radio" class='tipo_user' name="funcao" id="esta" value="ESTAGIARIO">
                             <label class="form-check-label" for="gridRadios3">
                               Estagiario
                             </label>
@@ -95,6 +96,7 @@
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{url_for('static', path='js/adm.controller.js')}}"></script>
     <script src="{{url_for('static',path='js/cadastro.user.js')}}"></script>
 
     <script>
