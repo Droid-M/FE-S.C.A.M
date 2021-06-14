@@ -6,6 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+<!-- 
+    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
 
     <script src="/static/js/jquery-3.6.0.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
@@ -13,6 +17,7 @@
     <script src="/static/js/adm.js"></script>
     <script src="/static/js/adm.controller.js"></script>
 
+    <link rel="stylesheet" href="{{url_for('static', path='css/adm.css')}}">
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -31,7 +36,7 @@
         <div class="divroot">
           <div id="table-users">
             <h3>Usuários Ativos</h3>
-            <table class="table table-dark">
+            <table class="table" id="tb_user">
               <thead>
                 <tr>
                   <th scope="col">CPF</th>
@@ -41,19 +46,21 @@
                   <th scope="col">Excluir</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody id="tBody"></tbody>
             </table>
           </div>
         </div>
 
-        <button type="button" onclick="get_all_users()" class="btn btn-primary">
+        <button type="button" onclick = "get_all_users()" class="btn btn-primary">
           <span class="glyphicon glyphicon-send"></span>
           Atualizar
         </button>
       </div>
     </div>
 
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
     <!--<script src="/static/js/main.js"></script>s-->
   </body>
