@@ -27,7 +27,7 @@ enfCFDAO = DAO.EnfermeiroChefeDAO()
     dependencies=[Depends(JWTBearer())],
     response_model=List[schemas.FuncionarioBase]
     ) 
-def getAllUsers(
+async def getAllUsers(
         page: int = 0, per_page: int = -1,
         current_user: schemas.FuncionarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
         ): #-> Any
@@ -48,7 +48,7 @@ def getAllUsers(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
-def getAllUsers(user_id: int):#-> Any
+async def getAllUsers(user_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = funcDAO.findByPK(user_id)
@@ -84,7 +84,7 @@ def getAllUsers(user_id: int):#-> Any
     dependencies=[Depends(JWTBearer())],
     response_model=schemas.FuncionarioBase
     )
-def create_user(
+async def create_user(
     user: schemas.FuncionarioCreated,
     ): # -> Any
     user_type = user.tipo
@@ -130,7 +130,7 @@ def create_user(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.put("/edicao_usuario", dependencies=[Depends(JWTBearer())]) #<-- Ainda não suporta atualização de chave primária *******
-def update_user(
+async def update_user(
     user: schemas.FuncionarioCreated,
 ): #-> Any
     #Buscando usuario:
@@ -157,7 +157,7 @@ def update_user(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.delete("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
-def delete_user(user_id: int):
+async def delete_user(user_id: int):
     is_admin = True
     if(is_admin):
         deleted_user = funcDAO.DeleteByPK(user_id)

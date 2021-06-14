@@ -23,7 +23,7 @@ enfDAO = DAO.EnfermeiroDAO()
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 
 @router.get('/estagiario', dependencies=[Depends(JWTBearer())], response_model=List[schemas.EstagiarioBase])
-def read_all_enfermeiro(
+async def read_all_enfermeiro(
         page: int = 0, per_page: int = -1,
         current_user: schemas.EstagiarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
         ): #-> Any
@@ -44,7 +44,7 @@ def read_all_enfermeiro(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.get('/estagiario/{estagiario_id}', dependencies=[Depends(JWTBearer())], response_model=schemas.EstagiarioBase) #Response_model é realmente necessário?
-def read_enfermeiro(estagiario_id: int):#-> Any
+async def read_enfermeiro(estagiario_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = estDAO.findByPK(estagiario_id)

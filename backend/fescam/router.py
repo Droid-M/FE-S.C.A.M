@@ -12,6 +12,10 @@ from fescam.api.endpoints.enfermeiro import router as enfermeiro
 from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
 from fescam.api.endpoints.estagiario import router as estagiario
 from fescam.api.endpoints.usersControl import router as users
+from fescam.api.endpoints.medicamento import router as medicamento
+from fescam.api.endpoints.paciente import router as paciente
+from fescam.api.endpoints.posologia import router as posologia
+from fescam.api.endpoints.agendamento import router as agendamento
 from fescam.db.seed.seed_db import prepare_DB
 from fastapi.staticfiles import StaticFiles
 
@@ -32,6 +36,10 @@ app.include_router(administrador, tags=["administrador"])
 app.include_router(enfermeiro, tags=["enfermeiro"])
 app.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
 app.include_router(estagiario, tags=["estagiario"])
+app.include_router(medicamento, tags=["medicamentos"])
+app.include_router(paciente, tags=["pacientes"])
+app.include_router(posologia, tags=["posologias"])
+app.include_router(agendamento, tags=["agendamentos"])
 
 app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 

@@ -150,12 +150,12 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
             self.__returning = returning
             self.__executeCommand = executeCommand
         
-        def WHERE(self, *tablesNames):
-            if len(tablesNames) == 0:
+        def WHERE(self, *condition):
+            if len(condition) == 0:
                 raise ValueError("Impossível impor uma condição sem atributos, comparadores e valores definidos.")
-            elif (len(tablesNames) == 1) and type(tablesNames[0] == tuple):
-                tablesNames = tablesNames[0]
-            self.__commandToDB += f" WHERE ({self.__convertCommand(tablesNames)})"
+            elif (len(condition) == 1) and type(condition[0] == tuple):
+                condition = condition[0]
+            self.__commandToDB += f" WHERE ({self.__convertCommand(condition)})"
             return self.__storageCommand(
                 command = self.__commandToDB,
                 convertCommand = self.__convertCommand,
