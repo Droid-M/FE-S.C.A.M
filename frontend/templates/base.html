@@ -1,71 +1,105 @@
-<html lang="pt-br">
-  <head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
     {% block head %}
-    <title>{% block title %}{% endblock %} | FESCAM</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', path='js/adm.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='css/sidebar.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='css/styleadm.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='css/style.css') }}"
-    />
+    <style>
+        .modal{
+            width: 300px;
+        }
+        .modal-content{
+            width: 300px;
+        }
+        .list-group-item:hover{
+            background-color: rgba(68, 67, 67, 0.212)!important;
+        }
+    </style>
+
+
+
     {% endblock %}
-  </head>
+    {% block title %}<title>titulo do enf chefe</title>{% endblock %}
+</head>
+<body>
+    {% block main %}
+    <!--  -->
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container-fluid">
+            
+        <!-- <span class="navbar-nav mx-auto -brand mb-0 h1 ">Enfermeiro Chefe</span> -->
 
-  <body>
-    <div class="d-flex" id="wrapper">
-      <div id="sidebar-wrapper"></div>
-      <div id="page-content-wrapper">
-        <nav id="navbar">
-          <h1>Test</h1>
-        </nav>
-        <div class="divroot">
-          {% block main %}
-          <div id="table-users">
-            <h3>Usuários Ativos</h3>
-            <table class="table table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Tipo</th>
-                  <th scope="col">Editar</th>
-                  <th scope="col">Excluir</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-          {% endblock %}
+          <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <!--
+          <div class="row">
+            <div class="span12">
+               <div class="page-header">
+                
+              <div class="well">
+              
+                <div class="dropdown">
+                   <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Enfermeiro Chefe<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                      <li><a href="#">Sei la outra opção</a></li>
+                      <li><a href="#">Mudar senha</a></li>
+                      <li><a href="#">Sair</a></li>
+                  </ul>
+                </div>         
+                      
+              </div>  
+              
+              </div>
+            </div>
+            </div>  
+                -->
+
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Menu do Enfermeiro Chefe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cadastrar Paciente</li>
+                <li class="list-group-item">Listar Pacientes</li>
+                <li class="list-group-item">Cadastrar medicamento</li>
+                <li class="list-group-item">Designar enfermeiro</li>
+                <li class="list-group-item">Listar enfermeiro</li>
+                <li class="list-group-item">Alarme</li>
+              </ul>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+         
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </body>
+
+        </div>
+      </nav>
+      {% endblock %}
+</body>
 </html>
