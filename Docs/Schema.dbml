@@ -28,7 +28,7 @@ Table Paciente {
   createdOn timestamptz [default: `now()`]
   updatedOn timestamptz [default: `now()`]
   dados varchar [note: "Informações a respeito do diagnóstico do paciente"]
-  enfermeiro_id bigint [ref: > Enfermeiro.id, note: "Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes"]
+  atendente_id bigint [ref: > Enfermeiro.id, note: "Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes"]
 
   indexes {
     CPF

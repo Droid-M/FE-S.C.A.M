@@ -41,7 +41,7 @@ def factory():
     tipo_sangue = fake.enum(TipoSangue)
     endereco = fake.address()
     telefone = cpfNumber_int_to_str(fake.pyint(min_value=0, max_value=99999999999, step=1))
-    enfermeiro_id = atendente.CPF
+    atendente_id = atendente.CPF
     dados = ''
     
     paciente = PacienteCreated(
@@ -53,7 +53,7 @@ def factory():
         tipo_sangue = tipo_sangue,
         endereco = endereco,
         telefone = telefone,
-        enfermeiro_id = enfermeiro_id,
+        atendente_id = atendente_id,
         dados = dados
         )
     result = pacDAO.createBySchema(paciente)

@@ -39,7 +39,19 @@ CREATE TABLE IF NOT EXISTS public.Paciente (
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
   dados varchar,
-  enfermeiro_id char(11) NOT NULL
+  atendente_id char(11) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.Log (
+  id bigserial PRIMARY KEY,
+  created_on timestamptz DEFAULT (now()),
+  updated_on timestamptz
+);
+
+CREATE TABLE IF NOT EXISTS public.Log_Linha (
+  id bigserial PRIMARY KEY,
+  campo varchar DEFAULT '\n',
+  log_id bigserial NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Funcionario (
@@ -56,7 +68,7 @@ CREATE TABLE IF NOT EXISTS public.Enfermeiro (
   func_id char(11) UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS public.EnfermeiroChefe (
+CREATE TABLE IF NOT EXISTS public.Enfermeiro_chefe (
   id bigserial PRIMARY KEY,
   func_id char(11) UNIQUE
 );
@@ -100,11 +112,9 @@ CREATE TABLE IF NOT EXISTS public.Agendamento (
   horario timestamptz DEFAULT null
 );
 
-ALTER TABLE public.Paciente ADD FOREIGN KEY (enfermeiro_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
-
 ALTER TABLE public.Enfermeiro ADD FOREIGN KEY (func_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE public.EnfermeiroChefe ADD FOREIGN KEY (func_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE public.Enfermeiro_chefe ADD FOREIGN KEY (func_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE public.Administrador ADD FOREIGN KEY (func_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -114,13 +124,15 @@ ALTER TABLE public.Posologia ADD FOREIGN KEY (medicamento) REFERENCES public.Med
 
 ALTER TABLE public.Posologia ADD FOREIGN KEY (paciente) REFERENCES public.Paciente (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE public.Log_Linha ADD FOREIGN KEY (log_id) REFERENCES public.Log (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE INDEX ON public.Paciente (CPF);
 
 CREATE INDEX ON public.Funcionario (CPF);
 
 CREATE INDEX ON public.Enfermeiro (func_id);
 
-CREATE INDEX ON public.EnfermeiroChefe (func_id);
+CREATE INDEX ON public.Enfermeiro_chefe (func_id);
 
 CREATE INDEX ON public.Administrador (func_id);
 
@@ -142,6 +154,6 @@ COMMENT ON COLUMN public.Paciente.genero IS 'Gênero com o qual a pessoa se iden
 
 COMMENT ON COLUMN public.Paciente.dados IS 'Informações a respeito do diagnóstico do paciente';
 
-COMMENT ON COLUMN public.Paciente.enfermeiro_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.Paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 COMMENT ON COLUMN public.Posologia.quantidade IS 'A quantidade diária a ser administrada';

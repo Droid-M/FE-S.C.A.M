@@ -30,7 +30,7 @@ class PacienteBase(BaseModel):
     telefone: Optional[str]
     created_on: Optional[datetime]
     updated_on: Optional[datetime] 
-    enfermeiro_id: constr(min_length=11, max_length=11) #<-- Rever isso
+    atendente_id: constr(min_length=11, max_length=11) #<-- Rever isso
     dados: Optional[str]
     
     class Config:
@@ -46,7 +46,7 @@ class PacienteCreated(BaseModel):
     tipo_sangue: Optional[tipoSangue]
     endereco: Optional[str]
     telefone: Optional[str]
-    enfermeiro_id: constr(min_length=11, max_length=11) #<-- Rever isso
+    atendente_id: constr(min_length=11, max_length=11) #<-- Rever isso
     dados: Optional[str]
     
     class Config:

@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS public.Paciente (
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
   dados varchar,
-  enfermeiro_id char(11) NOT NULL
+  atendente_id char(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Funcionario (
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS public.Agendamento (
   horario timestamptz DEFAULT null
 );
 
-ALTER TABLE public.Paciente ADD FOREIGN KEY (enfermeiro_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE public.Paciente ADD FOREIGN KEY (atendente_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE public.Enfermeiro ADD FOREIGN KEY (func_id) REFERENCES public.Funcionario (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -134,6 +134,6 @@ COMMENT ON COLUMN public.Paciente.genero IS 'Gênero com o qual a pessoa se iden
 
 COMMENT ON COLUMN public.Paciente.dados IS 'Informações a respeito do diagnóstico do paciente';
 
-COMMENT ON COLUMN public.Paciente.enfermeiro_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.Paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 COMMENT ON COLUMN public.Posologia.quantidade IS 'A quantidade diária a ser administrada';
