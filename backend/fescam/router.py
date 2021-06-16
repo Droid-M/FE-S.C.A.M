@@ -96,6 +96,10 @@ async def cadastroPaciente(request: Request):
 async def cadastroUsuario(request: Request):
     return templates.TemplateResponse("cadastroUsuario.html",  {"request": request})
 
+@app.get("/edicao-usuario/id={id_user}", response_class=HTMLResponse)
+async def cadastroUsuario(request: Request):
+    return templates.TemplateResponse("cadastroUsuario.html",  {"request": request})
+
 @app.get("/designar-enfermeiro", response_class=HTMLResponse)
 async def designarEnfermeiro(request: Request):
     return templates.TemplateResponse("designarEnfermeiro.html",  {"request": request})
