@@ -3,25 +3,13 @@
     {% extends "base.html" %}
 <head>
     {% block title %} FESCAM {% endblock %}
-    {% block head}
+    {% block head %}
     {{ super() }}
     {% endblock %}
 </head>
 <body>
-    <div class="d-flex" id="wrapper">
-        <div id="sidebar-wrapper"></div>
-        <div id="page-content-wrapper">
-          <nav id="navbar">
-            <h1>Test</h1>
-          </nav>
-          <div class="divroot">
-            {% block main}
-            {{ super() }}
-            {% endblock %}
-        </div>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% block main %}
+    {{ super() }}
+    {% endblock %}
 </body>
 </html>
