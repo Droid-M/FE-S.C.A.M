@@ -83,7 +83,7 @@
                     </fieldset>
                     <div class="form-group row">
                       <div class="col-sm-6">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button id='cadastro-salvar' type="submit" class="btn btn-primary">Cadastro</button>
                       </div>
                       <div class="col-sm-6">
                         <button type="submit" class="btn btn-primary">Cancelar</button>
@@ -96,12 +96,12 @@
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="{{url_for('static', path='js/adm.controller.js')}}"></script>
     <script src="{{url_for('static',path='js/cadastro.user.js')}}"></script>
+    <script src="{{url_for('static', path='js/adm.controller.js')}}"></script>
 
     <script>
          $(document).ready(function() {
-                $("#cad-user").submit(cadastro_user);
+                $("#cad-user").submit(cadastro_edicao_user);
             });
     </script>
 
