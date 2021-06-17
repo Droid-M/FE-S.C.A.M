@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+</head>
+<body>
+    {% block mainadm %}
+    <nav class="navbar navbar-light bg-light shadow">
+        <div class="container-fluid">
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Menu do Administrador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cadastrar Usuário</li>
+                <li class="list-group-item">Listar Usuário</li>
+                <li class="list-group-item">Gerar Log</li>
+                <li class="list-group-item">Gerar Relatório</li>
+                <li class="list-group-item">Fazer Backup</li>
+
+              </ul>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+        </div>
+      </nav>
+    {% endblock %}
+</body>
+</html>

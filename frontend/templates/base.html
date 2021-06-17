@@ -9,97 +9,17 @@
     <link href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" 
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
+
     <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}" 
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
-    <style>
-        .modal{
-            width: 300px;
-        }
-        .modal-content{
-            width: 300px;
-        }
-        .list-group-item:hover{
-            background-color: rgba(68, 67, 67, 0.212)!important;
-        }
-    </style>
 
 
 
     {% endblock %}
-    {% block title %}<title>titulo do enf chefe</title>{% endblock %}
+    {% block title %}<title>FES-CAM</title>{% endblock %}
 </head>
 <body>
-    {% block main %}
-    <!--  -->
-    <nav class="navbar navbar-light bg-light shadow">
-        <div class="container-fluid">
-            
-        <!-- <span class="navbar-nav mx-auto -brand mb-0 h1 ">Enfermeiro Chefe</span> -->
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <!--
-          <div class="row">
-            <div class="span12">
-               <div class="page-header">
-                
-              <div class="well">
-              
-                <div class="dropdown">
-                   <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Enfermeiro Chefe<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                      <li><a href="#">Sei la outra opção</a></li>
-                      <li><a href="#">Mudar senha</a></li>
-                      <li><a href="#">Sair</a></li>
-                  </ul>
-                </div>         
-                      
-              </div>  
-              
-              </div>
-            </div>
-            </div>  
-                -->
-
-
-
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Menu do Enfermeiro Chefe</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cadastrar Paciente</li>
-                <li class="list-group-item">Listar Pacientes</li>
-                <li class="list-group-item">Cadastrar medicamento</li>
-                <li class="list-group-item">Designar enfermeiro</li>
-                <li class="list-group-item">Listar enfermeiro</li>
-                <li class="list-group-item">Alarme</li>
-              </ul>
-
-
-
-
-        </div>
-        <div class="modal-footer">
-           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-         
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-        </div>
-      </nav>
-      {% endblock %}
 </body>
 </html>
