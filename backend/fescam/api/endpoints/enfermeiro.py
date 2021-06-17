@@ -52,11 +52,11 @@ async def read_all_enfermeiro(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.get('/enfermeiro/{enfermeiro_id}',dependencies=[Depends(JWTBearer())], response_model=schemas.EnfermeiroBase) #Response_model é realmente necessário?
-async def read_enfermeiro(enfermeiro_id: int):#-> Any
+@router.get('/enfermeiro/{atendente_id}',dependencies=[Depends(JWTBearer())], response_model=schemas.EnfermeiroBase) #Response_model é realmente necessário?
+async def read_enfermeiro(atendente_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
-        user = enfDAO.findByPK(enfermeiro_id)
+        user = enfDAO.findByPK(atendente_id)
         if(user is not None):
             nome = user.nome
             CPF = user.CPF
@@ -75,8 +75,8 @@ async def read_enfermeiro(enfermeiro_id: int):#-> Any
                 )
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
-            #description = f"ID/CPF de usuário {enfermeiro_id} não consta no sistema!",
-            content= jsonable_encoder(schemas.Error(message = f"ID/CPF de usuário {enfermeiro_id} não consta no sistema!"))
+            #description = f"ID/CPF de usuário {atendente_id} não consta no sistema!",
+            content= jsonable_encoder(schemas.Error(message = f"ID/CPF de usuário {atendente_id} não consta no sistema!"))
         )
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo

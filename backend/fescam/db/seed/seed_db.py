@@ -17,62 +17,82 @@ import fescam.db.factory.posologia_seed as posologia_seed
 from fescam.db.create_schemas import create_all
 from fescam.components.functions_helpers import create_file
 
-def dictToFileTXT(result: dict, arq_title):
-    if(bool(result)):
-        filePath = os.path.dirname(os.path.abspath(__file__)) + (
-            f'/../scripts/seed_result/{arq_title}.txt')
-        create_file(filePath=filePath, content=str(result)+'\n', writeMode='a+')
-        print(f"Informação inserida com sucesso no arquivo {filePath}")
-        return True
-    print("Falha! Informação não inserida no arquivo!")
-    return False
+def dictToFileTXT(result: str, arq_title):
+    filePath = os.path.dirname(os.path.abspath(__file__)) + (
+        f'/../scripts/seed_result/{arq_title}.txt')
+    create_file(filePath=filePath, content=result, writeMode='a+')
+    print(f"Informação inserida no arquivo {filePath}")
 
 def seed():
     #Administrador
     max = random.randint(9, 13)
     arq_title = f'ADMINISTRADOR_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
+    result = ''
     for i in range(0, max, 1):
-        dictToFileTXT(administrador_seed.factory(), arq_title)
+        print(' .')
+        result += str(administrador_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
     #Enfermeiro
     max = random.randint(9, 13)
+    result = ''
     arq_title = f'ENFERMEIRO_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
     for i in range(0, max, 1):
-        dictToFileTXT(enfermeiro_seed.factory(), arq_title)
+        print(' .')
+        result += str(enfermeiro_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
     #Estagiário
     max = random.randint(9, 13)
+    result = ''
     arq_title = f'ESTAGIARIO_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
     for i in range(0, max, 1):
-        dictToFileTXT(estagiario_seed.factory(), arq_title)
+        print(' .')
+        result += str(estagiario_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
     #Enfermeiro chefe
     max = random.randint(3, 10)
+    result = ''
     arq_title = f'ENFERMEIRO_CHEFE_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
     for i in range(0, max, 1):
-        dictToFileTXT(enfermerio_chefe_seed.factory(), arq_title)
+        print(' .')
+        result += str(enfermerio_chefe_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
     
     #Paciente
     maxPac = random.randint(8, 24)
     arq_title = f'PACIENTE_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
+    result = ''
     for i in range(0, maxPac, 1):
-        dictToFileTXT(paciente_seed.factory(), arq_title)
+        print(' .')
+        result += str(paciente_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
     
     #Medicamento
     max = random.randint(40, 60)
+    result = ''
     arq_title = f'MEDICAMENTO_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
     for i in range(0, max, 1):
-        dictToFileTXT(medicamento_seed.factory(), arq_title)
+        print(' .')
+        result += str(medicamento_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
     #Posologia
     arq_title = f'POSOLOGIA_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
+    result = ''
     for i in range(0, maxPac - 2, 1):
-        dictToFileTXT(posologia_seed.factory(), arq_title)
+        print(' .')
+        result += str(posologia_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
     #Agendamento
     arq_title = f'AGENDAMENTO_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}'
+    result = ''
     for i in range(0, maxPac - 2, 1):
-        dictToFileTXT(agendamento_seed.factory(), arq_title)
+        print(' .')
+        result += str(agendamento_seed.factory())+'\n'
+    dictToFileTXT(result, arq_title)
         
 def prepare_DB():
     create_all() #<- Cria as tabelas

@@ -48,7 +48,7 @@ async def getAllUsers(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
-async def getAllUsers(user_id: str):#-> Any
+async def getAllUsers(user_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = funcDAO.findByPK(user_id)
@@ -129,27 +129,23 @@ async def create_user(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.put("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())]) #<-- Ainda não suporta atualização de chave primária *******
+@router.put("/edicao_usuario", dependencies=[Depends(JWTBearer())]) #<-- Ainda não suporta atualização de chave primária *******
 async def update_user(
     user: schemas.FuncionarioCreated,
-    user_id: str
 ): #-> Any
     #Buscando usuario:
     is_admin = True
     if(is_admin):
-        user_updated = funcDAO.UPDATE(user.dict()).WHERE("cpf", "=", user_id).getFirst()
+        user_updated = funcDAO.update(user)
         if(user_updated is not None):
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 
                 content = jsonable_encoder(schemas.FuncionarioBase(
-
-                    tipo = user_updated.get("tipo"),
-                    CPF = user_updated.get("CPF"), 
-                    nome = user_updated.get("nome"), 
-                    updated_on = user_updated.get("updated_on"), 
-                    created_on = user_updated.get("created_on")
-
+                    CPF = user_updated.CPF, 
+                    nome = user_updated.nome, 
+                    updated_on = user_updated.updated_on, 
+                    created_on = user_updated.created_on
                 )))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
@@ -161,7 +157,7 @@ async def update_user(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.delete("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
-async def delete_user(user_id: str):
+async def delete_user(user_id: int):
     is_admin = True
     if(is_admin):
         deleted_user = funcDAO.DeleteByPK(user_id)
@@ -173,8 +169,7 @@ async def delete_user(user_id: str):
                     CPF = deleted_user.CPF, 
                     nome = deleted_user.nome, 
                     updated_on = deleted_user.updated_on, 
-                    created_on = deleted_user.created_on,
-                    tipo = deleted_user.tipo
+                    created_on = deleted_user.created_on
                 )))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,

@@ -138,10 +138,10 @@ CREATE TABLE public.enfermeiro (
 ALTER TABLE public.enfermeiro OWNER TO fescam;
 
 --
--- Name: enfermeiro_id_seq; Type: SEQUENCE; Schema: public; Owner: fescam
+-- Name: atendente_id_seq; Type: SEQUENCE; Schema: public; Owner: fescam
 --
 
-CREATE SEQUENCE public.enfermeiro_id_seq
+CREATE SEQUENCE public.atendente_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -149,13 +149,13 @@ CREATE SEQUENCE public.enfermeiro_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.enfermeiro_id_seq OWNER TO fescam;
+ALTER TABLE public.atendente_id_seq OWNER TO fescam;
 
 --
--- Name: enfermeiro_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fescam
+-- Name: atendente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fescam
 --
 
-ALTER SEQUENCE public.enfermeiro_id_seq OWNED BY public.enfermeiro.id;
+ALTER SEQUENCE public.atendente_id_seq OWNED BY public.enfermeiro.id;
 
 
 --
@@ -290,7 +290,7 @@ CREATE TABLE public.paciente (
     created_on timestamp with time zone DEFAULT now(),
     updated_on timestamp with time zone,
     dados character varying,
-    enfermeiro_id character(11) NOT NULL
+    atendente_id character(11) NOT NULL
 );
 
 
@@ -318,10 +318,10 @@ COMMENT ON COLUMN public.paciente.dados IS 'Informações a respeito do diagnós
 
 
 --
--- Name: COLUMN paciente.enfermeiro_id; Type: COMMENT; Schema: public; Owner: fescam
+-- Name: COLUMN paciente.atendente_id; Type: COMMENT; Schema: public; Owner: fescam
 --
 
-COMMENT ON COLUMN public.paciente.enfermeiro_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 
 --
@@ -387,7 +387,7 @@ ALTER TABLE ONLY public.agendamento ALTER COLUMN id SET DEFAULT nextval('public.
 -- Name: enfermeiro id; Type: DEFAULT; Schema: public; Owner: fescam
 --
 
-ALTER TABLE ONLY public.enfermeiro ALTER COLUMN id SET DEFAULT nextval('public.enfermeiro_id_seq'::regclass);
+ALTER TABLE ONLY public.enfermeiro ALTER COLUMN id SET DEFAULT nextval('public.atendente_id_seq'::regclass);
 
 
 --
@@ -569,7 +569,7 @@ COPY public.medicamento (codigo, created_on, updated_on, nome) FROM stdin;
 -- Data for Name: paciente; Type: TABLE DATA; Schema: public; Owner: fescam
 --
 
-COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, enfermeiro_id) FROM stdin;
+COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, atendente_id) FROM stdin;
 44301834634	Bruno AragÃ£o	t	non-b	1983-03-25	null_rh	Vila Emanuel Peixoto, 448\nPenha\n76461514 Teixeira / SC	08257559781	2021-05-21 03:32:00.45958+00	\N		97441463814
 18900731843	Daniel Porto	t	non-b	1958-05-04	o-	Setor Eduardo Peixoto\nNova Vista\n98373095 Mendes Verde / ES	82633428109	2021-05-21 03:32:00.725614+00	\N		40181898460
 31470298935	JoÃ£o Martins	t	non-b	1987-10-03	a-	Quadra de Lopes, 50\nAraguaia\n91712846 da Paz / DF	89074166474	2021-05-21 03:32:01.4047+00	\N		25964933951
@@ -628,10 +628,10 @@ SELECT pg_catalog.setval('public.agendamento_id_seq', 1, false);
 
 
 --
--- Name: enfermeiro_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fescam
+-- Name: atendente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fescam
 --
 
-SELECT pg_catalog.setval('public.enfermeiro_id_seq', 1, false);
+SELECT pg_catalog.setval('public.atendente_id_seq', 1, false);
 
 
 --
@@ -876,11 +876,11 @@ ALTER TABLE ONLY public.estagiario
 
 
 --
--- Name: paciente paciente_enfermeiro_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fescam
+-- Name: paciente paciente_atendente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fescam
 --
 
 ALTER TABLE ONLY public.paciente
-    ADD CONSTRAINT paciente_enfermeiro_id_fkey FOREIGN KEY (enfermeiro_id) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT paciente_atendente_id_fkey FOREIGN KEY (atendente_id) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

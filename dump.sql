@@ -167,10 +167,10 @@ ALTER TABLE public.enfermeiro OWNER TO postgres;
 
 --
 -- TOC entry 202 (class 1259 OID 253158)
--- Name: enfermeiro_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: atendente_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.enfermeiro_id_seq
+CREATE SEQUENCE public.atendente_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -178,15 +178,15 @@ CREATE SEQUENCE public.enfermeiro_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.enfermeiro_id_seq OWNER TO postgres;
+ALTER TABLE public.atendente_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3117 (class 0 OID 0)
 -- Dependencies: 202
--- Name: enfermeiro_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: atendente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.enfermeiro_id_seq OWNED BY public.enfermeiro.id;
+ALTER SEQUENCE public.atendente_id_seq OWNED BY public.enfermeiro.id;
 
 
 --
@@ -336,7 +336,7 @@ CREATE TABLE public.paciente (
     created_on timestamp with time zone DEFAULT now(),
     updated_on timestamp with time zone,
     dados character varying,
-    enfermeiro_id character(11) NOT NULL
+    atendente_id character(11) NOT NULL
 );
 
 
@@ -372,10 +372,10 @@ COMMENT ON COLUMN public.paciente.dados IS 'Informações a respeito do diagnós
 --
 -- TOC entry 3124 (class 0 OID 0)
 -- Dependencies: 200
--- Name: COLUMN paciente.enfermeiro_id; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN paciente.atendente_id; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN public.paciente.enfermeiro_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 
 --
@@ -450,7 +450,7 @@ ALTER TABLE ONLY public.agendamento ALTER COLUMN id SET DEFAULT nextval('public.
 -- Name: enfermeiro id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.enfermeiro ALTER COLUMN id SET DEFAULT nextval('public.enfermeiro_id_seq'::regclass);
+ALTER TABLE ONLY public.enfermeiro ALTER COLUMN id SET DEFAULT nextval('public.atendente_id_seq'::regclass);
 
 
 --
@@ -694,7 +694,7 @@ COPY public.medicamento (codigo, created_on, updated_on, nome) FROM stdin;
 -- Data for Name: paciente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, enfermeiro_id) FROM stdin;
+COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, atendente_id) FROM stdin;
 02295602357	Pietro Nunes	t	non-b	2002-06-08	ab-	Quadra de Rezende, 775\nVila Trinta E Um De Março\n26990535 Vieira de Farias / CE	44451182505	2021-06-09 23:47:53.1155-03	\N		92629504311
 24535573920	Vitor Gabriel Martins	t	non-b	1975-01-31	b+	Fazenda Davi Lucca da Cunha, 7\nVila Bandeirantes\n22653443 Vieira / PA	84946712174	2021-06-09 23:47:53.266508-03	\N		92629504311
 61537729784	Sr. Thales Oliveira	t	trans	1982-06-09	o-	Ladeira Moura, 156\nJardim Alvorada\n95114818 Barros do Galho / PA	56006357515	2021-06-09 23:47:53.437518-03	\N		89412446295
@@ -755,10 +755,10 @@ SELECT pg_catalog.setval('public.agendamento_id_seq', 12, true);
 --
 -- TOC entry 3129 (class 0 OID 0)
 -- Dependencies: 202
--- Name: enfermeiro_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: atendente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.enfermeiro_id_seq', 9, true);
+SELECT pg_catalog.setval('public.atendente_id_seq', 9, true);
 
 
 --
@@ -1040,11 +1040,11 @@ ALTER TABLE ONLY public.estagiario
 
 --
 -- TOC entry 2957 (class 2606 OID 253231)
--- Name: paciente paciente_enfermeiro_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: paciente paciente_atendente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.paciente
-    ADD CONSTRAINT paciente_enfermeiro_id_fkey FOREIGN KEY (enfermeiro_id) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT paciente_atendente_id_fkey FOREIGN KEY (atendente_id) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
