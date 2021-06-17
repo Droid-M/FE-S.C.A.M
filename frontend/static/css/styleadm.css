@@ -1,3 +1,33 @@
+.divroot{
+    flex-direction: column;
+}
+.cards{
+    display: flex;
+   
+    width: 950px;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 15px;
+
+}
+.card-adm{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 10px 5px 5px #ccc;
+    width: 200px;
+    height: 100px;
+    padding: 8px;
+ 
+
+}
+.card-adm h2{
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+
+
 #table-users{
     width: 950px;
     border: 1px solid rgb(219, 219, 219);
