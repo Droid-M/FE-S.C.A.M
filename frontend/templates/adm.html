@@ -15,7 +15,7 @@
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/adm.js"></script>
-    <script src="/static/js/adm.controller.js"></script>
+
 
     <link rel="stylesheet" href="{{url_for('static', path='css/adm.css')}}">
     <link
@@ -34,8 +34,37 @@
       <div id="page-content-wrapper">
         <nav id="navbar"></nav>
         <div class="divroot">
+          <div class="cards">
+            <div class="card-adm">
+              <h2>QTD ADM</h2>
+              <h3 id='qtd-adm'></h3>
+            </div>
+            <div class="card-adm">
+              <h2>QTD ENFCHE</h2>
+              <h3 id='qtd-enf-chefe'></h3>
+            </div>
+            <div class="card-adm">
+              <h2>QTD ENFE</h2>
+              <h3 id='qtd-enfe'></h3>
+            </div>
+            <div class="card-adm">
+              <h2>QTD EST</h2>
+              <h3 id='qtd-est'></h3>
+            </div>
+          </div>
           <div id="table-users">
             <h3>Usuários Ativos</h3>
+            
+            <input id='txtBusca'>
+            <button type="submmit" onclick ="get_user()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-send"></span>
+              Pesquisar
+            </button>
+            <button type="submmit" onclick = "get_all_users()" class="btn btn-primary">
+              <span class="glyphicon glyphicon-send"></span>
+              Atualizar
+            </button>
+            
             <table class="table" id="tb_user">
               <thead>
                 <tr>
@@ -51,16 +80,15 @@
           </div>
         </div>
 
-        <button type="button" onclick = "get_all_users()" class="btn btn-primary">
-          <span class="glyphicon glyphicon-send"></span>
-          Atualizar
-        </button>
+       
       </div>
     </div>
 
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script src="/static/js/adm.controller.js"></script>
+    <script src="../static/js/cadastro.user.js"></script>
+    
 
     <!--<script src="/static/js/main.js"></script>s-->
   </body>
