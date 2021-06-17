@@ -48,7 +48,7 @@ async def getAllUsers(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
 @router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
-async def getAllUsers(user_id: int):#-> Any
+async def getAllUsers(user_id: str):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = funcDAO.findByPK(user_id)
@@ -143,11 +143,13 @@ async def update_user(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 
                 content = jsonable_encoder(schemas.FuncionarioBase(
+
                     tipo = user_updated.get("tipo"),
                     CPF = user_updated.get("CPF"), 
                     nome = user_updated.get("nome"), 
                     updated_on = user_updated.get("updated_on"), 
                     created_on = user_updated.get("created_on")
+
                 )))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
@@ -171,7 +173,8 @@ async def delete_user(user_id: str):
                     CPF = deleted_user.CPF, 
                     nome = deleted_user.nome, 
                     updated_on = deleted_user.updated_on, 
-                    created_on = deleted_user.created_on
+                    created_on = deleted_user.created_on,
+                    tipo = deleted_user.tipo
                 )))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
