@@ -15,9 +15,8 @@ function update_user(index){
     let user='';
 
     if(usuarios.length !=0){
-       for(let i=0;i<=index;i++){
+
            user = usuarios[i];
-       }
     }
 
     location.href=`/edicao-usuario/id=${user.CPF}`;

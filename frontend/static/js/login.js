@@ -39,11 +39,6 @@ function logar() {
         '<div class="alert alert-danger alert-dismissible">' + msg + "</div>"
       );
 
-      // if(error.response.status == 422){
-      //   console.error(error.response.status,error.response.data.msg);
-      // }else if(error.response.status == 406){
-      //   console.error(error.response.status,error.response.data.msg);
-      // }
     });
 
 }
