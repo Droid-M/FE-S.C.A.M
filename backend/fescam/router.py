@@ -88,9 +88,17 @@ async def cadastrarFarmaco(request: Request):
 async def cadastrarPaciente(request: Request):
     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
 
+@app.get("/cadastrar-paciente/id={id_paciente}", response_class=HTMLResponse)
+async def cadastrarPaciente(request: Request):
+    return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
+
 @app.get("/cadastro-paciente", response_class=HTMLResponse)
 async def cadastroPaciente(request: Request):
     return templates.TemplateResponse("cadastroPaciente.html",  {"request": request})
+
+@app.get("/cadastro-paciente/id={id_paciente}", response_class=HTMLResponse)
+async def cadastroPaciente(request: Request):
+    return templates.TemplateResponse("cadastroPaciente.html",  {"request": request})   
 
 @app.get("/cadastro-usuario", response_class=HTMLResponse)
 async def cadastroUsuario(request: Request):
