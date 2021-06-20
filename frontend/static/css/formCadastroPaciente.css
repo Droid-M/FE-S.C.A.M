@@ -1,0 +1,91 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 1000px;
+    height: 100%;
+    margin: 50px 150px;
+    border: 1px solid rgb(187, 186, 186);
+    padding: 15px;
+    box-shadow: 0 0 1em rgb(151, 150, 150);
+    border-radius: 8px;
+
+}
+.formCad{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(226, 223, 223);
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0 1em rgb(151, 150, 150);
+    border-radius: 8px;
+
+}
+h3{
+    font-size: 18px;
+}
+
+.formCad form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-group{
+    margin-right: 10px;
+}
+
+.form-group label{
+    color:black
+}
+#bloco1{
+
+    margin-bottom: 30px;
+    padding: 10px;
+    width: 100%;
+}
+
+#nome_sobre {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#nome_sobre input{
+    width: 400px;
+}
+
+#cpf-genero{
+    display: flex;
+}
+
+#cpf-genero input{
+    width: 200px ;
+}
+
+
+
+#bloco2{
+    display:flex;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+#bloco2 input{
+    margin-right: 8px;
+    width: 400px;
+}
+#bloco3{
+    display: flex;
+}
+
+#botoes{
+    display: flex;
+    justify-content: right;
+}
+
+#botoes button{
+    margin-right: 10px;
+}
