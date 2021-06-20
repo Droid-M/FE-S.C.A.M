@@ -1,70 +1,48 @@
 <html lang="pt-br">
-
+    {% extends "base.html" %}
+    {% extends "baseEnfChefe.html" %}
 <head>
-    <title>FE-SCAM</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block head %}
+    {{ super() }}
+    {% endblock %}
 
-    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', path='js/enfchefe.js') }}"></script>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-
+    {% block title %}{% endblock %}
 
 </head>
 
 <body>
+    {% block mainenfchefe %}
+    {{ super() }}
+    {% endblock %}
 
-    <div class="d-flex" id="wrapper">
-
-        <div id="sidebar-wrapper"></div>
-        <div id="page-content-wrapper">
-            <nav id="navbar"></nav>
-            <div class="container-fluid">
-
-
-
-                <form action="/novo-farmaco" method="POST">
-                    
-                    <div class= "form-group">
-                        <label for="nome-medicamento">Nome do medicamento:</label>
-                        <input type="text" id="nome-medicamento" />
-                    </div>
-                    <div class= "form-group">
-                        <label for="quantidade">Quantidade de uso:</label>
-                        <input type="text" id="quantidade" />
-                    </div>
-                    <div class= "form-group">
-                        <label for="aplicacao">Orientação de aplicação:</label>
-                        <input type="text" id="aplicacao" />
-                    </div>
-                    <div class= "form-group">
-                        <label for="reacao">Possíveis reações:</label>
-                        <input type="text" id="reacao" />
-                    </div>
-                    <button type="button" onclick="salvarFarmaco()" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-send"></span>
-                        Salvar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-send"></span>
-                        Limpar tudo
-                    </button>
-                </form>
-
-
-            </div>
+        
+    <form action="/novo-farmaco" method="POST">
+                        
+        <div class= "form-group">
+            <label for="nome-medicamento">Nome do medicamento:</label>
+            <input type="text" id="nome-medicamento" />
         </div>
-
-    </div>
-
-
-
+        <div class= "form-group">
+            <label for="quantidade">Quantidade de uso:</label>
+            <input type="text" id="quantidade" />
+        </div>
+        <div class= "form-group">
+            <label for="aplicacao">Orientação de aplicação:</label>
+            <input type="text" id="aplicacao" />
+        </div>
+        <div class= "form-group">
+            <label for="reacao">Possíveis reações:</label>
+            <input type="text" id="reacao" />
+        </div>
+        <button type="button" onclick="salvarFarmaco()" class="btn btn-primary">
+            <span class="glyphicon glyphicon-send"></span>
+            Salvar
+        </button>
+        <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-send"></span>
+            Limpar tudo
+        </button>
+    </form>
 </body>
 
 </html>

@@ -1,21 +1,20 @@
 <html lang="pt-br">
-
+    {% extends "base.html" %}
+    {% extends "baseEnfChefe.html" %}
 <head>
-    <title>FE-SCAM</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', path='js/enfchefe.js') }}"></script>
-    <script src="{{ url_for('static', path='js/jquery.mask.min.js') }}" type="text/javascript"></script>
+    
+    {% block head %}
+    {{ super() }}
+    {% endblock %}
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/formCadastroPaciente.css') }}">
+
+    {% block title %}{% endblock %}
+
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -29,8 +28,12 @@
 </head>
 
 <body>
+    {% block mainenfchefe %}
+    {{ super() }}
+    {% endblock %}
 
-    <div class="d-flex" id="wrapper">
+        
+
 
         <div id="sidebar-wrapper"></div>
         <div id="page-content-wrapper">
@@ -127,10 +130,28 @@
                 </div>
 
 
-            </div>
-        </div>
-
+    <div class="form-group">   
+        <label>Tipo sanguíneo:</label>
+        <select name="Sangue" id="sangue">
+            <option value="o+">o+</option>
+            <option value="o-">o-</option>
+            <option value="a+">a+</option>
+            <option value="a-">a-</option>
+            <option value="b+">b+</option>
+            <option value="b-">b-</option>
+            <option value="ab+">ab+</option>
+            <option value="ab-">ab-</option>
+            </select>
     </div>
+
+    
+    
+    <button type="button" class="btn btn-primary" onclick="cadastrarPaciente()">
+        <span class="glyphicon glyphicon-send"></span>
+        Salvar
+    </button>
+</form>
+
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../static/js/cadastro.paciente.js"></script>
