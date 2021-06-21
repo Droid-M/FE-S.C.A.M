@@ -138,7 +138,7 @@ async def listaEnfermeiro(request: Request):
 
 @app.get("/listar-paciente", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
-    return templates.TemplateResponse("listarPaciente.html",  {"request": request})
+    return templates.TemplateResponse("listarPaciente2.html",  {"request": request})
 
 @app.get("/navbar", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
