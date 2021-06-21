@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    {% extends "base.html" %}
 <head>
-
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block title %}{% endblock %}
 </head>
 <body>
     {% block mainenfchefe %}
+    <header>
     <nav class="navbar navbar-light bg-light shadow">
         <div class="container-fluid">
 
@@ -42,7 +47,7 @@
 
         </div>
       </nav>
-
+    </header>
     {% endblock %}
 </body>
 </html>
