@@ -1,24 +1,24 @@
 <html lang="pt-br">
 
+{% extends "baseEnfChefe.html" %}
 <head>
-    <title>FE-SCAM</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
 
-    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', path='js/enfchefe.js') }}"></script>
+  {% block title %}{% endblock %}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-
+  <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', path='js/enfchefe.js') }}"></script>
 
 </head>
 
 <body>
+  {% block mainenfchefe %}
+  {{ super() }}
+  {% endblock %}
 
     <div class="d-flex" id="wrapper">
 
@@ -26,9 +26,6 @@
         <div id="page-content-wrapper">
             <nav id="navbar"></nav>
             <div class="container-fluid">
-
-
-
                 <table class="table table-dark">
                     <thead>
                       <tr>
@@ -55,15 +52,9 @@
                     <span class="glyphicon glyphicon-send"></span>
                     Atualizar
                 </button>
-
-
             </div>
         </div>
-
     </div>
-
-
-
 </body>
 
 </html>
