@@ -1,26 +1,11 @@
-.container-fluid{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 0 1em rgb(151, 150, 150);
-    width: 400px;
-    height: 450px;
-    background-color: #f9f7f7ea;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 10px;
-}
-#form_box{
+
+.container-cadastro{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    margin-top: 80px;
-    border: 1px solid rgb(214, 212, 212);
-   
-    box-shadow: 5px 10px #e6e5e5;
-    border-radius: 10px;
-   
+    border:1px solid black;
+    width: 900px;
+    margin-left: 50px;
 }
 
 .form{

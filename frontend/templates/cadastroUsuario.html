@@ -4,8 +4,9 @@
 <head>
     {% block head %}
     {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', path='css/cadastroUser.css') }}">
     {% endblock %}
-
+    
     {% block title %}{% endblock %}
 </head>
 <body>
@@ -13,7 +14,7 @@
     {% block mainadm %}
     {{ super() }}
 
-    <div>
+    <div class="container-cadastro">
       <form class= "form" id='cad-user'>
   
         <div class="form-group row">
