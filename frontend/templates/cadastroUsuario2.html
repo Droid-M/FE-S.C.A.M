@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-{% extends "base.html" %}
 {% extends "baseAdm.html" %}
 <head>
     {% block head %}
@@ -13,10 +12,10 @@
 
     {% block mainadm %}
     {{ super() }}
-    {% endblock %}
 
-    <form class= "form" id='cad-user'>
-
+    <div>
+      <form class= "form" id='cad-user'>
+  
         <div class="form-group row">
           <label f class="col-sm-2 col-form-label">Nome</label>
           <div class="col-sm-10">
@@ -75,6 +74,9 @@
           </div>
         </div>
       </form>
-      
+    </div>
+    
+    {% endblock %}
+    
 </body>
 </html>
