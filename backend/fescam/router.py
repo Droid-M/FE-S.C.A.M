@@ -84,21 +84,29 @@ async def alarme(request: Request):
 async def cadastrarFarmaco(request: Request):
     return templates.TemplateResponse("cadastrarFarmaco.html",  {"request": request})
 
-@app.get("/cadastrar-paciente", response_class=HTMLResponse)
-async def cadastrarPaciente(request: Request):
-    return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
+# @app.get("/cadastrar-paciente", response_class=HTMLResponse)
+# async def cadastrarPaciente(request: Request):
+#     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
 
-@app.get("/cadastrar-paciente/id={id_paciente}", response_class=HTMLResponse)
-async def cadastrarPaciente(request: Request):
-    return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
+# @app.get("/cadastrar-paciente/id={id_paciente}", response_class=HTMLResponse)
+# async def cadastrarPaciente(request: Request):
+#     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
 
 @app.get("/cadastro-paciente", response_class=HTMLResponse)
 async def cadastroPaciente(request: Request):
-    return templates.TemplateResponse("cadastroPaciente.html",  {"request": request})
+    return templates.TemplateResponse("cadastro.Paciente.EnfChefe.html",  {"request": request})
 
 @app.get("/cadastro-paciente/id={id_paciente}", response_class=HTMLResponse)
 async def cadastroPaciente(request: Request):
-    return templates.TemplateResponse("cadastroPaciente.html",  {"request": request})   
+    return templates.TemplateResponse("cadastro.Paciente.EnfChefe.html",  {"request": request}) 
+
+@app.get("/enf/cadastro-paciente", response_class=HTMLResponse)
+async def cadastroPaciente(request: Request):
+    return templates.TemplateResponse("cadastro.Paciente.Enf.html",  {"request": request})
+
+@app.get("/enf/cadastro-paciente/id={id_paciente}", response_class=HTMLResponse)
+async def cadastroPaciente(request: Request):
+    return templates.TemplateResponse("cadastro.Paciente.Enf.html",  {"request": request})     
 
 @app.get("/cadastro-usuario", response_class=HTMLResponse)
 async def cadastroUsuario(request: Request):
@@ -136,22 +144,12 @@ async def gerarRelatorio(request: Request):
 async def listaEnfermeiro(request: Request):
     return templates.TemplateResponse("listarEnfermeiros.html",  {"request": request})
 
-@app.get("/listar-paciente", response_class=HTMLResponse)
+@app.get("/enf/listar-paciente", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
-    return templates.TemplateResponse("listarPaciente2.html",  {"request": request})
+    return templates.TemplateResponse("lista.Paciente.Enf.html",  {"request": request})
 
-@app.get("/navbar", response_class=HTMLResponse)
+@app.get("/enf-chefe/listar-paciente", response_class=HTMLResponse)
 async def listaPaciente(request: Request):
-    return templates.TemplateResponse("navbar.html",  {"request": request})
+    return templates.TemplateResponse("lista.Paciente.EnfChefe.html",  {"request": request})
+
     
-@app.get("/sidebaradm", response_class=HTMLResponse)
-async def listaPaciente(request: Request):
-    return templates.TemplateResponse("sidebarAdm.html",  {"request": request})
-
-@app.get("/sidebarenfchefe", response_class=HTMLResponse)
-async def listaPaciente(request: Request):
-    return templates.TemplateResponse("sidebarEnfChefe.html",  {"request": request})
-
-@app.get("/sidebarenf", response_class=HTMLResponse)
-async def listaPaciente(request: Request):
-    return templates.TemplateResponse("sidebarEnf.html",  {"request": request})
