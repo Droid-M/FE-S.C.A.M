@@ -16,7 +16,7 @@ function update_user(index){
 
     if(usuarios.length !=0){
 
-           user = usuarios[i];
+           user = usuarios[index];
     }
 
     location.href=`/edicao-usuario/id=${user.CPF}`;
