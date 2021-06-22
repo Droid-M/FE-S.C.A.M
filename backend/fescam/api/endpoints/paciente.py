@@ -102,7 +102,7 @@ async def update_patient(
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 
-                content = jsonable_encoder(schemas.PacienteBase(**pat_updated.typesAcceptables)))
+                content = jsonable_encoder(schemas.PacienteBase(**pat_updated)))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
             content= jsonable_encoder(schemas.Error(message = f"Impossível atualizar um paciente não cadastrado! CPF:{cpf}")
