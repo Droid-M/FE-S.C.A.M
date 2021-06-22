@@ -1,5 +1,4 @@
 <html lang="pt-br">
-    {% extends "base.html" %}
     {% extends "baseEnfChefe.html" %}
 <head>
     {% block head %}
@@ -13,7 +12,7 @@
 <body>
     {% block mainenfchefe %}
     {{ super() }}
-    {% endblock %}
+  
 
         
     <form action="/novo-farmaco" method="POST">
@@ -44,5 +43,6 @@
         </button>
     </form>
 </body>
+{% endblock %}
 
 </html>
