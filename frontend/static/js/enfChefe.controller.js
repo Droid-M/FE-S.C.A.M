@@ -11,7 +11,7 @@ function update_paciente(id_paci){
     if(pacientes.length>0){
         paci = pacientes[id_paci];
     }
-    location.href=`/cadastrar-paciente/id=${paci.CPF}`;
+    location.href=`/cadastro-paciente/id=${paci.CPF}`;
 
 }
 
