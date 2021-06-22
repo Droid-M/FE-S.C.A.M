@@ -1,6 +1,6 @@
 <html lang="pt-br">
 
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
 
     <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}" 
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
     {% extends "baseEnf.html" %}
 <head>
     {% block head %}
@@ -21,7 +21,8 @@
 </head>
 
 <body>
-
+    {% block mainenf %}
+        {{ super() }}
     <div class="d-flex" id="wrapper">
 
         <div id="sidebar-wrapper"></div>
@@ -35,5 +36,5 @@
         </div>
     </div>
 </body>
-
+    {% endblock %}
 </html>

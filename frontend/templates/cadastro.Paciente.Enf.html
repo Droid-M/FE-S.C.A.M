@@ -1,0 +1,131 @@
+<html lang="pt-br">
+    {% extends "baseEnf.html" %}
+<head>
+    {% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/jquery.mask.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/formCadastroPaciente.css') }}">
+    
+    <script type="text/javascript">
+        $(document).ready(function($){
+          $('#cpf').mask('000.000.000-00');
+        })
+       $(document).ready(function($){
+           $('#dataNascimento').mask('00/00/0000');
+       })
+    </script>
+    {% endblock %}
+
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+    {% block mainenf %}
+    {{ super() }}
+    <div id="page-content-wrapper">
+        <div class="container">
+            <h3>Dados do Paciente</h3>
+            <div class="formCad">
+
+                <form>
+                    <h3>Dados Pessoais</h3>
+                    <div id='bloco1'>
+                        <div id="nome_sobre">
+
+                            <div class="form-group">
+                                <label>Nome:</label>
+                                <input type="text" name="nome" id="nome" placeholder="Nome do paciente" />
+                            </div>
+                
+                            <div class="form-group">
+                                <label>Sobrenome:</label>
+                                <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome do paciente" />
+                            </div>
+                        </div>
+                        <div id="cpf-genero">
+
+                            <div class="form-group">
+                                <label>Gênero:</label>
+                                <input type="text" name="genero" id="genero" placeholder="gênero do paciente" />
+                            </div>
+                            <div class="form-group">
+                                <label>Sexo:</label>
+                                <input type="text" name="sexo" id="sexo" placeholder="sexo biologico" />
+                            </div>
+                            <div class="form-group">   
+                                <label>CPF:</label>
+                                <input type="text" name="cpf"   id="cpf" placeholder="00000000000"/>
+                                
+                            </div>
+                            
+                            <div class="form-group">   
+                                <label>Data Nascimento:</label>
+                                <input type="text" name="Data Nascimento" id="dataNascimento" placeholder=""  />
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Endereço</h3>
+                    <div id="bloco2">
+                        <div class="form-group">   
+                            <label>Endereço</label>
+                            <input type="text" name="endereco" id="endereco" placeholder="Rua,nº,Bairro,Cidade" />
+                        </div>
+                        <div class="form-group">   
+                            <label>Telefone</label>
+                            <input type="text" name="telefone" id="telefone" placeholder="DD NUMERO" />
+                        </div>
+                        
+                    </div>
+                    <h3>Diagnostico</h3>
+                    <div id="bloco3">
+                        <div class="form-group">   
+                            <label>diagnostico</label>
+                            <input type="text" name="dados" id="dados" placeholder="Diagnostico" />
+                        </div>
+                        <div class="form-group">   
+                            <label>Tipo sanguíneo:</label>
+                            <select name="Sangue" id="sangue">
+                                <option value="o+">o+</option>
+                                <option value="o-">o-</option>
+                                <option value="a+">a+</option>
+                                <option value="a-">a-</option>
+                                <option value="b+">b+</option>
+                                <option value="b-">b-</option>
+                                <option value="ab+">ab+</option>
+                                <option value="ab-">ab-</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div id="botoes">
+                        <div class="form-group">   
+                            <label>Responsavel</label>
+                            <input type="text" name="responsavel" id="responsavel" placeholder="responsavel" />
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="cadastro_paciente()" id='btnCadastrar'>
+                            <span class="glyphicon glyphicon-send" ></span>
+                            Cadastrar
+                        </button>
+
+                        <button type="button" class="btn btn-primary" onclick="cadastrarPaciente()">
+                            <span class="glyphicon glyphicon-send"></span>
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+</form>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../static/js/cadastro.paciente.js"></script>
+<script src="../static/js/enfChefe.controller.js"></script>
+
+</body>
+    {% endblock %}
+    
+
+
+</html>
+
