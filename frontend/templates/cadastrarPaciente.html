@@ -4,39 +4,41 @@
     
     {% block head %}
     {{ super() }}
-    {% endblock %}
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <script src="{{ url_for('static', path='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/jquery.mask.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', path='css/formCadastroPaciente.css') }}">
-
-    {% block title %}{% endblock %}
-
-
+    
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function($){
           $('#cpf').mask('000.000.000-00');
         })
-       $(document).ready(function(){
+       $(document).ready(function($){
            $('#dataNascimento').mask('00/00/0000');
        })
     </script>
+  
+    {% endblock %}
 
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}"> -->
+   
+
+    {% block title %}{% endblock %}
+
+           
+    
 </head>
 
 <body>
     {% block mainenfchefe %}
     {{ super() }}
-    {% endblock %}
 
         
+   
 
-
-        <div id="sidebar-wrapper"></div>
         <div id="page-content-wrapper">
-            <nav id="navbar"></nav>
             <div class="container">
                 <h3>Dados do Paciente</h3>
                 <div class="formCad">
@@ -155,8 +157,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../static/js/cadastro.paciente.js"></script>
     <script src="../static/js/enfChefe.controller.js"></script>
-      
-
+   
 </body>
+{% endblock %}
 
 </html>
