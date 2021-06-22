@@ -11,44 +11,36 @@
 <body>
     {% block mainenf %}
     {{ super() }}
- 
-
-    <div class="d-flex" id="wrapper">
-
-        <div id="sidebar-wrapper"></div>
-        <div id="page-content-wrapper">
-            <nav id="navbar"></nav>
-            <div class="container-fluid">
-                <table class="table table-dark">
-                    <thead>
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Data de Internação</th>
-                        <th scope="col">Prontuário</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <!--fazer função para pegar o log com essa base 
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Fulano</td>
-                        <td>10/10/2021</td>
-                        <td>pop up de visualização</td>
-                      </tr>-->
-                     
-                    </tbody>
-                    
-                  </table>
-
-                  <button type="button" onclick="relistarPaciente()" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-send"></span>
-                    Atualizar
-                </button>
-            </div>
-        </div>
+    <div>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data de Internação</th>
+            <th scope="col">Prontuário</th>
+          </tr>
+        </thead>
+        <tbody>
+            <!--fazer função para pegar o log com essa base 
+          <tr>
+            <th scope="row">1</th>
+            <td>Fulano</td>
+            <td>10/10/2021</td>
+            <td>pop up de visualização</td>
+          </tr>-->
+         
+        </tbody>
+        
+      </table>
+      
+      <button type="button" onclick="relistarPaciente()" class="btn btn-primary">
+        <span class="glyphicon glyphicon-send"></span>
+        Atualizar
+      </button>
     </div>
-    
+    {% endblock %}   
 </body>
-{% endblock %}
+
 </html>
+
