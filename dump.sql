@@ -336,7 +336,7 @@ CREATE TABLE public.paciente (
     created_on timestamp with time zone DEFAULT now(),
     updated_on timestamp with time zone,
     dados character varying,
-    atendente_id character(11) NOT NULL
+    nome_atendente character(11) NOT NULL
 );
 
 
@@ -372,10 +372,10 @@ COMMENT ON COLUMN public.paciente.dados IS 'Informações a respeito do diagnós
 --
 -- TOC entry 3124 (class 0 OID 0)
 -- Dependencies: 200
--- Name: COLUMN paciente.atendente_id; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN paciente.nome_atendente; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN public.paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.paciente.nome_atendente IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 
 --
@@ -694,7 +694,7 @@ COPY public.medicamento (codigo, created_on, updated_on, nome) FROM stdin;
 -- Data for Name: paciente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, atendente_id) FROM stdin;
+COPY public.paciente (cpf, nome, sexo, genero, data_nascimento, tipo_sangue, endereco, telefone, created_on, updated_on, dados, nome_atendente) FROM stdin;
 02295602357	Pietro Nunes	t	non-b	2002-06-08	ab-	Quadra de Rezende, 775\nVila Trinta E Um De Março\n26990535 Vieira de Farias / CE	44451182505	2021-06-09 23:47:53.1155-03	\N		92629504311
 24535573920	Vitor Gabriel Martins	t	non-b	1975-01-31	b+	Fazenda Davi Lucca da Cunha, 7\nVila Bandeirantes\n22653443 Vieira / PA	84946712174	2021-06-09 23:47:53.266508-03	\N		92629504311
 61537729784	Sr. Thales Oliveira	t	trans	1982-06-09	o-	Ladeira Moura, 156\nJardim Alvorada\n95114818 Barros do Galho / PA	56006357515	2021-06-09 23:47:53.437518-03	\N		89412446295
@@ -1044,7 +1044,7 @@ ALTER TABLE ONLY public.estagiario
 --
 
 ALTER TABLE ONLY public.paciente
-    ADD CONSTRAINT paciente_atendente_id_fkey FOREIGN KEY (atendente_id) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT paciente_atendente_id_fkey FOREIGN KEY (nome_atendente) REFERENCES public.funcionario(cpf) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

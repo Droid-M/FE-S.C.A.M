@@ -41,7 +41,7 @@ class childBase:
             return True if (result is not None) and len(result) > 0 else False
         return False
         
-    def findByPK(self, primaryKeyValue):
+    def findByFK(self, primaryKeyValue):
         #primaryKeyValue = ForeignKey aqui **
         #Essa classe:
         foreignKey = self.__child.foreignKey[self.__parent.tableName]
@@ -56,7 +56,7 @@ class childBase:
             "foreignKey":parentPK #<--Tá correto, a PK desta classe é a FK de outra
         }).ON(TN_period_FK, "=", f"'{primaryKeyValue}'").AND(TN_period_FK, "=", PTN_period_PPK).getFirst()
     
-    def DeleteByPK(self, primaryKeyValue): #Possivelmente vai ser inutilizado kk
+    def DeleteByFK(self, primaryKeyValue): #Possivelmente vai ser inutilizado kk
         #primaryKeyValue = ForeignKey aqui **
         #Essa classe:
         foreignKey = self.__child.foreignKey[self.__parent.tableName]
@@ -108,7 +108,7 @@ class childBase:
             return None
         
         instancePKValue = dictValuesToUpd[self.__parent.primaryKey]
-        result = self.findByPK(instancePKValue)
+        result = self.findByFK(instancePKValue)
         if(result is not None):
             #primaryKeyValue = ForeignKey aqui **
             

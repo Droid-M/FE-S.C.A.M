@@ -1,3 +1,6 @@
+from fescam.model.Medicamento import Medicamento
+from fescam.model.Paciente import Paciente
+
 class Posologia:
     #Inicializando variaveis para evitar futuros erros (talvez seja desnecessário no futuro) ***:
     
@@ -44,8 +47,8 @@ class Posologia:
     @property
     def foreignKey(self):
         return {
-            "Medicamento" : "medicamento",
-            "Paciente" : "paciente",
+            Medicamento().tableName : "medicamento",
+            Paciente().tableName : "paciente",
         }
      
     @property

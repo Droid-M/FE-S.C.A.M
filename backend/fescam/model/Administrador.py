@@ -1,3 +1,5 @@
+from fescam.model.Funcionario import Funcionario
+
 class Administrador:
     #Inicializando variaveis para evitar futuros erros (talvez seja desnecessário no futuro) ***:
 
@@ -13,7 +15,7 @@ class Administrador:
 
      @property
      def foreignKey(self):
-          return {"Funcionario" : "func_id"}
+          return {Funcionario().tableName : "func_id"}
 
      @property
      def typesAcceptables(self):

@@ -74,7 +74,7 @@ if(state && id!=undefined){
         tipo_sangue: tipoSangue,
         endereco: endereco,
         telefone: telefone,
-        atendente_id: id_func,
+        nome_atendente: id_func,
         dados: diagnostico
     }
     axios({
@@ -130,7 +130,7 @@ function update_paci(){
             let telefone = document.getElementById('telefone').value = paci.telefone;
         
             let diagnostico = document.getElementById('dados').value = paci.dados;
-            let id_func = document.getElementById('responsavel').value = paci.atendente_id;
+            let id_func = document.getElementById('responsavel').value = paci.nome_atendente;
         }).catch((error)=>{
             console.error(error);
         })

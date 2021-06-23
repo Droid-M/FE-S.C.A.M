@@ -1,36 +1,15 @@
-from os import path
-import sys
-import bcrypt
-sys.path.append(path.abspath('.'))
-
 from typing import Any, List, NoReturn
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
-
 from fescam.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
 from fescam import DAO, model, schemas
 from fescam.api.bearer import JWTBearer
+import bcrypt
 
-router = APIRouter()
-
-admDAO = DAO.AdministradorDAO()
-funcDAO = DAO.FuncionarioDAO()
-estDAO = DAO.EstagiarioDAO()
-enfDAO = DAO.EnfermeiroDAO()
-enfCFDAO = DAO.EnfermeiroChefeDAO()
-
-@router.get(
-    "/lista_usuario", 
-    dependencies=[Depends(JWTBearer())],
-    response_model=List[schemas.FuncionarioBase]
-    ) 
-async def getAllUsers(
-        page: int = 0, per_page: int = -1,
-        current_user: schemas.FuncionarioBase = None #usar alguma lógica pra pegar o usuário atual: Depends(deps.get_current_active_user)
-        ): #-> Any
+def getAllUsers(page: int = 0, per_page: int = -1): #-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         if(per_page > -1): #Se tem paginação definida:
@@ -46,9 +25,8 @@ async def getAllUsers(
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
-
-@router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
-async def getAllUsers(user_id: str):#-> Any
+    
+def getUser(user_id: str):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         user = funcDAO.findByPK(user_id)
@@ -78,15 +56,8 @@ async def getAllUsers(user_id: str):#-> Any
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
-
-@router.post(
-    "/cadastro_usuario", 
-    dependencies=[Depends(JWTBearer())],
-    response_model=schemas.FuncionarioBase
-    )
-async def create_user(
-    user: schemas.FuncionarioCreated,
-    ): # -> Any
+    
+def create_user(user: schemas.FuncionarioCreated): # -> Any
     user_type = user.tipo
     is_admin = True
     if(is_admin):
@@ -128,13 +99,11 @@ async def create_user(
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
-
-@router.put("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())]) #<-- Ainda não suporta atualização de chave primária *******
-async def update_user(
+    
+def update_user(
     user: schemas.FuncionarioCreated,
     user_id: str
 ): #-> Any
-    #Buscando usuario:
     is_admin = True
     if(is_admin):
         user_updated = funcDAO.UPDATE(user.dict()).WHERE("cpf", "=", user_id).getFirst()
@@ -159,9 +128,8 @@ async def update_user(
     else:
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
-
-@router.delete("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
-async def delete_user(user_id: str):
+    
+def delete_user(user_id: str):
     is_admin = True
     if(is_admin):
         deleted_user = funcDAO.DeleteByPK(user_id)

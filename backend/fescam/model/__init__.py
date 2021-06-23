@@ -7,3 +7,6 @@ from .Funcionario import Funcionario
 from .Medicamento import Medicamento
 from .Paciente import Paciente
 from .Posologia import Posologia
+from .DadoPaciente import DadoPacinte
+from .log_linha import Log_linha
+from .Log import Log
