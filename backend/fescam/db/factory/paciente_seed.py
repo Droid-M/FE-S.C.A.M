@@ -13,7 +13,7 @@ from fescam.DAO.PacienteDAO import PacienteDAO
 from fescam.DAO.EnfermeiroDAO import EnfermeiroDAO
 from fescam.DAO.EnfermeiroChefeDAO import EnfermeiroChefeDAO
 from fescam.DAO.EstagiarioDAO import EstagiarioDAO
-from fescam.schemas.paciente import PacienteStoreDB, tipoSangue as TipoSangue, genero as Genero
+from fescam.schemas.paciente import PacienteStoreDB, tipoSangue as TipoSangue, genero as Genero, tipoSexo
 import random
 
 fake = Faker(['pt_BR'])
@@ -33,7 +33,7 @@ def factory():
     
     CPF = cpfNumber_int_to_str(fake.pyint(min_value=0, max_value=99999999999, step=1))
     nome = fake.name()
-    sexo = fake.boolean(chance_of_getting_true=50)
+    sexo = fake.enum(tipoSexo)
     genero = fake.enum(Genero)
     data_nascimento = fake.date_of_birth(tzinfo=None, minimum_age=16, maximum_age=99)
     tipo_sangue = fake.enum(TipoSangue)

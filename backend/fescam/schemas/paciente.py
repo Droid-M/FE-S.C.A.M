@@ -22,11 +22,15 @@ class genero(Enum):
     cis = 'cis'
     trans = 'trans'
     nonB = 'non-b'
+    
+class tipoSexo(Enum):
+    MASCULINO = 'MASCULINO'
+    FEMININO = 'FEMININO'
 
 class PacienteBase(BaseModel):
     CPF: constr(min_length=11, max_length=11)
     nome: str
-    sexo: Optional[bool]
+    sexo: Optional[tipoSexo]
     genero: Optional[genero]
     data_nascimento: Optional[date]
     tipo_sangue: Optional[tipoSangue]
@@ -44,7 +48,7 @@ class PacienteBase(BaseModel):
 class PacienteCreated(BaseModel):
     CPF: constr(min_length=11, max_length=11)
     nome: str
-    sexo: Optional[bool]
+    sexo: Optional[tipoSexo]
     genero: Optional[genero]
     data_nascimento: Optional[date]
     tipo_sangue: Optional[tipoSangue]
@@ -64,7 +68,7 @@ class PacienteDadosUpload(PacienteBase):
 class PacienteStoreDB(BaseModel):
     CPF: constr(min_length=11, max_length=11)
     nome: str
-    sexo: Optional[bool]
+    sexo: Optional[tipoSexo]
     genero: Optional[genero]
     data_nascimento: Optional[date]
     tipo_sangue: Optional[tipoSangue]

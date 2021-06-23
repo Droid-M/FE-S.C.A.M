@@ -27,10 +27,15 @@ CREATE TYPE public.tipoFuncionario AS ENUM (
   'ENFERMEIRO_CHEFE'
 );
 
+CREATE TYPE public.tipoSexo AS ENUM (
+  'MASCULINO',
+  'FEMININO'
+);
+
 CREATE TABLE IF NOT EXISTS public.Paciente (
   CPF char(11) PRIMARY KEY,
   nome varchar NOT NULL,
-  sexo boolean DEFAULT null,
+  sexo tipoSexo DEFAULT null,
   genero tipoGenero DEFAULT null,
   data_nascimento date DEFAULT null,
   tipo_sangue tipoSangue DEFAULT null,
@@ -98,7 +103,7 @@ CREATE TABLE IF NOT EXISTS public.Medicamento (
 
 CREATE TABLE IF NOT EXISTS public.Posologia (
   id bigserial PRIMARY KEY,
-  medicamento bigint,
+  medicamento varchar,
   paciente char(11) NOT NULL,
   quantidade float NOT NULL,
   created_on timestamptz DEFAULT (now()),
