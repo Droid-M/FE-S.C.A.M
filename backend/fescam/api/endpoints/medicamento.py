@@ -20,7 +20,7 @@ async def getAllData(page: int = 0, per_page: int = -1):
 @router.get("/medicamento/{codigo}", 
             dependencies=[Depends(JWTBearer())], 
             response_model=schemas.MedicamentoBase)
-async def getData(codigo: int):
+async def getData(codigo: str):
     return getMedicament(codigo)
 
 @router.post(
@@ -33,11 +33,11 @@ async def postData(medicament: schemas.MedicamentoCreated):
 
 @router.put("/medicamento/{codigo}", dependencies=[Depends(JWTBearer())])
 async def putData(
-    codigo: int, 
+    codigo: str, 
     medicament: schemas.MedicamentoCreated,
 ):
     return update_medicament(codigo, medicament)
 
 @router.delete("/medicamento/{codigo}", dependencies=[Depends(JWTBearer())])
-async def deleteData(codigo: int):
+async def deleteData(codigo: str):
     return delete_Medicament(codigo)

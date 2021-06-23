@@ -17,9 +17,8 @@ router = APIRouter()
 async def getAllData(
     page: int = 0, 
     per_page: int = -1,
-    current_user: schemas.FuncionarioBase = None
 ):
-    return getAllScheduling(page, per_page, current_user)
+    return getAllScheduling(page, per_page)
 
 @router.get("/agendamento/{id}", 
             dependencies=[Depends(JWTBearer())], 

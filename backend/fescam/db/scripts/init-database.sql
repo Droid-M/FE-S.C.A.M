@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS public.Estagiario (
 );
 
 CREATE TABLE IF NOT EXISTS public.Medicamento (
-  codigo bigserial PRIMARY KEY,
+  codigo varchar PRIMARY KEY,
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
   nome varchar NOT NULL

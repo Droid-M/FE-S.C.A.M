@@ -25,7 +25,7 @@ def getAllMedicaments(page: int = 0, per_page: int = -1): #-> Any
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
     
-def getMedicament(codigo: int):#-> Any
+def getMedicament(codigo: str):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
         medicamento = medDAO.findByPK(codigo)
@@ -65,7 +65,7 @@ def create_medicament(medicament: schemas.MedicamentoCreated): # -> Any
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
     
 def update_medicament(
-    codigo: int, 
+    codigo: str, 
     medicament: schemas.MedicamentoCreated,
 ): #-> Any
     #Buscando usuario:
@@ -85,7 +85,7 @@ def update_medicament(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
     
-def delete_Medicament(codigo: int):
+def delete_Medicament(codigo: str):
     is_admin = True
     if(is_admin):
         deleted_med = medDAO.DeleteByPK(codigo)

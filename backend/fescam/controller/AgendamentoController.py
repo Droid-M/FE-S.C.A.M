@@ -7,6 +7,7 @@ from fescam import DAO, model, schemas
 from fescam.api.bearer import JWTBearer
 
 schDAO = DAO.AgendamentoDAO()
+posDAO = DAO.PosologiaDAO()
 
 def getAllScheduling(
         page: int = 0, 
@@ -20,7 +21,7 @@ def getAllScheduling(
         else: #Senão, pega todos
             schedulings = schDAO.getAll(convert = False)
             for scheduling in schedulings:
-                scheduling['posologia'] = 1
+                scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
