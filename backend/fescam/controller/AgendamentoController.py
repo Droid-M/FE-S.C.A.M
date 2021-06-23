@@ -1,3 +1,4 @@
+from fescam.controller import PacienteController
 import bcrypt
 from typing import Any, List, NoReturn
 from fastapi.responses import JSONResponse
@@ -8,6 +9,15 @@ from fescam.api.bearer import JWTBearer
 
 schDAO = DAO.AgendamentoDAO()
 posDAO = DAO.PosologiaDAO()
+enfDAO = DAO.EnfermeiroDAO()
+estDAO = DAO.EstagiarioDAO()
+
+def getFunc(cpf: str, dao):
+    result = dao.findByFK(cpf)
+    if(result):
+        result = result.typesAcceptables
+        result.pop('senha')
+    return result
 
 def getAllScheduling(
         page: int = 0, 
@@ -22,6 +32,9 @@ def getAllScheduling(
             schedulings = schDAO.getAll(convert = False)
             for scheduling in schedulings:
                 scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
+                scheduling['enfermeiro'] = getFunc(scheduling['enfermeiro'], enfDAO)
+                scheduling['estagiario'] = getFunc(scheduling['estagiario'], estDAO)
+                scheduling['paciente'] = PacienteController.getPatientDB(scheduling['paciente'])
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
@@ -34,9 +47,12 @@ def getAllScheduling(
 def getscheduling(id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
-        scheduling = schDAO.findByPK(id)
+        scheduling = schDAO.findByPK(id, False)
         if(scheduling is not None):
-            scheduling = schemas.AgendamentoBase(**scheduling.typesAcceptables)  #<-- Necessário? Rever
+            scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
+            scheduling['enfermeiro'] = getFunc(scheduling['enfermeiro'], enfDAO)
+            scheduling['estagiario'] = getFunc(scheduling['estagiario'], estDAO)
+            scheduling['paciente'] = PacienteController.getPatientDB(scheduling['paciente'])
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 

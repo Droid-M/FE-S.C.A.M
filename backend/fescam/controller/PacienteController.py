@@ -31,6 +31,15 @@ def updatePatientData(cpf, data: List[dict]):
 
 #_________________ Informações principais do paciente _________________#
 
+def getPatientDB(cpf: str):
+    patient = patDAO.findByPK(cpf)
+    if(patient is not None):
+        patient = schemas.PacienteBase(
+            **patient.typesAcceptables, 
+            dados=getPatientData(patient.CPF)
+        )
+    return patient
+
 def getAllPatients(
         page: int = 0,
         per_page: int = -1,

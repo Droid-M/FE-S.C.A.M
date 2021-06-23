@@ -22,21 +22,21 @@ async def getAllData(
 
 @router.get("/agendamento/{id}", 
             dependencies=[Depends(JWTBearer())], 
-            response_model=schemas.AgendamentoBase)
+            response_model=schemas.AgendamentoBaseToUpload)
 async def getData(id: int):
     return getscheduling(id)
 
 @router.post(
     "/agendamento", 
     dependencies=[Depends(JWTBearer())],
-    response_model=schemas.AgendamentoBase
+    response_model=schemas.AgendamentoBaseToUpload
     )
 async def postData(scheduling: schemas.AgendamentoCreated):
     return create_scheduling(scheduling)
 
 @router.put("/agendamento/{id}", 
     dependencies=[Depends(JWTBearer())],
-    response_model=schemas.AgendamentoBase
+    response_model=schemas.AgendamentoBaseToUpload
     )
 async def putData(
     id: int,
@@ -47,7 +47,7 @@ async def putData(
 
 @router.delete("/agendamento/{id}", 
     dependencies=[Depends(JWTBearer())],
-    response_model=schemas.AgendamentoBase,
+    response_model=schemas.AgendamentoBaseToUpload,
 )
 async def deleteData(id: int):
     return delete_scheduling(id)
