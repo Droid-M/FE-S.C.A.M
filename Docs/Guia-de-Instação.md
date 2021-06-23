@@ -7,6 +7,10 @@ O _FS-S.C.A.M_ usa o Docker para virtualizar o ambiente de execução através d
 Siga a documentação oficial do Docker dependendo do seu sistema operacional:
 - [Linux (Ubuntu)](https://docs.docker.com/engine/install/ubuntu/) - O modo mais rápido é pelo [script de instalação oficial](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
 - [Windows 10](https://docs.docker.com/docker-for-windows/install/)
+**Nota**: Não esqueça de reiniciar a máquina após instalar o docker, e em instalações linux, execute o comando abaixo antes de reiniciar:
+```bash
+usermod -aG docker $USER
+```
 
 # Instale o docker-compose
 Usamos o composer como orquestrador de containers para gerenciar os containers e recursos da rede virtual que os une. Caso esteja no Windows ou Mac, não é necessário instalar o docker-compose pois ele já vem embutido no Docker Desktop. Para o Linux, a [documentação oficial](https://docs.docker.com/compose/install/) descreve os seguintes comandos _bash_:
