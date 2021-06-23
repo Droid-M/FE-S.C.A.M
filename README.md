@@ -9,3 +9,4 @@ Para instruções de como executar o programa, veja o [Guia de Instalação](htt
 - Pedro Antonio Nunes Moreira
 - Marcos Vinícius Ferreira dos Santos
 - Robson Jones de Lima
+- Daniel Lucas Alves Ferreira de Jesus
