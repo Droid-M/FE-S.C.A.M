@@ -7,3 +7,4 @@ Para instruções de como executar o programa, veja o [Guia de Instalação](htt
 # Integrantes
 - Pedro Antonio Nunes Moreira
 - Marcos Vinícius Ferreira dos Santos
+- Robson Jones de Lima
