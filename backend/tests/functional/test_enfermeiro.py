@@ -10,6 +10,6 @@ def test_read_all_enfermeiro():
     assert response.status_code == 200
 
 def test_read_enfermeiro():
-    atendente_id = 1
-    response = client.get(f'/enfermeiro/{atendente_id}')
+    nome_atendente = 1
+    response = client.get(f'/enfermeiro/{nome_atendente}')
     assert response.status_code == 200

@@ -13,7 +13,7 @@ class Paciente:
         self.created_on = values.get("created_on")
         self.updated_on = values.get("updated_on")
         self.dados = values.get("dados")
-        self.atendente_id = values.get("atendente_id")
+        self.nome_atendente = values.get("nome_atendente")
     
     def setAll(self, **values): #<-- Sobrescreve todos os valores, até os que não forem passados por parâmetro (recebem None)
         self.CPF = values.get("CPF")
@@ -27,7 +27,7 @@ class Paciente:
         self.created_on = values.get("created_on")
         self.updated_on = values.get("updated_on")
         self.dados = values.get("dados")
-        self.atendente_id = values.get("atendente_id")
+        self.nome_atendente = values.get("nome_atendente")
     
     def updateAll(self, **values): #<-- Apenas sobrescreve os valores que forem passados por parâmetro
         if(values.get("CPF") is not None):
@@ -52,8 +52,8 @@ class Paciente:
             self.updated_on = values.get("updated_on")
         if(values.get("dados") is not None):
             self.dados = values.get("dados")
-        if(values.get("atendente_id") is not None):
-            self.atendente_id = values.get("atendente_id")
+        if(values.get("nome_atendente") is not None):
+            self.nome_atendente = values.get("nome_atendente")
 
     #"Atributos" somente leitura:
     
@@ -74,8 +74,7 @@ class Paciente:
         "telefone" : self.telefone,
         "created_on" : self.created_on,
         "updated_on" : self.updated_on,
-        "dados" : self.dados,
-        "atendente_id" : self.atendente_id
+        "nome_atendente" : self.nome_atendente,
         }
      
     @property

@@ -1,3 +1,5 @@
+from fescam.model.Log import Log
+
 class Log_linha:
     #Inicializando variaveis para evitar futuros erros (talvez seja desnecessário no futuro) ***:
     
@@ -14,7 +16,7 @@ class Log_linha:
       
     @property
     def foreignKey(self):
-         return {"log" : "log_id"}
+         return {Log().tableName : "log_id"}
      
     @property
     def typesAcceptables(self):
@@ -26,4 +28,4 @@ class Log_linha:
      
     @property
     def tableName(self):
-         return "log_linha"
+         return "Log_linha"

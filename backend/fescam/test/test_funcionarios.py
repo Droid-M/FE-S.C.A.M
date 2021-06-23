@@ -4,7 +4,7 @@ import sys
 sys.path.append(path.abspath('.'))
 import pytest
 from fescam.schemas.administrador import AdministradorCreated
-from fescam.schemas.estagiaro import EstagiarioCreated
+from fescam.schemas.estagiario import EstagiarioCreated
 from fescam.model.Funcionario import Funcionario
 from fescam.DAO.EstagiarioDAO import EstagiarioDAO
 

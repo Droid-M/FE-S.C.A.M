@@ -32,6 +32,7 @@ class FuncionarioCreated(BaseModel):
 class Funcionario(BaseModel):
     CPF: constr(min_length=11, max_length=11)
     senha: str
+    remember_me: bool = False
     
     class Config:
         use_enum_values = True

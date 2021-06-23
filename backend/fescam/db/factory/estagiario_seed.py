@@ -6,7 +6,7 @@ import bcrypt
 sys.path.append(path.abspath('.'))
 from faker import Faker
 from fescam.components.functions_helpers import cpfNumber_int_to_str
-from fescam.schemas.estagiaro import EstagiarioCreated
+from fescam.schemas.estagiario import EstagiarioCreated
 from fescam.model.Funcionario import Funcionario
 from fescam.DAO.EstagiarioDAO import EstagiarioDAO
 

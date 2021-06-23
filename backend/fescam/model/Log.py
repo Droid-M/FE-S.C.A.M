@@ -22,4 +22,4 @@ class Log:
      
     @property
     def tableName(self):
-         return "log"
+         return "Log"

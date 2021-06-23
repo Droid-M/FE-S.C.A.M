@@ -32,7 +32,7 @@ CREATE TABLE "Paciente" (
   "createdOn" timestamptz DEFAULT (now()),
   "updatedOn" timestamptz DEFAULT (now()),
   "dados" varchar,
-  "atendente_id" bigint
+  "nome_atendente" varchar
 );
 
 CREATE TABLE "Funcionario" (
@@ -84,7 +84,7 @@ CREATE TABLE "Agendamento" (
   "horario" timestamptz DEFAULT null
 );
 
-ALTER TABLE "Paciente" ADD FOREIGN KEY ("atendente_id") REFERENCES "Enfermeiro" ("id");
+ALTER TABLE "Paciente" ADD FOREIGN KEY ("nome_atendente") REFERENCES "Enfermeiro" ("nome");
 
 ALTER TABLE "Enfermeiro" ADD FOREIGN KEY ("func_id") REFERENCES "Funcionario" ("CPF");
 
@@ -136,6 +136,6 @@ COMMENT ON COLUMN "Paciente"."genero" IS 'Gênero com o qual a pessoa se identif
 
 COMMENT ON COLUMN "Paciente"."dados" IS 'Informações a respeito do diagnóstico do paciente';
 
-COMMENT ON COLUMN "Paciente"."atendente_id" IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN "Paciente"."nome_atendente" IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 COMMENT ON COLUMN "Posologia"."quantidade" IS 'A quantidade diária a ser administrada';

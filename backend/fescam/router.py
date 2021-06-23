@@ -11,7 +11,7 @@ from fescam.api.endpoints.administrador import router as administrador
 from fescam.api.endpoints.enfermeiro import router as enfermeiro
 from fescam.api.endpoints.enfermeiroChefe import router as enfermeiroChefe
 from fescam.api.endpoints.estagiario import router as estagiario
-from fescam.api.endpoints.usersControl import router as users
+from fescam.api.endpoints.funcionario import router as users
 from fescam.api.endpoints.medicamento import router as medicamento
 from fescam.api.endpoints.paciente import router as paciente
 from fescam.api.endpoints.posologia import router as posologia
