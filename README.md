@@ -8,3 +8,5 @@ Para instruções de como executar o programa, veja o [Guia de Instalação](htt
 - Pedro Antonio Nunes Moreira
 - Marcos Vinícius Ferreira dos Santos
 - Robson Jones de Lima
+É possível visualizar a parcela de contribuição com o código de cada um dos integrantes, ver a [aba de estatísticas do GitHub](https://github.com/Droid-M/FE-S.C.A.M/graphs/contributors). 
+- Pedro Antonio Nunes Moreira
