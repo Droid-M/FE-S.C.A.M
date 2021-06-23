@@ -1,4 +1,5 @@
 from fescam.controller import PacienteController
+from fescam.controller import FuncionarioController
 import bcrypt
 from typing import Any, List, NoReturn
 from fastapi.responses import JSONResponse
@@ -10,14 +11,17 @@ from fescam.api.bearer import JWTBearer
 schDAO = DAO.AgendamentoDAO()
 posDAO = DAO.PosologiaDAO()
 enfDAO = DAO.EnfermeiroDAO()
+enfCFDAO = DAO.EnfermeiroChefeDAO()
 estDAO = DAO.EstagiarioDAO()
 
-def getFunc(cpf: str, dao):
-    result = dao.findByFK(cpf)
-    if(result):
-        result = result.typesAcceptables
-        result.pop('senha')
-    return result
+def getSchedulingToUp(scheduling: dict):
+    if(scheduling is not None and len(scheduling) > 0):
+        scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
+        scheduling['enfermeiro'] =  FuncionarioController.getFuncToUpload(scheduling['enfermeiro'], enfDAO)
+        scheduling['estagiario'] = FuncionarioController.getFuncToUpload(scheduling['estagiario'], estDAO)
+        scheduling['enferchefe'] = FuncionarioController.getFuncToUpload(scheduling['enferchefe'], enfCFDAO)
+        scheduling['paciente'] = PacienteController.getPatientDB(scheduling['paciente'])
+    return scheduling
 
 def getAllScheduling(
         page: int = 0, 
@@ -31,10 +35,7 @@ def getAllScheduling(
         else: #Senão, pega todos
             schedulings = schDAO.getAll(convert = False)
             for scheduling in schedulings:
-                scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
-                scheduling['enfermeiro'] = getFunc(scheduling['enfermeiro'], enfDAO)
-                scheduling['estagiario'] = getFunc(scheduling['estagiario'], estDAO)
-                scheduling['paciente'] = PacienteController.getPatientDB(scheduling['paciente'])
+                getSchedulingToUp(scheduling)
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
@@ -47,12 +48,8 @@ def getAllScheduling(
 def getscheduling(id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
-        scheduling = schDAO.findByPK(id, False)
-        if(scheduling is not None):
-            scheduling['posologia'] = posDAO.findByPK(scheduling['posologia'])
-            scheduling['enfermeiro'] = getFunc(scheduling['enfermeiro'], enfDAO)
-            scheduling['estagiario'] = getFunc(scheduling['estagiario'], estDAO)
-            scheduling['paciente'] = PacienteController.getPatientDB(scheduling['paciente'])
+        scheduling = getSchedulingToUp(schDAO.findByPK(id, False))
+        if(scheduling):
             return JSONResponse(
                 status_code= status.HTTP_200_OK, 
                 #description = 'Retorna uma lista de todos os usuários do sistema', 
@@ -69,13 +66,13 @@ def getscheduling(id: int):#-> Any
 def create_scheduling(scheduling: schemas.AgendamentoCreated): # -> Any
     is_admin = True
     if(is_admin):
-        result = schDAO.createBySchema(scheduling)
-        if(result is not None):
-            scheduling = schemas.AgendamentoBase(**result.typesAcceptables)
+        result = getSchedulingToUp(schDAO.createBySchema(scheduling, convert = False))
+        if(result is not None and len(result) > 0):
+            #scheduling = schemas.AgendamentoBaseToUPload(**result.typesAcceptables)
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Um novo usuario foi cadastrado com sucesso', 
-                content = jsonable_encoder(scheduling)
+                content = jsonable_encoder(result)
             )
         else:
             return JSONResponse(
@@ -93,12 +90,12 @@ def update_scheduling(
     #Buscando usuario:
     is_admin = True
     if(is_admin):
-        sch_updated = schDAO.UPDATE(scheduling.dict()).WHERE("id", "=", id).getFirst()
-        if(sch_updated is not None):
+        sch_updated = getSchedulingToUp(schDAO.UPDATE(scheduling.dict()).WHERE("id", "=", id).getFirst())
+        if(sch_updated is not None and len(sch_updated) > 0):
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 
-                content = jsonable_encoder(schemas.AgendamentoBase(**sch_updated)))
+                content = jsonable_encoder(sch_updated))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
             content= jsonable_encoder(schemas.Error(message = f"Impossível atualizar um agendamento não cadastrado! ID:{id}")
@@ -110,12 +107,12 @@ def update_scheduling(
 def delete_scheduling(id: int):
     is_admin = True
     if(is_admin):
-        deleted_sch = schDAO.DeleteByPK(id)
-        if(deleted_sch is not None):
+        deleted_sch = getSchedulingToUp(schDAO.DeleteByPK(id, convert = False))
+        if(deleted_sch is not None and len(deleted_sch) > 0):
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Usuario deletado com sucesso', 
-                content = jsonable_encoder(schemas.AgendamentoBase(**deleted_sch.typesAcceptables))
+                content = jsonable_encoder(deleted_sch)
             )
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,

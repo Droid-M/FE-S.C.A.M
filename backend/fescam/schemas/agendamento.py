@@ -25,6 +25,8 @@ class AgendamentoCreated(BaseModel): #Enfermeiro e estagiário podem ser alocado
     paciente: constr(min_length=11, max_length=11)
     enferchefe: constr(min_length=11, max_length=11)
     horario: datetime
+    enfermeiro: Optional[constr(min_length=11, max_length=11)]
+    estagiario: Optional[constr(min_length=11, max_length=11)]
 
 # Adicionar um enfermeiro no agendamento
 class AgendamentoAddEnf(AgendamentoCreated):

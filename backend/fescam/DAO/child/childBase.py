@@ -23,12 +23,12 @@ class childBase:
                 return None
         return result
     
-    def createBySchema(self, instanceData):
+    def createBySchema(self, instanceData, convert = True):
         result = self.__parentDAO.createBySchema(instanceData)
         if(result is not None):
             foreignKey = self.__child.foreignKey[self.__parent.tableName]
             valueFK = instanceData.dict()[self.__parent.primaryKey]
-            if(self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = False) is None):
+            if(self.__base._save(atributeEValue = {foreignKey:valueFK}, convertMethod = convert) is None):
                 self.__parentDAO.deleteByTuple(**instanceData.dict())
                 return None
         return result
@@ -56,7 +56,7 @@ class childBase:
             "foreignKey":parentPK #<--Tá correto, a PK desta classe é a FK de outra
         }).ON(TN_period_FK, "=", f"'{primaryKeyValue}'").AND(TN_period_FK, "=", PTN_period_PPK).getFirst()
     
-    def DeleteByFK(self, primaryKeyValue): #Possivelmente vai ser inutilizado kk
+    def DeleteByFK(self, primaryKeyValue, convert = True): #Possivelmente vai ser inutilizado kk
         #primaryKeyValue = ForeignKey aqui **
         #Essa classe:
         foreignKey = self.__child.foreignKey[self.__parent.tableName]
@@ -66,7 +66,7 @@ class childBase:
         parentTableName = self.__parent.tableName
         parentPK = self.__parent.primaryKey
         PTN_period_PPK = parentTableName+ "." + parentPK #ptn= parentTableName; PPK = parentPK
-        return  self.__base._remove(convertMethod= True, toUse= {
+        return  self.__base._remove(convertMethod= convert, toUse= {
             "tableName" : parentTableName,
             "atributesToReturn": list(self.__parent.typesAcceptables.keys())
         }).WHERE(TN_period_FK, "=", PTN_period_PPK).AND(TN_period_FK, "=", f"'{primaryKeyValue}'").getFirst()

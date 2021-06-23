@@ -1,3 +1,4 @@
+import os
 from typing import Final
 import io
 
@@ -128,3 +129,18 @@ def lstrListToStr(list, separator:str):
             result += item + separator
         return result[:-1] #<-- Removendo ultimo separador
     
+def makeDir(directory: str):
+    try:
+        os.makedirs(directory)
+        return True
+    except Exception as Error:
+        print(Error)
+        return False
+        
+def removeDir(directory: str):
+    try:
+        os.makedirs(directory, 777)
+        return True
+    except Exception as Error:
+        print(Error)
+        return False
