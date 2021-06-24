@@ -9,6 +9,19 @@ from fescam import DAO, model, schemas
 from fescam.api.bearer import JWTBearer
 import bcrypt
 
+funcDAO = DAO.FuncionarioDAO()
+admDAO = DAO.AdministradorDAO()
+enfDAO = DAO.EnfermeiroDAO()
+enfCFDAO = DAO.EnfermeiroChefeDAO()
+estDAO = DAO.EstagiarioDAO()
+
+def getFuncToUpload(cpf: str, dao):
+    result = dao.findByFK(cpf)
+    if(result):
+        result = result.typesAcceptables
+        result.pop('senha')
+    return result
+
 def getAllUsers(page: int = 0, per_page: int = -1): #-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
@@ -107,7 +120,7 @@ def update_user(
     is_admin = True
     if(is_admin):
         user_updated = funcDAO.UPDATE(user.dict()).WHERE("cpf", "=", user_id).getFirst()
-        if(user_updated is not None):
+        if(user_updated is not None and len(user_updated) > 0):
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 

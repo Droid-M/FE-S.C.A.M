@@ -19,8 +19,8 @@ class BaseDAO:
     def createByTuple(self, **attAndValues): #Considerando que o retorno vai ser uma instância de schema ou do model ou None:
         return self.__base._save(atributeEValue = attAndValues, convertMethod= True)
     
-    def createBySchema(self, instanceData):
-        return self.__base._save(atributeEValue = instanceData.dict(), convertMethod= True) #Considerando que o retorno vai ser um dicionário:
+    def createBySchema(self, instanceData, convert = True):
+        return self.__base._save(atributeEValue = instanceData.dict(), convertMethod= convert) #Considerando que o retorno vai ser um dicionário:
     
     def store(self, instanceData):
         result = self.__base._save(atributeEValue = instanceData.typesAcceptables, convertMethod= False) #Considerando que o retorno vai ser um dicionário:
@@ -32,8 +32,8 @@ class BaseDAO:
     def findByTuple(self, **attAndValues):
         return self.__base._find(atributes = list(self.__typesAcceptables.keys()), convertMethod= True).WHERE(dictToSQLConditions(attAndValues)).getAll()
     
-    def DeleteByPK(self, primaryKeyValue): #Possivelmente vai ser inutilizado kk
-        return self.__base._remove(convertMethod= True).WHERE(self.__primaryKey, "=", primaryKeyValue).getFirst()
+    def DeleteByPK(self, primaryKeyValue, convert = True): #Possivelmente vai ser inutilizado kk
+        return self.__base._remove(convertMethod= convert).WHERE(self.__primaryKey, "=", primaryKeyValue).getFirst()
     
     def deleteByTuple(self, **attAndValues):
         return self.__base._remove(convertMethod= True).WHERE(dictToSQLConditions(attAndValues)).getAll()

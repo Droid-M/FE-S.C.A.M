@@ -6,7 +6,7 @@ from .paciente import PacienteBase
 
 class PosologiaBase(BaseModel):
     id: int
-    medicamento: int
+    medicamento: str
     paciente: constr(min_length=11, max_length=11)
     quantidade: float
     notas: str
@@ -17,7 +17,7 @@ class PosologiaBase(BaseModel):
         use_enum_values = True
 
 class PosologiaCreated(BaseModel):
-    medicamento: int
+    medicamento: str
     paciente: constr(min_length=11, max_length=11)
     quantidade: float
     notas: str
