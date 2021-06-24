@@ -1,4 +1,4 @@
-from fescam.schemas.estagiaro import EstagiarioCreated
+from fescam.schemas.estagiario import EstagiarioCreated
 from fescam.model.Estagiario import Estagiario
 from fescam.model.Funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO

@@ -7,3 +7,6 @@ from .MedicamentoDAO import MedicamentoDAO
 from .PacienteDAO import PacienteDAO
 from .PosologiaDAO import PosologiaDAO
 from .AgendamentoDAO import AgendamentoDAO
+from .DadosPacienteDAO import DadosPacienteDAO
+from .LogDAO import LogDAO
+from .LogLinhaDAO import LogLinhaDAO

@@ -1,3 +1,5 @@
+from fescam.model.Funcionario import Funcionario
+
 class Estagiario:
     #Inicializando variaveis para evitar futuros erros (talvez seja desnecessário no futuro) ***:
     
@@ -13,13 +15,13 @@ class Estagiario:
       
     @property
     def foreignKey(self):
-         return {"Funcionario" : "func_id"}
+         return {Funcionario().tableName : "func_id"}
      
     @property
     def typesAcceptables(self):
          return { #Substituir dicionário por lista no futuro ***
-        "id": None,
-        'func_id' : None,
+        "id": self.id,
+        'func_id' : self.func_id,
         }
      
     @property

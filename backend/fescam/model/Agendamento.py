@@ -1,3 +1,10 @@
+from fescam.model.Medicamento import Medicamento
+from fescam.model.Paciente import Paciente
+from fescam.model.EnfermeiroChefe import EnfermeiroChefe
+from fescam.model.Enfermeiro import Enfermeiro
+from fescam.model.Estagiario import Estagiario
+from fescam.model.Posologia import Posologia
+
 class Agendamento:
     #Inicializando variaveis para evitar futuros erros (talvez seja desnecessário no futuro) ***:
     
@@ -52,11 +59,11 @@ class Agendamento:
     @property
     def foreignKey(self):
         return {
-            "Posologia" : "posologia",
-            "Paciente" : "paciente",
-            "Enfermeiro" : "enfermeiro",
-            "Estagiario" : "estagiario",
-            "EnfermeiroChefe" : "enferchefe",
+            Posologia().tableName : "posologia",
+            Paciente().tableName : "paciente",
+            Enfermeiro().tableName : "enfermeiro",
+            Estagiario().tableName : "estagiario",
+            EnfermeiroChefe().tableName : "enferchefe",
         }
          
     @property

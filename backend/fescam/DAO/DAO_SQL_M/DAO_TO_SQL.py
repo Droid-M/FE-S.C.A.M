@@ -275,7 +275,6 @@ class DAO_TO_SQL: #Adicionar uma variável representando todos os toReturn conve
         tablesNamesToSave = '' #'valor', 'valor'
         AtributesEtablesNamesToUpdate = '' #atributo = 'valor'
         for atribute, value in atributeEValue.items():
-            value = str(value)
             count += 1
             value = f"'{value}'" if(value is not None) else "NULL" #<-- Necessário pois o banco não interpreta None como Null
             if(count == atributesLength):

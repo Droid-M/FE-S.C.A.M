@@ -27,10 +27,15 @@ CREATE TYPE public.tipoFuncionario AS ENUM (
   'ENFERMEIRO_CHEFE'
 );
 
+CREATE TYPE public.tipoSexo AS ENUM (
+  'MASCULINO',
+  'FEMININO'
+);
+
 CREATE TABLE IF NOT EXISTS public.Paciente (
   CPF char(11) PRIMARY KEY,
   nome varchar NOT NULL,
-  sexo boolean DEFAULT null,
+  sexo tipoSexo DEFAULT null,
   genero tipoGenero DEFAULT null,
   data_nascimento date DEFAULT null,
   tipo_sangue tipoSangue DEFAULT null,
@@ -38,8 +43,14 @@ CREATE TABLE IF NOT EXISTS public.Paciente (
   telefone char(11) DEFAULT null,
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
-  dados varchar,
-  atendente_id char(11) NOT NULL
+  nome_atendente varchar
+);
+
+CREATE TABLE IF NOT EXISTS public.dado_paciente (
+  id bigserial PRIMARY KEY,
+  nome_campo varchar DEFAULT '',
+  valor_campo varchar DEFAULT '',
+  paciente char(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Log (
@@ -84,7 +95,7 @@ CREATE TABLE IF NOT EXISTS public.Estagiario (
 );
 
 CREATE TABLE IF NOT EXISTS public.Medicamento (
-  codigo bigserial PRIMARY KEY,
+  codigo varchar PRIMARY KEY,
   created_on timestamptz DEFAULT (now()),
   updated_on timestamptz,
   nome varchar NOT NULL
@@ -92,7 +103,7 @@ CREATE TABLE IF NOT EXISTS public.Medicamento (
 
 CREATE TABLE IF NOT EXISTS public.Posologia (
   id bigserial PRIMARY KEY,
-  medicamento bigint,
+  medicamento varchar,
   paciente char(11) NOT NULL,
   quantidade float NOT NULL,
   created_on timestamptz DEFAULT (now()),
@@ -126,7 +137,19 @@ ALTER TABLE public.Posologia ADD FOREIGN KEY (paciente) REFERENCES public.Pacien
 
 ALTER TABLE public.Log_Linha ADD FOREIGN KEY (log_id) REFERENCES public.Log (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE public.dado_paciente ADD FOREIGN KEY (paciente) REFERENCES public.Paciente (CPF) ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE INDEX ON public.Paciente (CPF);
+
+CREATE INDEX ON public.dado_paciente(id);
+
+CREATE INDEX ON public.dado_paciente(paciente);
+
+CREATE INDEX ON public.log (id);
+
+CREATE INDEX ON public.Log_Linha(id);
+
+CREATE INDEX ON public.Log_Linha(log_id);
 
 CREATE INDEX ON public.Funcionario (CPF);
 
@@ -148,12 +171,12 @@ CREATE INDEX ON public.Agendamento (paciente);
 
 CREATE INDEX ON public.Agendamento (horario);
 
+CREATE INDEX ON public.Agendamento (horario);
+
 COMMENT ON COLUMN public.Paciente.sexo IS 'Sexo biológico';
 
 COMMENT ON COLUMN public.Paciente.genero IS 'Gênero com o qual a pessoa se identifica';
 
-COMMENT ON COLUMN public.Paciente.dados IS 'Informações a respeito do diagnóstico do paciente';
-
-COMMENT ON COLUMN public.Paciente.atendente_id IS 'Funcionario que cadastrou esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
+COMMENT ON COLUMN public.Paciente.nome_atendente IS 'Funcionario que atendeu esse paciente. Restringir no código quais tipos de funionário podem cadastrar pacientes';
 
 COMMENT ON COLUMN public.Posologia.quantidade IS 'A quantidade diária a ser administrada';

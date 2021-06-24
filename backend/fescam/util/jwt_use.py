@@ -2,10 +2,11 @@ import jwt
 import time
 
 EXPIRATION_TIME = 3600 #1 hora
+EXPIRATION_TIME_MAX = 2678400 #31 dias
 JWT_SECRET = '443535353'
 
-def encode_jwt(cpf: str) -> str:
-    payload = {'cpf':cpf, "exp": time.time() + EXPIRATION_TIME}
+def encode_jwt(cpf: str, remember: bool = False) -> str:
+    payload = {'cpf':cpf, "exp": time.time() + (EXPIRATION_TIME_MAX if remember else EXPIRATION_TIME)}
     return jwt.encode(
             payload,
             JWT_SECRET,

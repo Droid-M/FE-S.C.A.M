@@ -8,14 +8,12 @@ sys.path.append(path.abspath('.'))
 from faker import Faker
 from faker_enum import EnumProvider
 from fescam.components.functions_helpers import cpfNumber_int_to_str
-from fescam.schemas.paciente import PacienteCreated
 from fescam.model.Paciente import Paciente
 from fescam.DAO.PacienteDAO import PacienteDAO
 from fescam.DAO.EnfermeiroDAO import EnfermeiroDAO
 from fescam.DAO.EnfermeiroChefeDAO import EnfermeiroChefeDAO
 from fescam.DAO.EstagiarioDAO import EstagiarioDAO
-from fescam.schemas.paciente import tipoSangue as TipoSangue
-from fescam.schemas.paciente import genero as Genero
+from fescam.schemas.paciente import PacienteStoreDB, tipoSangue as TipoSangue, genero as Genero, tipoSexo
 import random
 
 fake = Faker(['pt_BR'])
@@ -35,16 +33,15 @@ def factory():
     
     CPF = cpfNumber_int_to_str(fake.pyint(min_value=0, max_value=99999999999, step=1))
     nome = fake.name()
-    sexo = fake.boolean(chance_of_getting_true=50)
+    sexo = fake.enum(tipoSexo)
     genero = fake.enum(Genero)
     data_nascimento = fake.date_of_birth(tzinfo=None, minimum_age=16, maximum_age=99)
     tipo_sangue = fake.enum(TipoSangue)
     endereco = fake.address()
     telefone = cpfNumber_int_to_str(fake.pyint(min_value=0, max_value=99999999999, step=1))
-    atendente_id = atendente.CPF
-    dados = ''
+    nome_atendente = atendente.nome
     
-    paciente = PacienteCreated(
+    paciente = PacienteStoreDB(
         CPF = CPF, 
         nome = nome, 
         sexo = sexo, 
@@ -53,8 +50,7 @@ def factory():
         tipo_sangue = tipo_sangue,
         endereco = endereco,
         telefone = telefone,
-        atendente_id = atendente_id,
-        dados = dados
+        nome_atendente = nome_atendente,
         )
     result = pacDAO.createBySchema(paciente)
     if(bool(result)):

@@ -1,6 +1,12 @@
 from pydantic import BaseModel, constr
-from typing import Optional
+from typing import Optional, Union
 from datetime import datetime
+from .medicamento import MedicamentoBase
+from .paciente import PacienteBase
+from .enfermeiro import EnfermeiroBase
+from .estagiario import EstagiarioBase
+from .enfermeiroChefe import EnfermeiroChefeBase
+from .posologia import PosologiaBase
 
 class AgendamentoBase(BaseModel):
     id: int
@@ -27,3 +33,14 @@ class AgendamentoAddEnf(AgendamentoCreated):
 #Adicionar um estagiario no agendamento
 class AgendamentoAddEst(AgendamentoCreated):
     estagiario: constr(min_length=11, max_length=11)
+    
+class AgendamentoBaseToUpload(BaseModel):
+    id: int
+    posologia: Union[PosologiaBase, dict]
+    paciente: Union[PacienteBase, dict]
+    enferchefe: Union[EnfermeiroChefeBase, dict]
+    enfermeiro: Union[EnfermeiroBase, dict]
+    estagiario: Union[EstagiarioBase, dict]
+    created_on: Optional[datetime]
+    updated_on: Optional[datetime]
+    horario: datetime

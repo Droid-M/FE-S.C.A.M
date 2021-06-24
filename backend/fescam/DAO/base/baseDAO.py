@@ -26,8 +26,8 @@ class BaseDAO:
         result = self.__base._save(atributeEValue = instanceData.typesAcceptables, convertMethod= False) #Considerando que o retorno vai ser um dicionário:
         return True if (result is not None) and len(result) > 0 else False
         
-    def findByPK(self, primaryKeyValue):
-        return self.__base._find(atributes = list(self.__typesAcceptables.keys()), convertMethod= True).WHERE(self.__primaryKey, "=", primaryKeyValue).getFirst()
+    def findByPK(self, primaryKeyValue, convert = True):
+        return self.__base._find(atributes = list(self.__typesAcceptables.keys()), convertMethod= convert).WHERE(self.__primaryKey, "=", primaryKeyValue).getFirst()
     
     def findByTuple(self, **attAndValues):
         return self.__base._find(atributes = list(self.__typesAcceptables.keys()), convertMethod= True).WHERE(dictToSQLConditions(attAndValues)).getAll()
