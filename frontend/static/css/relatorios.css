@@ -1,0 +1,47 @@
+#wrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+    height: 100vh;
+}
+
+.table_container{
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    width: 1200px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 5px 3px 4px #ccc;
+    border-radius: 8px;
+}
+.table_container h1{
+    font-size: 30px;
+}
+
+.button-upload{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:20px
+}
+.search{
+    display: flex;
+}
+
+.search input{
+    width: 350spx;
+    margin-right: 8px;
+}
+.table th{
+    text-align: center;
+}
+
+#tBody td{
+    text-align: center;
+}
+
+#tBody td a{
+   color: black;
+}

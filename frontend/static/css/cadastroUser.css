@@ -1,15 +1,90 @@
 
+body{
+    margin: 0;
+    padding: 0;
+}
 .container-cadastro{
     display: flex;
     justify-content: center;
-    align-items: center;
-    border:1px solid black;
+    flex-direction: column;
+    align-items:flex-start;
+    padding: 50px;
     width: 900px;
-    margin-left: 50px;
+    margin-left: 250px;
+    height: 100vh;
+    margin-top:-50px;
+    border: 1px solid #0000001a;
 }
 
+.title h1{
+    font-size: 24px;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    margin-left: 20px;
+}
+.form-container{
+    width: 100%;
+    border: 1px solid #a8a8a8;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px #a8a8a8;
+    border-radius: 8px;
+}
 .form{
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.block1{
+    display: flex;
+    margin: 16px;
+    margin-left: 5px;
+}
+.block1 input{
+    width: 300px;
+}
+
+.block2{
+    display: flex;
+    margin:16px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.block2 input{
+    margin-left: 10px;
+}
+
+
+.form-check{
+    display: flex;
+    padding-left: 10px;
+    margin-right: 3px;
+    font-size: 15px;
+}
+.form-funcoes{
+    margin-left: 50px;
+    width: 100%;
+}
+
+.funcoes fieldset{
+    display: flex;
+    border:1px solid black
+}
+.form-radios-function{
+    display: flex;
+}
+
+.form-radios-function label{
+    margin-right: 15px;
+}
+
+.form__buttons{
+    display: flex;
+    justify-content: flex-end;
 }
 
 /* .form-group{
