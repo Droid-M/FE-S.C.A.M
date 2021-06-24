@@ -6,7 +6,7 @@ var state =false;
 const url = location.href;
 let params = url.split('=');
 let id='';
-
+console.log(params[0], 1)
 if(params.length>1){
     id = params[1];
     state = true;

@@ -1,3 +1,4 @@
+import bcrypt
 from fastapi import Request, status
 from fastapi.applications import FastAPI
 from fastapi.exceptions import RequestValidationError
@@ -21,6 +22,7 @@ from fescam.db.seed.seed_db import prepare_DB
 from fastapi.staticfiles import StaticFiles
 from fescam.components.functions_helpers import ENFERMEIRO_FOO, ESTAGIARIO_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_CHEFE_FOO
 from fescam.util import checkAccess
+from fescam import DAO
 
 app = FastAPI()
 
@@ -52,6 +54,16 @@ app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 from fescam.db.generate_backup import backup
 import os
 
+@app.get("/init_user")
+async def create_first():
+    senha = bcrypt.hashpw("12345678".encode('utf-8'), bcrypt.gensalt()).decode()
+    CPF = "00000000000"
+    tipo = "ADMINISTRADOR"
+    return JSONResponse(
+        status_code=200,
+        content = jsonable_encoder(DAO.FuncionarioDAO().createByTuple(CPF = CPF, senha = senha, tipo = tipo, nome = "Admin"))
+    )
+            
 @app.get("/teste_seed")
 async def test_seed():
     prepare_DB()
