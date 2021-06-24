@@ -79,18 +79,18 @@
               </fieldset>
             </div>
           </div>
-          <div class="form__buttons">
-
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <button id='cadastro-salvar' type="submit" class="btn btn-primary">Cadastro</button>
-              </div>
-              <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">Cancelar</button>
-              </div>
-          </div>
-          </div>
         </form>
+        <div class="form__buttons">
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button id='cadastro-salvar' type="submit" class="btn btn-primary" onclick=cadastro_edicao_user()>Cadastro</button>
+            </div>
+            <div class="col-sm-6">
+              <button type="submit" class="btn btn-primary">Cancelar</button>
+            </div>
+        </div>
+        </div>
       </div>
     </div>
 
@@ -103,12 +103,12 @@
     
 
     
-    <script>
+    <!-- <script>
       $(document).ready(function(){
 
         $( "#cadastro-salvar" ).submit(cadastro_edicao_user);
       });
-    </script>
+    </script> -->
     {% endblock %}
 </body>
 </html>

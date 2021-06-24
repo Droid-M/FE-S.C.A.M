@@ -47,9 +47,9 @@ function carrega_dados(){
 /*
  * Cadastra novos usuários no sistema
  */
- function cadastro_edicao_user(event){
+ function cadastro_edicao_user(){
 
-    event.preventDefault();
+    // event.preventDefault();
     
     let cpf = document.getElementById('cpf').value;
     let nome = document.getElementById('nome').value;
@@ -60,7 +60,7 @@ function carrega_dados(){
   
     axios({
         method: state ? 'put':'post',
-        url: state ?'/edicao_usuario':'/cadastro_usuario',
+        url: state ?`/edicao_usuario/${id}`:'/cadastro_usuario',
         headers: { Authorization: `Bearer ${token}` },
         data: 
             {
