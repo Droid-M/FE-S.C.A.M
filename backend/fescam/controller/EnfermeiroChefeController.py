@@ -4,9 +4,9 @@ from fastapi.encoders import jsonable_encoder
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
-from fescam.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
+
 from fescam import DAO, model, schemas
-from fescam.api.bearer import JWTBearer
+
 
 enfCFDAO = DAO.EnfermeiroChefeDAO()
 funcDAO = DAO.FuncionarioDAO()

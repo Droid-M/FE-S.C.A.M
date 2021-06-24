@@ -5,39 +5,42 @@ from fastapi.encoders import jsonable_encoder
 from fastapi import APIRouter, HTTPException, status, Depends
 from fescam.controller.AgendamentoController import *
 from fescam import DAO, model, schemas
-from fescam.api.bearer import JWTBearer
+from fescam.components.functions_helpers import ENFERMEIRO_FOO, ESTAGIARIO_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_CHEFE_FOO
+from fescam.util import checkAccess
 
 router = APIRouter()
+enfCf = checkAccess.Check([ENFERMEIRO_CHEFE_FOO])
 
 @router.get(
     "/agendamento", 
-    dependencies=[Depends(JWTBearer())],
     response_model=List[schemas.AgendamentoBaseToUpload]
-    )
+)
 async def getAllData(
     page: int = 0, 
     per_page: int = -1,
 ):
     return getAllScheduling(page, per_page)
 
-@router.get("/agendamento/{id}", 
-            dependencies=[Depends(JWTBearer())], 
-            response_model=schemas.AgendamentoBaseToUpload)
+@router.get(
+    "/agendamento/{id}",
+    response_model=schemas.AgendamentoBaseToUpload
+)
 async def getData(id: int):
     return getscheduling(id)
 
 @router.post(
     "/agendamento", 
-    dependencies=[Depends(JWTBearer())],
+    dependencies=[(Depends(enfCf))],
     response_model=schemas.AgendamentoBaseToUpload
-    )
+)
 async def postData(scheduling: schemas.AgendamentoCreated):
     return create_scheduling(scheduling)
 
-@router.put("/agendamento/{id}", 
-    dependencies=[Depends(JWTBearer())],
-    response_model=schemas.AgendamentoBaseToUpload
-    )
+@router.put(
+    "/agendamento/{id}", 
+    response_model=schemas.AgendamentoBaseToUpload,
+    dependencies=[(Depends(enfCf))],
+)
 async def putData(
     id: int,
     scheduling: schemas.AgendamentoCreated
@@ -45,8 +48,9 @@ async def putData(
     return update_scheduling(id, scheduling)
     
 
-@router.delete("/agendamento/{id}", 
-    dependencies=[Depends(JWTBearer())],
+@router.delete(
+    "/agendamento/{id}",
+    dependencies=[(Depends(enfCf))],
     response_model=schemas.AgendamentoBaseToUpload,
 )
 async def deleteData(id: int):
