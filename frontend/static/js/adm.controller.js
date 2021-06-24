@@ -170,6 +170,9 @@ function qtd_user(){
     }
 }
 
+/**
+ * Função que faz o backup do Banco de Dados
+ */
 function backup_bd(){
 //  let btn_backup = document.getElementById("btn_backup");
 
@@ -180,5 +183,17 @@ function backup_bd(){
     }).catch((error)=>{
         console.error(error.data);
     })
+
+}
+
+/**
+ * Função Logout
+ */
+function logout(){
+    let resp = confirm("Tem certeza que deseja Sair?");
+    if(resp){
+        sessionStorage.removeItem("access_token");
+        location.href='/'
+    }
 
 }
