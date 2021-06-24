@@ -89,8 +89,10 @@ function cria_tabela_paci(pacientes){
         cell_prontuario.innerHTML= pacientes[i].dados;
         cell_editar.appendChild(btEditar);
         cell_delete.appendChild(btDeletar);
-
+        
     }
+    
+    document.getElementById('txtBusca').addEventListener("keyup", get_user);
 }
 
 /**
@@ -102,4 +104,41 @@ function formata_data(dados){
     var data = new Date(dados);
     var dataFormatada = (data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear());
     return dataFormatada;
+}
+
+
+/**
+ * Pesquisa um Paciente específico 
+ */
+ function get_user(){
+    var tabela = document.getElementById('tb_paciente');
+    
+    var busca = document.getElementById("txtBusca").value.toLowerCase();
+    const corpo =tabela.childNodes[3];
+    console.log(corpo.childNodes)
+    for(let i=0; i<corpo.childNodes.length;i++){
+        var achou = false;
+        var tr = corpo.childNodes[i];
+        var td = tr.childNodes;
+ 
+        for(var j =0; j<td.length-3;j++){
+            
+            var value = td[j].childNodes[0].nodeValue.toLowerCase();
+            // console.log(value)
+            if(value.indexOf(busca)>=0){
+                achou = true;
+            }
+            
+           
+        }
+        if(achou){
+            tr.style.display='table-row'
+          
+        }else{
+            tr.style.display='none'
+          
+        }
+
+    }
+
 }

@@ -75,7 +75,6 @@ if(state && id!=undefined){
         endereco: endereco,
         telefone: telefone,
         nome_atendente: id_func,
-        dados: diagnostico
     }
     axios({
         method: state ?'put':'post',
