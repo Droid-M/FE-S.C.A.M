@@ -10,9 +10,9 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from fescam.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
+
 from fescam import DAO, model, schemas
-from fescam.api.bearer import JWTBearer
+
 
 router = APIRouter()
 
@@ -24,7 +24,7 @@ enfCFDAO = DAO.EnfermeiroChefeDAO()
 
 @router.get(
     "/lista_usuario", 
-    dependencies=[Depends(JWTBearer())],
+    
     response_model=List[schemas.FuncionarioBase]
     ) 
 async def getAllUsers(
@@ -47,7 +47,7 @@ async def getAllUsers(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
+@router.get("/lista_usuario/{user_id}", response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
 async def getAllUsers(user_id: int):#-> Any
     is_admin = True #<- Fazer um tratamento pra saber se o usuário atual é admin ******* 
     if(is_admin):
@@ -81,7 +81,7 @@ async def getAllUsers(user_id: int):#-> Any
 
 @router.post(
     "/cadastro_usuario", 
-    dependencies=[Depends(JWTBearer())],
+    
     response_model=schemas.FuncionarioBase
     )
 async def create_user(
@@ -129,7 +129,7 @@ async def create_user(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.put("/edicao_usuario", dependencies=[Depends(JWTBearer())]) #<-- Ainda não suporta atualização de chave primária *******
+@router.put("/edicao_usuario") #<-- Ainda não suporta atualização de chave primária *******
 async def update_user(
     user: schemas.FuncionarioCreated,
 ): #-> Any
@@ -156,7 +156,7 @@ async def update_user(
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
 
-@router.delete("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
+@router.delete("/edicao_usuario/{user_id}")
 async def delete_user(user_id: int):
     is_admin = True
     if(is_admin):

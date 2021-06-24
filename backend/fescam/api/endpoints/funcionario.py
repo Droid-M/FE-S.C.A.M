@@ -4,9 +4,9 @@ from fastapi.encoders import jsonable_encoder
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_200_OK, HTTP_404_NOT_FOUND
-from fescam.components.functions_helpers import ENFERMEIRO_CHEFE_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_FOO, ESTAGIARIO_FOO
+
 from fescam import DAO, model, schemas
-from fescam.api.bearer import JWTBearer
+
 from fescam.controller.FuncionarioController import *
 
 router = APIRouter()
@@ -19,31 +19,31 @@ enfCFDAO = DAO.EnfermeiroChefeDAO()
 
 @router.get(
     "/lista_usuario", 
-    dependencies=[Depends(JWTBearer())],
+    
     response_model=List[schemas.FuncionarioCreated]
     ) 
 async def getAllData(page: int = 0, per_page: int = -1):
     return getAllUsers(page, per_page)
 
-@router.get("/lista_usuario/{user_id}", dependencies=[Depends(JWTBearer())], response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
+@router.get("/lista_usuario/{user_id}", response_model=schemas.FuncionarioBase) #Response_model é realmente necessário?
 async def getData(user_id: str):
     return getUser(user_id)
 
 @router.post(
     "/cadastro_usuario", 
-    dependencies=[Depends(JWTBearer())],
+    
     response_model=schemas.FuncionarioBase
     )
 async def postData(user: schemas.FuncionarioCreated):
     return create_user(user)
 
-@router.put("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
+@router.put("/edicao_usuario/{user_id}")
 async def updateData(
     user: schemas.FuncionarioCreated,
     user_id: str
 ):
     return update_user(user, user_id)
 
-@router.delete("/edicao_usuario/{user_id}", dependencies=[Depends(JWTBearer())])
+@router.delete("/edicao_usuario/{user_id}")
 async def deleteData(user_id: str):
     return delete_user(user_id)

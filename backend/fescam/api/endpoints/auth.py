@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Response
 from fescam.schemas.funcionario import Funcionario
 from fescam.DAO.FuncionarioDAO import FuncionarioDAO
-from fescam.api.bearer import JWTBearer
+
 from fescam.util.jwt_use import decode_jwt, encode_jwt
 import bcrypt
 import re
@@ -25,6 +25,6 @@ async def post_auth(response: Response, func: Funcionario = None):
     response.status_code = 406
     return {'msg': f'Esse funcionário não existe ou a senha está incorreta, CPF: "{cpf}".'}
     
-@router.get('/auth', dependencies=[Depends(JWTBearer())])
+@router.get('/auth')
 async def ping():
     return True

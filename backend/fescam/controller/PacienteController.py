@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from fescam import DAO, model, schemas
-from fescam.api.bearer import JWTBearer
+
 from fescam.controller.PacienteController import *
 
 patDAO = DAO.PacienteDAO()

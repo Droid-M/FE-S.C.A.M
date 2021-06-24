@@ -1,11 +1,12 @@
 from fastapi import Request, status
 from fastapi.applications import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
-
+from fescam.api.bearer import JWTBearer
 from fescam.api.endpoints.auth import router as auth
 from fescam.api.endpoints.administrador import router as administrador
 from fescam.api.endpoints.enfermeiro import router as enfermeiro
@@ -18,8 +19,13 @@ from fescam.api.endpoints.posologia import router as posologia
 from fescam.api.endpoints.agendamento import router as agendamento
 from fescam.db.seed.seed_db import prepare_DB
 from fastapi.staticfiles import StaticFiles
+from fescam.components.functions_helpers import ENFERMEIRO_FOO, ESTAGIARIO_FOO, ADMINISTRADOR_FOO, ENFERMEIRO_CHEFE_FOO
+from fescam.util import checkAccess
 
 app = FastAPI()
+
+adm_auth = checkAccess.Check([ADMINISTRADOR_FOO])
+
 templates = Jinja2Templates(directory="../frontend/templates")
 
 @app.exception_handler(RequestValidationError)
@@ -29,17 +35,16 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
 )
 
-
-app.include_router(users, tags=["user_control"])
+app.include_router(users, tags=["user_control"], dependencies=[Depends(JWTBearer()), Depends(adm_auth)])
 app.include_router(auth, tags=["api_auth"])
-app.include_router(administrador, tags=["administrador"])
-app.include_router(enfermeiro, tags=["enfermeiro"])
-app.include_router(enfermeiroChefe, tags=["enfermeiroChefe"])
-app.include_router(estagiario, tags=["estagiario"])
-app.include_router(medicamento, tags=["medicamentos"])
-app.include_router(paciente, tags=["pacientes"])
-app.include_router(posologia, tags=["posologias"])
-app.include_router(agendamento, tags=["agendamentos"])
+app.include_router(administrador, tags=["administrador"], dependencies=[Depends(JWTBearer()), Depends(adm_auth)])
+app.include_router(enfermeiro, tags=["enfermeiro"], dependencies=[Depends(JWTBearer())])
+app.include_router(enfermeiroChefe, tags=["enfermeiroChefe"], dependencies=[Depends(JWTBearer())])
+app.include_router(estagiario, tags=["estagiario"], dependencies=[Depends(JWTBearer())])
+app.include_router(medicamento, tags=["medicamentos"], dependencies=[Depends(JWTBearer())])
+app.include_router(paciente, tags=["pacientes"], dependencies=[Depends(JWTBearer())])
+app.include_router(posologia, tags=["posologias"], dependencies=[Depends(JWTBearer())])
+app.include_router(agendamento, tags=["agendamentos"], dependencies=[Depends(JWTBearer())])
 
 app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
 
@@ -52,11 +57,6 @@ async def test_seed():
     prepare_DB()
     return {"message":"Dados completos. Cheque a pasta 'backend/fescam/db/scripts/seed_result' para obter as credenciais"}
 #testando semeação de banco (e geração de arquivos) **********************
-
-
-#testando dump sql (na segunda vez vai dar erro pq não permite sobrescrita de arquivo --proposital--): ***************
-from fescam.db.generate_backup import backup
-import os
 
 @app.get("/teste_backup")
 async def test():
