@@ -169,3 +169,16 @@ function qtd_user(){
     
     }
 }
+
+function backup_bd(){
+//  let btn_backup = document.getElementById("btn_backup");
+
+    axios.get("/teste_backup",{
+        headers: { Authorization: `Bearer ${access_token}` }
+    }).then((response)=>{
+        alert(response.data);
+    }).catch((error)=>{
+        console.error(error.data);
+    })
+
+}

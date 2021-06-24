@@ -50,8 +50,9 @@
             <input type="text" id="pesquisa" />
             <button
               type="button"
-              onclick="baixarBackup()"
+              onclick=backup_bd()
               class="btn btn-primary"
+              id="btn_backup"
             >
               <span class="glyphicon glyphicon-send"></span>
               <svg
@@ -75,6 +76,10 @@
         </form>
       </div>
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/static/js/adm.controller.js"></script>
+
     {% endblock %}
   </body>
 </html>
