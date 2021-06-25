@@ -1,9 +1,11 @@
 import bcrypt
+import os
 from fastapi import Request, status
 from fastapi.applications import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
@@ -73,9 +75,9 @@ async def test_seed():
 @app.get("/teste_backup")
 async def test():
     path = os.path.dirname(os.path.abspath(__file__)) + "/db/scripts/teste.sql"
-    #path = os.path.dirname(os.path.abspath(__file__)) + "\\db\\scripts\\teste.sql" <-- Windows
+    os.remove(path)
     if(backup(path)):
-        return f"Arquivo criado com sucesso! Localização: {path}"
+        return FileResponse(path)
     else:
         return f"Erro ao criar arquivo! Verifique as credenciais do banco ou se já existe algum arquivo no diretório {path}"
 #testando dump sql ***************
@@ -95,14 +97,6 @@ async def alarme(request: Request):
 @app.get("/cadastrar-farmaco", response_class=HTMLResponse)
 async def cadastrarFarmaco(request: Request):
     return templates.TemplateResponse("cadastrarFarmaco.html",  {"request": request})
-
-# @app.get("/cadastrar-paciente", response_class=HTMLResponse)
-# async def cadastrarPaciente(request: Request):
-#     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
-
-# @app.get("/cadastrar-paciente/id={id_paciente}", response_class=HTMLResponse)
-# async def cadastrarPaciente(request: Request):
-#     return templates.TemplateResponse("cadastrarPaciente.html",  {"request": request})
 
 @app.get("/cadastro-paciente", response_class=HTMLResponse)
 async def cadastroPaciente(request: Request):

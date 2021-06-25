@@ -177,9 +177,15 @@ function backup_bd(){
 //  let btn_backup = document.getElementById("btn_backup");
 
     axios.get("/teste_backup",{
-        headers: { Authorization: `Bearer ${access_token}` }
+        headers: { Authorization: `Bearer ${access_token}` },
+        responseType: 'blob'
     }).then((response)=>{
-        alert(response.data);
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'backup.sql');
+        document.body.appendChild(link);
+        link.click();
     }).catch((error)=>{
         console.error(error.data);
     })
