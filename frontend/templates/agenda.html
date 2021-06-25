@@ -3,7 +3,7 @@
 <head>
     {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', path='css/adm.posologia.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', path='css/agendamento.css')}}">
     {% endblock %}
 
     {% block title %}{% endblock %}
@@ -20,41 +20,38 @@
         <div class="administracao_med__container">
            
           <form class="form_administracao_posologia">
-            <div class="title"><h3>Ordem de Administração e Posologia</h3></div>
+            <div class="title"><h3>Agendamento</h3></div>
               <div class="administracao_med__paciente">
                   <div id='n_p' class="nome_paci">
                       <label for="">Nome Paciente</label>
                       <input id='nome_paciente' type="text">
                   </div>
-                  <!-- <div class="nome_paci">
-                      <label for="">Leito</label>
-                      <input id='leito_paci'type="text">
-                  </div> -->
+                  <div class="nome_paci">
+                      <label for="">Responsável pela Aplicação</label>
+                      <input id='responsavel_aplicacao'type="text">
+                  </div>
               </div>
               <div class="administracao_med__medicamento">
                  <div class="title_adm"><h5>Administracao de medicamento</h5></div>
                   <div class="nome_med">  
                       <div class="nome_paci" id="med">
-                          <label for="">Codigo Medicamento</label>
-                          <input id='nome_medicamento' type="text">
+                          <label for="">Posologia ID</label>
+                          <input id='posologia_id' type="text">
                       </div>  
                       <div class="poso">
-                        <label for="">Dosagem</label>
-                        <input id ='dosagem'type="text">
-                    </div>
+                        <label for="">Horario aplicação</label>
+                        <input id ='horario'type="text">
+                      </div>
+                     
                       <!-- <div class=' nome_paci' id="tipo">
                           <label for="">Tipo Uso</label>
                           <input id='tipo_uso'type="text">
                       </div> -->
                   </div>
-                  <div class="nome_medicacao">
-                      <div class="nome_paci" id="orientacao">
-                        <label for="">Orientacao de aplicação</label>
-                        <textarea id = 'orientacao'type="text"></textarea>
-                      </div>
-                      <div class="nome_paci"  id="reacao">
-                          <label for="">Possiveis Reações</label>
-                          <textarea id='possiveis_reacoes'type="text"></textarea>
+                  <div class="nome_enfChefe">
+                    <div class="poso">
+                        <label for="">Enfermeiro Chefe Responsavel</label>
+                        <input id ='id_enfChefe'type="text">
                       </div>
                   </div>
               </div>
@@ -63,10 +60,14 @@
             </div>
        
         <div class="botoes">
-            
                 <div class="col-sm-6 btn_cadastro">
-                  <button id='cadastro-salvar' type="submit" class="btn btn-primary cad" onclick=ordem_administracao()>Registrar</button>
+                    
+                    <button id='cadastro-salvar' type="button" class="btn btn-primary cad"><a href="/designar-enfermeiro">Cadastrar Posologia</a></button>
+              </div>
+                <div class="col-sm-6 btn_cadastro">
+                  <button id='cadastro-salvar' type="submit" class="btn btn-primary cad" onclick=ordem_administracao()>Salvar Agendamento</button>
                 </div>
+               
                 <div class="col-sm-6 btn_cancelar">
                   <button type="submit" class="btn btn-primary">Cancelar</button>
                 </div>
@@ -78,7 +79,6 @@
     
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="../static/js/enfChefe.controller.js"></script>
-        <script src="../static/js/posologia.js"></script>
     {% endblock %}
 
 </body>

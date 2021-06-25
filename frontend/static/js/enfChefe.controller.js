@@ -28,7 +28,7 @@ function delete_paciente(index){
         axios.delete(`/paciente/${paci.CPF}`,{
             headers: { Authorization: `Bearer ${token}` }
         }).then((response)=>{
-            alert("Usuario Deletado com Sucesso")
+            alert("Paciente Deletado com Sucesso")
             location.href='/enf-chefe';
     
         }).catch((error)=>{
@@ -169,32 +169,32 @@ function cancela_cadastro(){
 
 function ordem_administracao(){
     let nome_paciente = document.getElementById('nome_paciente').value;
-    let leito_paciente = document.getElementById('leito_paci').value;
+    // let leito_paciente = document.getElementById('leito_paci').value;
     let nome_medicamento = document.getElementById('nome_medicamento').value;
-    let tipo_uso = document.getElementById('tipo_uso').value;
+    // let tipo_uso = document.getElementById('tipo_uso').value;
     let orientacao = document.getElementById('orientacao').value;
     let possiveis_reacoes = document.getElementById('possiveis_reacoes').value;
-    let hora_aplicacao = document.getElementById('hora_aplicacao').value;
-    let intervalo_aplicacao = document.getElementById('intervalo_aplicacao').value;
-    let frequencia_diaria = document.getElementById('frequencia_diaria').value;
+    // let hora_aplicacao = document.getElementById('hora_aplicacao').value;
+    // let intervalo_aplicacao = document.getElementById('intervalo_aplicacao').value;
+    // let frequencia_diaria = document.getElementById('frequencia_diaria').value;
     let dosagem = document.getElementById('dosagem').value;
 
     let cpf_paci= busca_paci(nome_paciente); 
     let codi_medi =busca_medicamento(nome_medicamento);
 
-    let agendamento = {
-        paciente: nome_paciente,
-        leito: leito_paciente,
-        medicamento:nome_medicamento,
-        uso: tipo_uso,
-        orientacao:orientacao,
-        reacoes:possiveis_reacoes,
-        horaAplicacao: hora_aplicacao,
-        intAplicacao:intervalo_aplicacao,
-        frequencia:frequencia_diaria,
-        quantidade:dosagem
+    // let agendamento = {
+    //     paciente: nome_paciente,
+    //     leito: leito_paciente,
+    //     medicamento:nome_medicamento,
+    //     uso: tipo_uso,
+    //     orientacao:orientacao,
+    //     reacoes:possiveis_reacoes,
+    //     horaAplicacao: hora_aplicacao,
+    //     intAplicacao:intervalo_aplicacao,
+    //     frequencia:frequencia_diaria,
+    //     quantidade:dosagem
 
-    }
+    // }
 
     let posologia = {
         medicamento: codi_medi,
@@ -202,7 +202,22 @@ function ordem_administracao(){
         quantidade:dosagem,
         notas: `${orientacao} ${possiveis_reacoes}`
     }
-
+    
+    axios.post('/posologia',{
+        headers: { Authorization: `Bearer ${token}` },
+        posology:{
+            medicamento: codi_medi,
+            paciente:cpf_paci,
+            quantidade:dosagem,
+            notas: `${orientacao} ${possiveis_reacoes}`
+        }
+    }).then((response)=>{
+        alert(response.data)
+    }).catch((error)=>{
+        console.log(error);
+    })
+    console.log(codi_medi)
+    console.log(cpf_paci)
     console.log(posologia)
 
   
@@ -230,4 +245,16 @@ function busca_medicamento(medicamento){
             return medicamentos[i].codigo;
         }
     }
+}
+
+/**
+ * Função Logout
+ */
+ function logout(){
+    let resp = confirm("Tem certeza que deseja Sair?");
+    if(resp){
+        sessionStorage.removeItem("access_token");
+        location.href='/'
+    }
+
 }
