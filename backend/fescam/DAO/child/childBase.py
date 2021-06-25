@@ -109,8 +109,8 @@ class childBase:
         
         instancePKValue = dictValuesToUpd[self.__parent.primaryKey]
         result = self.findByFK(instancePKValue)
-        if(result is not None):
-            #primaryKeyValue = ForeignKey aqui **
+        if(result is not None and len(result) > 0):
+            #obs.: primaryKeyValue = ForeignKey aqui **
             
             #Essa classe:
             foreignKey = self.__child.foreignKey[self.__parent.tableName]
@@ -139,10 +139,14 @@ class childBase:
         })
     
     def INSERT(self, atributeEValue:dict, convertReturn = False):
-        return self.__parentDAO.INSERT(atributeEValue= atributeEValue, convertReturn= convertReturn)
+        return self.__base._save(atributeEValue = atributeEValue, convertMethod= convertReturn)
     
-    def UPDATE(self, atributeEValue:dict, convertReturn = False):
+    def UPDATE(self, atributeEValue:dict, convertReturn = False, disassociate = False):
+        if(disassociate):
+            return self.__base._save(atributeEValue = atributeEValue, toInsert = False, convertMethod= convertReturn)
         return self.__parentDAO.UPDATE(atributeEValue = atributeEValue, convertReturn= convertReturn)
     
-    def DELETE(self, convertReturn = False):
+    def DELETE(self, convertReturn = False, disassociate = False):
+        if(disassociate):
+            return self.__base._remove(convertMethod= convertReturn)
         return self.__parentDAO.DELETE(convertReturn= convertReturn)
