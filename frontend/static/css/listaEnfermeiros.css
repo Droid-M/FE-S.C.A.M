@@ -1,0 +1,36 @@
+#page-content-wrapper{
+
+    width:100% ;
+    
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.dashboard-tabela{
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+}
+
+button{
+    background-color: rgb(164, 169, 185);
+    border-radius: 4px;
+    border: none;
+    transition: all 0.3s ease-out;
+    padding: 5px;
+    font-family: sans-serif;
+    font-weight: 300;
+}
+
+
+button:hover{
+    background-color: rgb(141, 146, 161);
+    
+}

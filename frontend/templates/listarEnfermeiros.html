@@ -3,7 +3,7 @@
 <head>
     {% block head %}
     {{ super() }}
-
+    <link rel="stylesheet" href="{{ url_for('static', path='css/listaEnfermeiros.css') }}">
     {% endblock %}
 
     {% block title %}{% endblock %}
@@ -15,31 +15,36 @@
   {{ super() }}
 
   <div>
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Usuário</th>
-          <th scope="col">Situação</th>
-        </tr>
-      </thead>
-      <tbody>
-          <!--fazer função para pegar o log com essa base 
-        <tr>
-          <th scope="row">1</th>
-          <td>Fulano</td>
-          <td>Aplicando medicação</td>
-        </tr>-->
-       
-      </tbody>
-      
-    </table>
-    
-    <button type="button" onclick="relistarEnfermeiro()" class="btn btn-primary">
-      <span class="glyphicon glyphicon-send"></span>
-      Atualizar
-    </button>
-  </div>
+    <div class="container">
+        <div class="dashboard-tabela">
+            <h1> Lista Enfermeiros</h1>
+            <div class="search">
+                <input id="txtBusca" type="text" placeholder="nome paciente">
+                <button>Pesquisa</button>
+            </div>
+            <table class="table" id="tb_paciente">
+                <thead>
+                  <tr>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Nome</th>
+                  </tr>
+                </thead>
+                <tbody id="tBody"></tbody>
+              </table>
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/static/js/enf.listaEnf.js"></script>
+<script src="/static/js/enfChefe.controller.js"></script>
+</div>
 
   {% endblock %}
 
