@@ -1,7 +1,9 @@
 
 const token = sessionStorage.getItem("access_token");
 let pacientes={};
+let medicamentos ={};
 get_all_pacientes();
+get_medicamentos();
 
 /**
  * Atualiza os dados de um paciente
@@ -148,4 +150,84 @@ function formata_data(dados){
  */
 function cancela_cadastro(){
     location.href='/enf-chefe'
+}
+
+/**
+ * Busca todos os medicamentos no sistema
+ */
+
+ function get_medicamentos(){
+    axios.get('/medicamento',{
+        headers: { Authorization: `Bearer ${token}` }
+    }).then((response)=>{
+        medicamentos = response.data;
+    }).catch((error)=>{
+        console.error(error)
+    })
+}
+
+
+function ordem_administracao(){
+    let nome_paciente = document.getElementById('nome_paciente').value;
+    let leito_paciente = document.getElementById('leito_paci').value;
+    let nome_medicamento = document.getElementById('nome_medicamento').value;
+    let tipo_uso = document.getElementById('tipo_uso').value;
+    let orientacao = document.getElementById('orientacao').value;
+    let possiveis_reacoes = document.getElementById('possiveis_reacoes').value;
+    let hora_aplicacao = document.getElementById('hora_aplicacao').value;
+    let intervalo_aplicacao = document.getElementById('intervalo_aplicacao').value;
+    let frequencia_diaria = document.getElementById('frequencia_diaria').value;
+    let dosagem = document.getElementById('dosagem').value;
+
+    let cpf_paci= busca_paci(nome_paciente); 
+    let codi_medi =busca_medicamento(nome_medicamento);
+
+    let agendamento = {
+        paciente: nome_paciente,
+        leito: leito_paciente,
+        medicamento:nome_medicamento,
+        uso: tipo_uso,
+        orientacao:orientacao,
+        reacoes:possiveis_reacoes,
+        horaAplicacao: hora_aplicacao,
+        intAplicacao:intervalo_aplicacao,
+        frequencia:frequencia_diaria,
+        quantidade:dosagem
+
+    }
+
+    let posologia = {
+        medicamento: codi_medi,
+        paciente:cpf_paci,
+        quantidade:dosagem,
+        notas: `${orientacao} ${possiveis_reacoes}`
+    }
+
+    console.log(posologia)
+
+  
+}
+/**
+ * Retorna o cpf do paciente procurado
+ * @param {*} nome_paciente nome do paciente String
+ * @returns string cpf
+ */
+function busca_paci(nome_paciente){
+    get_all_pacientes();
+   for(let i=0;i<pacientes.length;i++){
+       if(pacientes[i].nome == nome_paciente){
+           return pacientes[i].CPF;
+        }
+    }
+}
+
+/**
+ * Retorna o codigo do medicamento solicitado
+ */
+function busca_medicamento(medicamento){
+    for(let i=0;i<medicamentos.length;i++){
+        if(medicamentos[i].nome == medicamento){
+            return medicamentos[i].codigo;
+        }
+    }
 }
