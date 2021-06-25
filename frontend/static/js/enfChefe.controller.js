@@ -142,3 +142,10 @@ function formata_data(dados){
     }
 
 }
+
+/**
+ * Função do botão de Cancelar o cadastro do paciente
+ */
+function cancela_cadastro(){
+    location.href='/enf-chefe'
+}
