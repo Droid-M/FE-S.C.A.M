@@ -42,3 +42,11 @@ function logar() {
     });
 
 }
+
+function esqueceusenha() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Contate seu administrador de sistemas e solicite a alteração'
+  });
+}
