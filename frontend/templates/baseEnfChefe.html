@@ -97,6 +97,13 @@
         </div>
       </nav>
     </header>
+
+    <script>
+      function logout(){
+      sessionStorage.removeItem("access_token");
+      location.reload();
+    }
+    </script>
     {% endblock %}
 </body>
 </html>

@@ -40,6 +40,9 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Listar Pacientes</li>
                 <li class="list-group-item">Gerenciar Histórico de Ocorrência</li>
+                <li class="list-group-item">
+                  <a href="/" onclick="logout()">Logout</a>
+                </li>
               </ul>
 
 
@@ -57,6 +60,13 @@
         </div>
       </nav>
     </header>
+
+    <script>
+      function logout(){
+      sessionStorage.removeItem("access_token");
+      location.reload();
+    }
+    </script>
     {% endblock %}
 </body>
 </html>

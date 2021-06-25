@@ -59,6 +59,9 @@
                         Gerenciar Histórico de Ocorrência
                       </a>
                     </li>
+                    <li class="list-group-item">
+                      <a href="/" onclick="logout()">Logout</a>
+                    </li>
                   </ul>
                 </div>
                 <div class="modal-footer">
@@ -70,6 +73,13 @@
         </div>
       </nav>
     </header>
+
+    <script>
+      function logout(){
+      sessionStorage.removeItem("access_token");
+      location.reload();
+    }
+    </script>
     {% endblock %}
 </body>
 </html>

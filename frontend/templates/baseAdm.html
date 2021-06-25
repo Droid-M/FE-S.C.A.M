@@ -64,7 +64,7 @@
                   </a>
                 </li>
                 <li class="list-group-item">
-                  <a onclick=logout()>
+                  <a href="/" onclick=logout()>
                     Logout
                   </a>
                 </li>
@@ -87,6 +87,13 @@
         </div>
       </nav>
     </header>
+    
+    <script>
+      function logout(){
+      sessionStorage.removeItem("access_token");
+      location.reload();
+    }
+    </script>
     {% endblock %}
     {% block content %}
     
