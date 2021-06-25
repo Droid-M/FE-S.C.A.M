@@ -113,26 +113,43 @@ def create_user(user: schemas.FuncionarioCreated): # -> Any
         #lance algum tipo de exceção ou redirecione, por exemplo
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Unexpected error")
     
+defineUserDAO = {
+    ADMINISTRADOR_FOO: admDAO,
+    ENFERMEIRO_FOO: enfDAO,
+    ENFERMEIRO_CHEFE_FOO: enfCFDAO,
+    ESTAGIARIO_FOO: estDAO
+}
+
+
 def update_user(
     user: schemas.FuncionarioCreated,
     user_id: str
 ): #-> Any
     is_admin = True
     if(is_admin):
-        user_updated = funcDAO.UPDATE(user.dict()).WHERE("cpf", "=", user_id).getFirst()
-        if(user_updated is not None and len(user_updated) > 0):
+        user.senha = bcrypt.hashpw(user.senha.encode('utf-8'), bcrypt.gensalt()).decode()
+        old_user_type = funcDAO.findByPK(user_id, convert = False).get('tipo')
+        user_updated = funcDAO.UPDATE(user.dict()).WHERE("CPF", "=", user_id).getFirst()
+        if(bool(user_updated) and len(user_updated) > 0):
+            if(old_user_type != user.tipo):
+                dao = defineUserDAO.get(old_user_type)
+                print(old_user_type, dao)
+                if(dao):
+                    dao.DELETE(disassociate = True).WHERE("func_id", '=', user.CPF).getFirst()
+                dao = defineUserDAO.get(user.tipo)
+                print(user.tipo, dao, "DEpois")
+                if(dao):
+                    dao.INSERT({'func_id':user.CPF})
             return JSONResponse(
                 status_code = status.HTTP_200_OK,
                 #description = 'Atualização realizada com sucesso', 
                 content = jsonable_encoder(schemas.FuncionarioBase(
-
                     tipo = user_updated.get("tipo"),
                     CPF = user_updated.get("CPF"), 
                     nome = user_updated.get("nome"), 
                     updated_on = user_updated.get("updated_on"), 
                     created_on = user_updated.get("created_on")
-
-                )))
+            )))
         return JSONResponse(
             status_code = status.HTTP_406_NOT_ACCEPTABLE,
             #description = f"Impossível atualizar um usuário não cadastrado! CPF:{user.CPF}",
