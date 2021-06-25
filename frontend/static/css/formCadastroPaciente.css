@@ -1,3 +1,9 @@
+#page-content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container{
     display: flex;
     align-items: center;
@@ -13,9 +19,7 @@
 
 }
 
-#page-content-wrapper{
-    display: flex;
-}
+
 .formCad{
     display: flex;
     align-items: center;
@@ -23,7 +27,7 @@
     border: 1px solid rgb(226, 223, 223);
     width: 100%;
     padding: 20px;
-    box-shadow: 0 0 1em rgb(151, 150, 150);
+    /* box-shadow: 0 0 1em rgb(151, 150, 150); */
     border-radius: 8px;
 
 }
@@ -33,10 +37,43 @@ h3{
 
 .formCad form{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
 }
+
+
+
+
+.dados_pessoais{
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 16px;
+}
+.dados_pessoais input{
+    /* width: 400px; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.endereco_pessoal{
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
+.prontuario{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
+.prontuario input{
+    
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 
 .form-group{
     margin-right: 10px;
@@ -54,11 +91,14 @@ h3{
 
 #nome_sobre {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
+
 
 #nome_sobre input{
     width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 #cpf-genero{
@@ -80,16 +120,27 @@ h3{
 #bloco2 input{
     margin-right: 8px;
     width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
 }
 #bloco3{
     display: flex;
+    margin-bottom: 20px;
 }
 
 #botoes{
     display: flex;
-    justify-content: right;
-}
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
+}
+#botoes input{
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 #botoes button{
     margin-right: 10px;
 }
