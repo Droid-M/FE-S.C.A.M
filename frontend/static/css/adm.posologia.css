@@ -1,0 +1,128 @@
+.container_adm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    /* border: 1px solid black; */
+    height: 100vh;
+}
+
+.administracao_med__container{
+  
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top:30px;
+    padding: 15px;
+    flex-direction: column;
+   
+}
+
+.form_administracao_posologia{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 5px 4px 3px#a8a8a8;
+    ;
+}
+
+.administracao_med__paciente{
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+}
+
+.nome_paci{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+
+.nome_paci input{
+    width: 300px;
+}
+
+.administracao_med__medicamento{
+    display: flex;
+    margin: 30px;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.nome_med{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-right: 150px;
+    align-items: center;
+}
+
+.nome_medicacao{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.nome_medicacao input{
+    width: 100%;
+}
+.administracao_med__posologia{
+    margin-top: 5px;
+    display: flex;
+    margin: 15px;
+    flex-direction: column;
+}
+.dado_posolo{
+    display: flex;
+}
+.title{
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: normal;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin:5px;
+    padding: 5px;
+    
+}
+
+
+.title_adm{
+    margin-top:2px ;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.botoes{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.btn_cadastro{
+    margin-bottom: 15px;
+    height: 60px;
+    
+}
+
+.btn_cadastro .cad{
+    height: 60px;
+    border:none;
+    background: #96e68b;
+    color: black;
+    box-shadow: 3px 2px 5px black;
+}
